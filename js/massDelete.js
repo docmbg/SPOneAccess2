@@ -19,3 +19,12 @@ ep.openLocal({
   }
   console.log(userNames);
 })
+
+var userObject = {
+  loginNames = [],
+  emails = []
+
+};
+
+userObject.emails = userNames;
+console.log("This is a property" + userObject.emails);
