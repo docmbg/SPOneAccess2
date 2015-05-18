@@ -191,6 +191,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "OneAccess.html",
+			"settings":
+			{
+				"buffer_size": 566,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -200,9 +208,13 @@
 	"command_palette":
 	{
 		"height": 368.0,
-		"last_filter": "xml",
+		"last_filter": "cdn",
 		"selected_items":
 		[
+			[
+				"cdn",
+				"Cdnjs: Search"
+			],
 			[
 				"xml",
 				"Set Syntax: XML"
@@ -288,10 +300,6 @@
 				"Cdnjs: Search"
 			],
 			[
-				"cdn",
-				"Cdnjs: Search"
-			],
-			[
 				"git remo",
 				"Git: Add Remote"
 			],
@@ -360,7 +368,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 563.0
+		"width": 632.0
 	},
 	"console":
 	{
@@ -384,6 +392,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client/OneAccess.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/client/ReportGenerator.html",
 		"/C/Users/simsimeo/.npmrc",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/Heading Banner.dwp",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/List Templates/RISTBanners.stp",
@@ -397,7 +407,6 @@
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Inactive Records-banner.dwp",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Active Records Banner.dwp",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/Inactive Records in ERMS.dwp",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/client/ReportGenerator.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/changelog.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/instructions.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/saveFileWorker.js",
@@ -631,8 +640,39 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "OneAccess.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 566,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								226,
+								226
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
