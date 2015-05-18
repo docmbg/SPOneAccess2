@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<script type="text/javascript" src="2.2/sheetjs.all.min.js"></script>
+<script type="text/javascript" src="2.2/excelplus-2.2.min.js"></script>
+</head>
+<body>
+<p><b>For old browsers (IE8 and others), make sure to be in standard mode with <code>&lt;meta http-equiv="X-UA-Compatible" content="IE=EDGE"></code> and with a DOCTYPE.</b></p>
+<p>Please select an Excel file from your computer:</p>
+<object id="file-object"></object>
+<div id="result"></div>
+<script>
+// in this example we want to read a local (= on the user's computer) Excel file
+// to do so we need to add `<object id="file-object"></object>` into our HTML where a button to upload the file will appear
+// then we can call our JavaScript
+var ep=new ExcelPlus();
+// we call openLocal() and when the file is loaded then we want to display its content
+// openLocal() will use the FileAPI if exists, otherwise it will use a Flash object
+ep.openLocal({
+  "flashPath":"2.2/swfobject/",
+  "labelButton":"Open an Excel file"
+},function() {
+  // show the content of the first sheet
+  var a = ep.selectSheet(1).readAll();
+  
+  var userNames = [];
+  for (var i=0; i < a.length; i++) {
+ 
+    for (var j=0; j < a[i].length; j++) {
+     userNames.push(a[i][j]);
+    }
+    
+  }
+  console.log(userNames);
+})
+</script>
+</body>
+</html>
