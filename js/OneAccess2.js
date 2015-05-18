@@ -8,9 +8,7 @@ var User = (function() {
         privateStore[this.id = uid++] = {};
         privateStore[this.id]._name = "No name";
         privateStore[this.id]._email = "No email specified";
-        privateStore[this.id]._manager = "No manager listed";
         privateStore[this.id]._login = "No login name";
-        privateStore[this.id]._pictureUrl = "No picture specified";
     }
 
     User.prototype.setName = function(name) {
@@ -43,7 +41,7 @@ var User = (function() {
                   'Login Name: ' + privateStore[this.id]._login;
         return ret;
     };
-    
+
     return User;
 }());
 
@@ -58,6 +56,6 @@ $SP().plugin('peopleahead', {
         user.setName($this.data('name'));
         user.setEmail($this.data('email'));
         user.setLogin($this.data('login'));
-        console.log(user.getName());
+        console.log(user.toString());
     }
 });
