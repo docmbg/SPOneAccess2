@@ -37,6 +37,13 @@ var User = (function() {
         return privateStore[this.id]._email;
     };
 
+    User.prototype.toString = function userToString(){
+        var ret = 'Name: ' + privateStore[this.id]._name + "\n" +
+                  'Email: ' + privateStore[this.id]._email + "\n" +
+                  'Login Name: ' + privateStore[this.id]._login;
+        return ret;
+    };
+    
     return User;
 }());
 
@@ -50,7 +57,6 @@ $SP().plugin('peopleahead', {
         var $this = $(this);
         user.setName($this.data('name'));
         user.setEmail($this.data('email'));
-        user.setManager($this.data('email'));
         user.setLogin($this.data('login'));
         console.log(user.getName());
     }
