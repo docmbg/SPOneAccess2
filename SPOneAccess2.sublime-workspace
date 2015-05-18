@@ -1,0 +1,741 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"site",
+				"siteURL"
+			],
+			[
+				"list",
+				"listName"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"changelog",
+				"changelogModal"
+			],
+			[
+				"down",
+				"downloadReportBtn"
+			],
+			[
+				"push",
+				"push('d"
+			],
+			[
+				"URL",
+				"Url"
+			],
+			[
+				"crea",
+				"created〔variable〕"
+			],
+			[
+				"create",
+				"createdBy〔variable〕"
+			],
+			[
+				"modifi",
+				"modifiedBy〔variable〕"
+			],
+			[
+				"modif",
+				"modifiedBy"
+			],
+			[
+				"Content",
+				"ContentTypeId"
+			],
+			[
+				"getDo",
+				"getDocInfo〔function〕"
+			],
+			[
+				"caml",
+				"camlViewFields〔variable〕"
+			],
+			[
+				"cli",
+				"clientContext〔variable〕"
+			],
+			[
+				"line",
+				"lineNumber"
+			],
+			[
+				"err",
+				"errorMsg"
+			],
+			[
+				"end",
+				"endQuery"
+			],
+			[
+				"item",
+				"itemCount〔variable〕"
+			],
+			[
+				"0",
+				"0x0101"
+			],
+			[
+				"abs",
+				"absURL〔variable〕"
+			],
+			[
+				"rec",
+				"recordCode〔variable〕"
+			],
+			[
+				"File",
+				"FileLeafRef"
+			],
+			[
+				"Doc",
+				"DocIcon"
+			],
+			[
+				"created",
+				"createdBy"
+			],
+			[
+				"document",
+				"documentType"
+			],
+			[
+				"re",
+				"recordCode"
+			],
+			[
+				"unde",
+				"undefined〔keyword〕"
+			],
+			[
+				"file",
+				"fileName〔variable〕"
+			],
+			[
+				"vis",
+				"visibility"
+			],
+			[
+				"get",
+				"getData〔function〕"
+			],
+			[
+				"docu",
+				"documentType〔variable〕"
+			],
+			[
+				"recT",
+				"recTypeSelect"
+			],
+			[
+				"stat",
+				"staticName"
+			],
+			[
+				"sta",
+				"staticN"
+			],
+			[
+				"stati",
+				"staticName"
+			],
+			[
+				"subst",
+				"substring (fn)"
+			],
+			[
+				"sub",
+				"substring (fn)"
+			],
+			[
+				"text",
+				"textnode"
+			],
+			[
+				"error",
+				"error	.error()"
+			],
+			[
+				"wo",
+				"work〔function〕"
+			],
+			[
+				"work",
+				"working"
+			],
+			[
+				"name",
+				"name (str)"
+			],
+			[
+				"SP",
+				"SPServices(aP, completefunc, listName, operation})"
+			],
+			[
+				"ready",
+				"ready	jQuery(document).ready"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 368.0,
+		"last_filter": "xml",
+		"selected_items":
+		[
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sy",
+				"Set Syntax: HTML"
+			],
+			[
+				"synth",
+				"Set Syntax: HTML"
+			],
+			[
+				"html",
+				"HTMLPrettify"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"",
+				"Changelog"
+			],
+			[
+				"syn",
+				"Set Syntax: HTML"
+			],
+			[
+				"html ",
+				"HTMLPrettify"
+			],
+			[
+				"html s",
+				"HTMLPrettify: Set Keyboard Shortcuts"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"synt",
+				"Set Syntax: HTML"
+			],
+			[
+				"synt ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"cdnjs",
+				"Cdnjs: Search"
+			],
+			[
+				"cdnj",
+				"Cdnjs: Search"
+			],
+			[
+				"cdjs",
+				"Cdnjs: Search"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"synta",
+				"Set Syntax: HTML"
+			],
+			[
+				"syntax htm",
+				"Set Syntax: HTML"
+			],
+			[
+				"cndjs",
+				"Cdnjs: Search"
+			],
+			[
+				"cdn",
+				"Cdnjs: Search"
+			],
+			[
+				"git remo",
+				"Git: Add Remote"
+			],
+			[
+				"github",
+				"Git: Checkout New Branch"
+			],
+			[
+				"git",
+				"Git: Add Remote"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"gistatus",
+				"Git: Status"
+			],
+			[
+				"ginit",
+				"Git: Init"
+			],
+			[
+				"git: init",
+				"Git: Init"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git:",
+				"Git: Pull"
+			],
+			[
+				"gs",
+				"Git: Show"
+			],
+			[
+				"git: stat",
+				"Git: Status"
+			],
+			[
+				"gith",
+				"GitHub: Open Gist in Editor"
+			],
+			[
+				"jshint",
+				"JSHint: Set Linting Preferences"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"install package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 563.0
+	},
+	"console":
+	{
+		"height": 654.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2"
+	],
+	"file_history":
+	[
+		"/C/Users/simsimeo/.npmrc",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/Heading Banner.dwp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/List Templates/RISTBanners.stp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/List Templates/InactiveRecordsLibrary.stp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/ItemStyleRecords.xsl",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/Header.xsl",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/ContentQueryMain.xsl",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My_Active_Records_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Unspecified Documents-banner.dwp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Inactive Records-banner.dwp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Active Records Banner.dwp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/Inactive Records in ERMS.dwp",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/client/ReportGenerator.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/changelog.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/instructions.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/saveFileWorker.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/reportGenerator.js",
+		"/C/Users/simsimeo/Desktop/Navigation/Exported/Navigation.htm",
+		"/C/Users/simsimeo/Desktop/HeinekenSyncSDRLOG/HeinekenSyncSDRLOG/HeinekenSyncSDRLOG/App.xaml",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/FileSaver.js",
+		"/C/Users/simsimeo/DOCM_Implement_INT_RIST2.1_SP2010-Templates/WebParts/Active_Records_Custom_XSL.webpart",
+		"/C/Users/simsimeo/DOCM_Implement_INT_RIST2.1_SP2010-Templates/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/css/style.css",
+		"/C/Users/simsimeo/Desktop/DisplayHTMLCalculatedColumns.txt",
+		"/C/Users/simsimeo/Desktop/response.xml",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/report.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/jquery.min.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/one_access.mass_delete.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/one_access.permission_handler.css",
+		"/C/Users/simsimeo/.gitconfig",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/report_generator.sublime-project",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/sharepointplus-3.0.10.js",
+		"/C/Users/simsimeo/Desktop/jsonTest/jsonTest.js",
+		"/C/Users/simsimeo/Desktop/jsonTest/index.html",
+		"/C/Users/simsimeo/Desktop/ent61.sharepoint.hp.com.har",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/excelplus.full.js",
+		"/C/Users/simsimeo/Desktop/SPUI_Add_Dialog.html",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/Default (Windows).sublime-keymap",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/.jshintrc",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/css/progressjs.min.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/excelplus-2.2.min.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/js/one_access.mass_delete2010.js",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov PRM Form/thankyouview.xsl",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation_with_links.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-APJ.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-EMEA.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-requests.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-MY-requests.htm",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-AMS.htm",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/system/styles/patterns/checkboxes.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/control-utils.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/form.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/hf/hf-utils.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/accessibility.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/common/swfobject.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/common/form-reset.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/hp-ui/system/styles/patterns/buttons.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/hp-ui/system/styles/patterns/checkboxes.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/checkboxes.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/buttons.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/buttons-ie.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/category-nav.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/dropdowns.css",
+		"/C/Users/simsimeo/Documents/hp-ui/system/styles/service/index.css",
+		"/C/Users/simsimeo/Documents/hp-ui/scripts/-ui-library-from-patterns.js",
+		"/C/Users/simsimeo/Documents/hp-ui/scripts/hp-jquery-lib/form.js",
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/IvanKolarov.xsn",
+		"/C/Users/simsimeo/Documents/Technical Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/app.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/js/one_access.permission_handler2010.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SP-OneAccess-Portal/easyAccess/js/select2.js",
+		"/C/Users/simsimeo/Desktop/Report Generator/js/report.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/ExcelPlusTest/xFileManager.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/sheetjs.all.min.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/today_date.js",
+		"/C/Program Files (x86)/Git/etc/gitconfig",
+		"/C/Program Files (x86)/Cntlm/cntlm.ini",
+		"/C/Users/simsimeo/Desktop/BowerTest/.bowerrc",
+		"/C/Users/simsimeo/Desktop/BowerTest/bower.json",
+		"/C/Users/simsimeo/Desktop/Report Generator/client/ReportGenerator.html",
+		"/C/Users/simsimeo/Desktop/Report Generator/.jshintrc",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/C/Users/simsimeo/Desktop/Report Generator/js/PRACS training V2_Jim_Lairmore.zip",
+		"/C/Users/simsimeo/Desktop/TestProject/test.js",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/cdnjs.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/simsimeo/Desktop/AbbVie ESP Navigation/AbbVie_ESP_Navigation.htm",
+		"/C/Users/simsimeo/Desktop/Report Generator/report",
+		"/C/Users/simsimeo/Desktop/Report Generator/report.js",
+		"/C/Users/simsimeo/Desktop/Report Generator/jquery.min.js",
+		"/C/Users/simsimeo/Desktop/Report Generator/sharepointplus-3.0.10.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/TextToHTML JavaScript (Calculated HTML Columns).js",
+		"/C/Users/simsimeo/Desktop/employee.js",
+		"/C/Users/simsimeo/table.csv",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/js/one_access.mass_delete2007.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/html/deleteUsers-2010.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/sp_one_access.sublime-project",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/css/select2-backupcdn.css",
+		"/C/Users/simsimeo/Desktop/FolderNavigation.txt",
+		"/C/Users/simsimeo/Desktop/onboardingNav.html",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/css/oneAccess.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/main.css",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/permissions_handler-2007.js",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/underscore-min.js",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/sharepointplus.js",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/matrix_generator.js",
+		"/C/Users/simsimeo/Desktop/Sublime Project Test/project.js",
+		"/C/Users/simsimeo/AppData/Local/Temp/_PA579/JavaScript/FolderNavigation.js",
+		"/C/Users/simsimeo/Desktop/Sublime Project Test/library/spservices.js",
+		"/C/Users/simsimeo/Desktop/Sublime Project Test/library/jquery.min.js",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/SublimeGit.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/GitHub.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/sublime-github/GitHub.sublime-settings",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/massDelete2010.js",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/simsimeo/Desktop/Sublime Project Test/.jshintrc",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Sublime-Text--cdnjs/cdnjs.sublime-settings",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/node.sublime-build"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 157.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ERMS",
+			"TRIM",
+			"Registered",
+			"Active",
+			"Unspecified",
+			"../",
+			"ADD_SITE_NAME_HERE",
+			"../",
+			"site",
+			"../",
+			"https://rawgit.com/docmbg/SPReportGenerator/1.0",
+			"length",
+			"cdn",
+			"libraries",
+			"use strict",
+			"\";\n",
+			"recType",
+			"input",
+			"version",
+			"SPServices",
+			"console.log",
+			"position",
+			"250",
+			"test",
+			"type",
+			"Report",
+			"container",
+			"MetaInfo",
+			"parse",
+			"_spPageContextInfo",
+			"setup",
+			"get",
+			"SP.js",
+			"string",
+			">",
+			"sp.js",
+			"downloadReport",
+			"executeFileSave",
+			"executeFileSave();",
+			"getFiles",
+			"reset",
+			"progress",
+			"rs:data",
+			"preview",
+			"parse",
+			"Content-Length",
+			"progress",
+			"contentType",
+			"list name",
+			"list",
+			"whereCAML",
+			"errorstring",
+			"xml version=",
+			"xml version=1.0",
+			"responseXML",
+			"XMLHttpRequestObject.responseXML",
+			"\"Field",
+			"\"FieldRef\"",
+			"getAttribute",
+			"ContentTypeId",
+			"$.p.end",
+			"$.p.set",
+			"$(\"#cancel",
+			"cancel",
+			"$.p.end",
+			"getElementsByTagName",
+			"saveAs",
+			"input",
+			"console.log",
+			"regEx",
+			"fileName",
+			"filenmae",
+			"arr",
+			"trim",
+			"documentName",
+			"rawname",
+			"docname",
+			"staticName",
+			"console.log",
+			"staticName",
+			"javascript",
+			"\n",
+			"                ",
+			");\n",
+			"tern",
+			"http_proxy"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 286.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 311.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git-init":
+	{
+		"height": 122.0
+	},
+	"output.git-push":
+	{
+		"height": 122.0
+	},
+	"output.git-remote":
+	{
+		"height": 122.0
+	},
+	"pinned_build_system": "",
+	"project": "SPOneAccess2.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"css\\style.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 270.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
