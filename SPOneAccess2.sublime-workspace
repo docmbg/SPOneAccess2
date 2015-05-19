@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"set",
+				"setManager"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
 				"site",
 				"siteURL"
 			],
@@ -192,10 +204,10 @@
 	"buffers":
 	[
 		{
-			"file": "OneAccess.html",
+			"file": "js/OneAccess2.js",
 			"settings":
 			{
-				"buffer_size": 566,
+				"buffer_size": 1659,
 				"line_ending": "Windows"
 			}
 		}
@@ -388,11 +400,25 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2"
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/libraries",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins"
 	],
 	"file_history":
 	[
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG 1.0 Implementation/js/saveFileWorker.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG 1.0 Implementation/ReportGenerator.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/Avaya RIST Implementation/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/Avaya RIST Implementation/WebParts/My_Active_Records_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins/sp-plugin.peopleahead.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/css/sp-plugin.peopleahead.css",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client/OneAccess.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/OneAccess2.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/reportGenerator.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/OneAccess.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/client/ReportGenerator.html",
 		"/C/Users/simsimeo/.npmrc",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/Heading Banner.dwp",
@@ -410,7 +436,6 @@
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/changelog.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/helpers/instructions.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/saveFileWorker.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/reportGenerator.js",
 		"/C/Users/simsimeo/Desktop/Navigation/Exported/Navigation.htm",
 		"/C/Users/simsimeo/Desktop/HeinekenSyncSDRLOG/HeinekenSyncSDRLOG/HeinekenSyncSDRLOG/App.xaml",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/FileSaver.js",
@@ -511,18 +536,11 @@
 		"/C/Users/simsimeo/Desktop/Sublime Project Test/library/jquery.min.js",
 		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings",
 		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/SublimeGit.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/GitHub.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/sublime-github/GitHub.sublime-settings",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/massDelete2010.js",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/simsimeo/Desktop/Sublime Project Test/.jshintrc",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Sublime-Text--cdnjs/cdnjs.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/node.sublime-build"
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/GitHub.sublime-settings"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 55.0
 	},
 	"find_in_files":
 	{
@@ -536,6 +554,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"login",
 			"ERMS",
 			"TRIM",
 			"Registered",
@@ -645,26 +664,28 @@
 			[
 				{
 					"buffer": 0,
-					"file": "OneAccess.html",
+					"file": "js/OneAccess2.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 566,
+						"buffer_size": 1659,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								226,
-								226
+								1115,
+								1115
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
