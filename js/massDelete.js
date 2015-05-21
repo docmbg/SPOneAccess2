@@ -1,7 +1,9 @@
 var ep = new ExcelPlus();
 var SITEENV;
 var userEmails = [];
-var usersInfo = []
+var usersInfo = [];
+var html = "";
+var aName = "";
 
 //Gettin the current SP site
 $(document).ready(function() {
@@ -9,6 +11,11 @@ $(document).ready(function() {
     console.log(SITEENV);
 });
 
+function resetAll() {
+    ep.reset();
+    usersInfo = [];
+    userEmails = [];
+};
 
 // we call openLocal() and when the file is loaded then we want to display its content
 // openLocal() will use the FileAPI if exists, otherwise it will use a Flash object
@@ -16,20 +23,41 @@ ep.openLocal({
     "flashPath": "2.2/swfobject/",
     "labelButton": "Open an Excel file"
 }, function() {
-    var arr = ep.selectSheet('MassDelete').readAll();
+    if (ep.selectedSheet !== "MassDelete") {
 
-    // iterate and push emails to userEmails array
-    for (var i = 0; i < arr.length; i++) {
-        for (var j = 0; j < arr[i].length; j++) {
-            userEmails.push(arr[i][j]);
+        $("#error").html("The name of the Excel Worksheet should be MassDelete");
+        resetAll();
+
+
+    } else {
+
+        var arr = ep.selectSheet('MassDelete').readAll();
+        resetAll();
+        $("#error").html("");
+
+        //setting the the html table to iclude the user's emails 
+
+
+        // iterate and push emails to userEmails array
+        for (var i = 0; i < arr.length; i++) {
+            html += '<tr>';
+            for (var j = 0; j < arr[i].length; j++) {
+                html += '<td>' + arr[i][j] + '</td>'
+                userEmails.push(arr[i][j]);
+            }
+
         }
+        iterateUsers();
+
     }
-    iterateUsers();
+
+
 });
 
 function iterateUsers() {
     for (var x = 0; x < userEmails.length; x++) {
         var aName = getUserLogIn(userEmails[x]);
+        console.log(aName);
     }
 };
 
@@ -88,8 +116,7 @@ function getUserLogIn(email) {
     $SP().people(email, {
         url: SITEENV
     }, function(p) {
-        var login = p;
-        console.log(login);
+
 
         var user = new User();
         user.setName = p.FirstName + " " + p.LastName;
@@ -97,6 +124,13 @@ function getUserLogIn(email) {
         user.setEmail = p.WorkEmail;
 
         usersInfo.push(user);
+        var html = "<table>";
+        // 
+        for (user in usersInfo) {
+            html += '<tr>' + '<td>' + user.setName + '' + user.setEmail + '</td>' + '</tr>';
+        }
+        html += "</table>";
+        $("#result").after(html);
 
     });
 };
