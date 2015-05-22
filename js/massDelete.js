@@ -3,7 +3,7 @@ var SITEENV;
 var userEmails = [];
 var usersInfo = [];
 var html = "";
-var aName = "";
+var unIdentifiedUsers = [];
 
 //Gettin the current SP site
 $(document).ready(function() {
@@ -57,7 +57,6 @@ ep.openLocal({
 function iterateUsers() {
     for (var x = 0; x < userEmails.length; x++) {
         var aName = getUserLogIn(userEmails[x]);
-        console.log(aName);
     }
 };
 
@@ -119,18 +118,27 @@ function getUserLogIn(email) {
 
 
         var user = new User();
-        user.setName = p.FirstName + " " + p.LastName;
-        user.setLogin = p.AccountName;
-        user.setEmail = p.WorkEmail;
+        user.setName(p.FirstName + " " + p.LastName);
+        user.setLogin(p.AccountName);
+        user.setEmail(p.WorkEmail);
 
-        usersInfo.push(user);
-        var html = "<table>";
-        // 
-        for (user in usersInfo) {
-            html += '<tr>' + '<td>' + user.setName + '' + user.setEmail + '</td>' + '</tr>';
+        if (user.getEmail() === "undefined") {
+            unIdentifiedUsers.push(user);
+            console.log("Unidentified " + user);
         }
-        html += "</table>";
-        $("#result").after(html);
+        usersInfo.push(user);
+        generateUsersTable(user);
 
     });
 };
+
+//A Method for Displaying the Identified Users
+function generateUsersTable(user) {
+    var html = "<table>";
+    // 
+    html += '<tr>' + '<td><b>' + user.getName() + '</b> (<em>' + user.getEmail() + '</em>)</td>' + '</tr>';
+
+    html += "</table>";
+    $("#result").after(html);
+
+}
