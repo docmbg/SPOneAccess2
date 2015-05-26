@@ -155,39 +155,57 @@ It uses asynchronous requests
                 });
             };
 
-
-            // $(document).ready(function(){
-            //     // $('#d_clip_button').zclip({
-            //     //     path:'ZeroClipboard.swf',
-            //     //     copy:$('#invalid-list').text()
-            //     // });
-            // // The link with ID "copy-description" will copy
-            // // the text of the paragraph with ID "description"
-            //     $('#d_clip_button').zclip({
-            //         path:'ZeroClipboard.swf',
-            //         copy:function(){return $('#invalid-list').val();}
-            //     });
-            // // The link with ID "copy-dynamic" will copy the current value
-            // // of a dynamically changing input with the ID "dynamic"
-            // });
-            // //- See more at: http://www.steamdev.com/zclip/#sthash.Hz9Nid3U.dpuf
-
-        	
         
             //One access
             //check group permissions
             var subjectGroups = [];
-
+            var usersInGroup = new Array();
             $().SPServices({
                 operation: "GetGroupCollectionFromWeb",
                 webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
                 completefunc: function(xData, Status){
                     $(xData.responseXML).find("Group").each(function(){
-                        subjectGroups.push($(this).attr('Name'));
+                        subjectGroups.push($(this));
+                        var groupName = $(this).attr("Name");
+                        $SP().groupMembers(groupName, function(members) {
+                            for (var j = 0; j < members.length; j++) {
+                                usersInGroup.push(members[j]);
+                                console.log(usersInGroup[j]);
+                            }
+                        });
+
+
                     });
                 }
             });
 
+            $(document).ready(function(){
+
+                 for(var i = 0; i < subjectGroups.length; i++){
+                    console.log(subjectGroups[i].attr("Name"))
+
+                    if (!usersInGroup[i]){
+                        usersInGroup[i] = new Array();
+                        console.log(subjectGroups[i].attr('Name'));
+                    }
+                    $SP().groupMembers(subjectGroups[i].attr('Name'), function(members) {
+                        for (var j=0; j < members.length; j++) {
+                            usersInGroup[i].push(members[j]);
+                            console.log(usersInGroup[i][j]);
+                        }
+                    });
+                }
+            });
+           
+            // for(group in subjectGroups){
+            //     $()SPServices({
+            //         operation: "GetGroupInfo",
+            //         webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
+            //         completefunc: function(xData,Status){
+            //             $(xData.responseXML).find("")
+            //         }
+            //     });
+            // }
 
         //});
     </script>
