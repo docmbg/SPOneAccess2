@@ -4,6 +4,10 @@ var userEmails = [];
 var usersInfo = [];
 var html = "";
 var unIdentifiedUsers = [];
+var patt1 = /\s/g;
+var formattedStr = "";
+var formattedArr = [];
+
 
 //Gettin the current SP site
 $(document).ready(function() {
@@ -35,19 +39,30 @@ ep.openLocal({
         resetAll();
         $("#error").html("");
 
-        //setting the the html table to iclude the user's emails 
+        //excluding any additional letters/ signs in the excel cell 
+
 
 
         // iterate and push emails to userEmails array
         for (var i = 0; i < arr.length; i++) {
             html += '<tr>';
             for (var j = 0; j < arr[i].length; j++) {
-                html += '<td>' + arr[i][j] + '</td>'
-                userEmails.push(arr[i][j]);
+
+                html += '<td>' + arr[i][j] + '</td>';
+                if (arr[i][j] !== null) {
+                    userEmails.push(arr[i][j]);
+                }
             }
 
         }
+
+        // for (var i = 0; i < userEmails.length; i++) {
+        //     var formattedStr = userEmails[i].trim();
+        //     formattedArr.push(formattedStr); //trimming the white spaces before/after the email string
+        // }
+
         iterateUsers();
+
 
     }
 
@@ -55,8 +70,8 @@ ep.openLocal({
 });
 
 function iterateUsers() {
-    for (var x = 0; x < userEmails.length; x++) {
-        var aName = getUserLogIn(userEmails[x]);
+    for (var x = 0; x < formattedArr.length; x++) {
+        var aName = getUserLogIn(formattedArr[x]);
     }
 };
 
