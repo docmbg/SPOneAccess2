@@ -76,17 +76,6 @@ $(document).ready(function() {
 
         });
     };
-
-
-    //A Method for Displaying the Identified Users
-    function generateUsersTable(user) {
-        var html = "<table>";
-        // 
-        html += '<tr>' + '<td><b>' + user.getName() + '</b> (<em>' + user.getEmail() + '</em>)</td>' + '</tr>';
-
-        html += "</table>";
-        $("#result").after(html);
-
-    }
+   
 
 });
