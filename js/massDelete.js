@@ -167,45 +167,19 @@ function generateUsersTable(user) {
 
 }
 
-// $(".delete").click(removeUsersFromSite(usersLogInNames));
-// //Removing the Identified users from site
-// function removeUsersFromSite(identifiedUser) {
-//     for (var i = 0; i < identifiedUsers.length; i++) {
-//         var logInName = identifiedUsers[i].getLogin();
-//         loginNamesArr.push(uName);
-//         console.log(loginNamesArr);
-//         $().SPServices({
-//             operation: "RemoveUserFromSite",
-//             userLoginName: logInName,
-//             async: true,
-//             completefunc: function(xData, Status) {
-//                 $.when.apply(this, loginNamesArr).done(function() {
-//                     if (identifiedUsers.length == loginNamesArr.length) {
-//                         $('#loading').html("<p>Users removed!</p>");
-//                         $(".cancelBtn").button("option", "label", "OK");
-//                     }
-//                 });
-//             }
-//         })
 
-//     }
-// }
-
-function RemoveUsers(validUsers) {
-
-    for (var i = 0; i < validUsers.length; i++) {
-        loginName = validUsers[i].getLogin();
-        usersLogInNames.push(loginName);
-        $().SPServices({
-            operation: "RemoveUserFromSite",
-            userLoginName: loginName,
-            async: true,
-            completefunc: function(xData, Status) {
-                alert("users deleted");
-            }
-        });
+//Removing users from site 
+$('#delete').click(function() {
+    for (var i = 0; i < usersInfo.length; i++) {
+        if (usersInfo[i] != undefined) {
+            $().SPServices({
+                operation: "RemoveUserFromSite",
+                userLoginName: usersInfo[i].getLogin(),
+                async: true
+            });
+            console.log('usersInfo[' + i + '] is deleted');
+        } else {
+            console.log('usersInfo[' + i + '] is ' + usersInfo[i]);
+        }
     }
-
-}
-
-$("#delete").click(RemoveUsers(usersInfo));
+})
