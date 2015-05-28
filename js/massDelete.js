@@ -3,10 +3,13 @@ var SITEENV;
 var userEmails = [];
 var usersInfo = [];
 var html = "";
-var unIdentifiedUsers = [];
-var patt1 = /\s/g;
+var invalidUsers = [];
 var formattedStr = "";
 var formattedArr = [];
+var loginName = "";
+var usersLogInNames = [];
+
+
 
 
 //Gettin the current SP site
@@ -39,9 +42,6 @@ ep.openLocal({
         resetAll();
         $("#error").html("");
 
-        //excluding any additional letters/ signs in the excel cell 
-
-
 
         // iterate and push emails to userEmails array
         for (var i = 0; i < arr.length; i++) {
@@ -62,16 +62,13 @@ ep.openLocal({
         // }
 
         iterateUsers();
-
-
     }
-
 
 });
 
 function iterateUsers() {
-    for (var x = 0; x < formattedArr.length; x++) {
-        var aName = getUserLogIn(formattedArr[x]);
+    for (var x = 0; x < userEmails.length; x++) {
+        var aName = getUserLogIn(userEmails[x]);
     }
 };
 
@@ -137,12 +134,24 @@ function getUserLogIn(email) {
         user.setLogin(p.AccountName);
         user.setEmail(p.WorkEmail);
 
-        if (user.getEmail() === "undefined") {
-            unIdentifiedUsers.push(user);
-            console.log("Unidentified " + user);
+        if (typeof p === "string") {
+            invalidUsers.push(email);
+            $("#invalid-list").append('<li class="invalid-item">' + email + '</li>');
+            //$('#fe_text').val($('#fe_text').val() + email + '<br />')
+            //$('#fe_text').append('<li>' +email + '</li>')
+        } else {
+            usersInfo.push(user);
+            usersLogInNames.push(user.getLogin());
+            generateUsersTable(user);
+            $("#valid-list").append(
+                "<li style='width:200px'>" + user.getName() + "  <span id='" + user.id + "' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+            $('.del').click(function(e) {
+                //e.preventDefault();
+                $(this).closest('li').remove();
+                usersInfo[parseInt($(this).attr('id'))] = undefined;
+
+            });
         }
-        usersInfo.push(user);
-        generateUsersTable(user);
 
     });
 };
@@ -157,3 +166,46 @@ function generateUsersTable(user) {
     $("#result").after(html);
 
 }
+
+// $(".delete").click(removeUsersFromSite(usersLogInNames));
+// //Removing the Identified users from site
+// function removeUsersFromSite(identifiedUser) {
+//     for (var i = 0; i < identifiedUsers.length; i++) {
+//         var logInName = identifiedUsers[i].getLogin();
+//         loginNamesArr.push(uName);
+//         console.log(loginNamesArr);
+//         $().SPServices({
+//             operation: "RemoveUserFromSite",
+//             userLoginName: logInName,
+//             async: true,
+//             completefunc: function(xData, Status) {
+//                 $.when.apply(this, loginNamesArr).done(function() {
+//                     if (identifiedUsers.length == loginNamesArr.length) {
+//                         $('#loading').html("<p>Users removed!</p>");
+//                         $(".cancelBtn").button("option", "label", "OK");
+//                     }
+//                 });
+//             }
+//         })
+
+//     }
+// }
+
+function RemoveUsers(validUsers) {
+
+    for (var i = 0; i < validUsers.length; i++) {
+        loginName = validUsers[i].getLogin();
+        usersLogInNames.push(loginName);
+        $().SPServices({
+            operation: "RemoveUserFromSite",
+            userLoginName: loginName,
+            async: true,
+            completefunc: function(xData, Status) {
+                alert("users deleted");
+            }
+        });
+    }
+
+}
+
+$("#delete").click(RemoveUsers(usersInfo));

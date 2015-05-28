@@ -35,11 +35,11 @@ var User = (function() {
         return privateStore[this.id]._email;
     };
 
-    User.prototype.setPicture = function(pic) {
+    User.prototype.setPicture = function(pic){
         privateStore[this.id]._picture = pic;
     };
 
-    User.prototype.getPicture = function() {
+    User.prototype.getPicture = function(){
         return privateStore[this.id]._picture;
     };
 
