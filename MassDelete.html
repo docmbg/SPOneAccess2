@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
     <script type="text/javascript" src="libraries/2.2/sheetjs.all.min.js"></script>
     <script type="text/javascript" src="libraries/2.2/excelplus-2.2.min.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
     <script type="text/javascript" src="libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
@@ -15,6 +15,20 @@
     <object id="file-object"></object>
     <p id="error"></p>
     <div id="result"> </div>
+    <div id="wrapper">
+        <div id="valid">
+            <p>Valid users</p>
+            <ol id="valid-list">
+            </ol>
+        </div>
+        <div id="invalid">
+            <p>Invalid users</p>
+            <ol id="invalid-list">
+            </ol>
+            <button id="d_clip_button" data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection </button>
+        </div>
+    </div>
+    <button id="delete">Delete</button>
     <script type="text/javascript" src="js/massDelete.js"></script>
 </body>
 
