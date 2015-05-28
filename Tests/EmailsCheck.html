@@ -61,6 +61,7 @@ It uses asynchronous requests
             </ol>
             <button id="d_clip_button"  data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection </button>
         </div>
+        <button id="delete-users">Delete Users</button>
     </div>
    
     <script type="text/javascript">
@@ -72,42 +73,43 @@ It uses asynchronous requests
             //check group permissions
             var subjectGroups = [];
             var usersInGroup = new Array();
-            $().SPServices({
-                operation: "GetGroupCollectionFromWeb",
-                webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
-                completefunc: function(xData, Status){
-                    $(xData.responseXML).find("Group").each(function(){
-                        subjectGroups.push($(this));
-                        var groupName = $(this).attr("Name");
-                        $SP().groupMembers(groupName, function(members) {
-                            for (var j = 0; j < members.length; j++) {
-                                usersInGroup.push(members[j]);
-                                console.log(usersInGroup[j]);
-                            }
-                        });
+
+            // $().SPServices({
+            //     operation: "GetGroupCollectionFromWeb",
+            //     webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
+            //     completefunc: function(xData, Status){
+            //         $(xData.responseXML).find("Group").each(function(){
+            //             subjectGroups.push($(this));
+            //             var groupName = $(this).attr("Name");
+            //             $SP().groupMembers(groupName, function(members) {
+            //                 for (var j = 0; j < members.length; j++) {
+            //                     usersInGroup.push(members[j]);
+            //                     console.log(usersInGroup[j]);
+            //                 }
+            //             });
 
 
-                    });
-                }
-            });
+            //         });
+            //     }
+            // });
 
-            $(document).ready(function(){
+            // $(document).ready(function(){
 
-                 for(var i = 0; i < subjectGroups.length; i++){
-                    console.log(subjectGroups[i].attr("Name"))
+            //      for(var i = 0; i < subjectGroups.length; i++){
+            //         console.log(subjectGroups[i].attr("Name"))
 
-                    if (!usersInGroup[i]){
-                        usersInGroup[i] = new Array();
-                    }
+            //         if (!usersInGroup[i]){
+            //             usersInGroup[i] = new Array();
+            //         }
 
-                    $SP().groupMembers(subjectGroups[i].attr('Name'), function(members) {
-                        for (var j=0; j < members.length; j++) {
-                            usersInGroup[i].push(members[j]);
-                            console.log(usersInGroup[i][j]);
-                        }
-                    });
-                }
-            });
+            //         $SP().groupMembers(subjectGroups[i].attr('Name'), function(members) {
+            //             for (var j=0; j < members.length; j++) {
+            //                 usersInGroup[i].push(members[j]);
+            //                 console.log(usersInGroup[i][j]);
+            //             }
+            //         });
+            //     }
+            // });
            
             
 
