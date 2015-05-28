@@ -1,11 +1,13 @@
+ var ep = new ExcelPlus();
+var SITEENV;
+var userEmails = [];
+var usersInfo = [];
+var html = "";
+var unIdentifiedUsers = [];
+var invalidUsers = [];
+
 $(document).ready(function() {
-    var ep = new ExcelPlus();
-    var SITEENV;
-    var userEmails = [];
-    var usersInfo = [];
-    var html = "";
-    var unIdentifiedUsers = [];
-    var invalidUsers = [];
+   
 
 //Gettin the current SP site
 
@@ -48,9 +50,7 @@ $(document).ready(function() {
         $SP().people(email, {url: SITEENV}, function(p) {
             if (typeof p === "string") {
                invalidUsers.push(email);
-               $("#invalid-list").append('<li class="invalid-item">' + email + '</li>');
-               //$('#fe_text').val($('#fe_text').val() + email + '<br />')
-               //$('#fe_text').append('<li>' +email + '</li>')
+               $("#invalid-list").append('<li class="invalid-item">' + email + '</li>')
             } else{
                 var login = p;
                 console.log(login);
@@ -78,4 +78,18 @@ $(document).ready(function() {
     };
    
 
+    $('#delete-users').click(function(){
+        for(var i = 0 ; i < usersInfo.length; i++){
+            if (usersInfo[i] != undefined){
+                $().SPServices({
+                    operation:"RemoveUserFromSite",
+                    userLoginName: usersInfo[i].getLogin(),
+                    async:true
+                });
+                console.log('usersInfo['+ i +'] is deleted');
+            }else{
+                console.log('usersInfo['+ i +'] is ' + usersInfo[i]);
+            }
+        }
+    })
 });
