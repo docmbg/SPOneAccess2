@@ -23,8 +23,9 @@ It uses asynchronous requests
     <script type="text/javascript" src="https://googledrive.com/host/0B05gvY7cupTteG90ejJhVllWZ1k/sharepointplus.js"></script>
     <script type="text/javascript" src="libraries/2.2/sheetjs.all.min.js"></script>
     <script type="text/javascript" src="libraries/2.2/excelplus-2.2.min.js"></script>
-    <script type="text/javascript" src="js/User.js"></script>
     <script type="text/javascript" src="libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
+    <script type="text/javascript" src="js/User.js"></script>
+    <script type="text/javascript" src="js/massDelete2.js"></script>
     <style>
         #wrapper{
             width: 70%;
@@ -61,99 +62,10 @@ It uses asynchronous requests
             <button id="d_clip_button"  data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection </button>
         </div>
     </div>
-  
-
-    
-     
-<!--     <textarea cols='30' id='fe_text' rows='3'></textarea> -->
-    <ul cols='30' id='fe_text' rows='3'></ul>
    
     <script type="text/javascript">
-      //var client = new ZeroClipboard( $('#d_clip_button') );
-    </script>
-    <script type="text/javascript">
 
-        //$(document).ready(function(){
-        	//MassDelete 
-            // checks if emails is valid
-            
-            var ep = new ExcelPlus();
-            var SITEENV;
-            var userEmails = [];
-            var usersInfo = []
-            var invalidUsers = [];
-
-            //Gettin the current SP site
-            $(document).ready(function() {
-                SITEENV = $().SPServices.SPGetCurrentSite();
-                $("#copy-invalid-list").click(function(){
-
-                });
-
-                  var clip = new ZeroClipboard($("#d_clip_button"))
-            });
-            
-
-            // we call openLocal() and when the file is loaded then we want to display its content
-            // openLocal() will use the FileAPI if exists, otherwise it will use a Flash object
-            ep.openLocal({
-                "flashPath": "2.2/swfobject/",
-                "labelButton": "Open an Excel file"
-            }, function() {
-                var arr = ep.selectSheet('MassDelete').readAll();
-
-                // iterate and push emails to userEmails array
-                for (var i = 0; i < arr.length; i++) {
-                    for (var j = 0; j < arr[i].length; j++) {
-                        userEmails.push(arr[i][j]);
-                    }
-                }
-                iterateUsers();
-            });
-
-            function iterateUsers() {
-                for (var x = 0; x < userEmails.length; x++) {
-                    var aName = getUserLogIn(userEmails[x]);
-                }
-            };
-
-            //User objects constructor
-
-           
-        //Method for Getting the user login name
-
-            function getUserLogIn(email) {
-                $SP().people(email, {url: SITEENV}, function(p) {
-                    if (typeof p === "string") {
-                       invalidUsers.push(email);
-                       $("#invalid-list").append('<li class="invalid-item">' + email + '</li>');
-                       //$('#fe_text').val($('#fe_text').val() + email + '<br />')
-                       //$('#fe_text').append('<li>' +email + '</li>')
-                    } else{
-                        var login = p;
-                        console.log(login);
-
-                        var user = new User();
-                        user.setName(p.FirstName + " " + p.LastName);
-                        user.setLogin(p.AccountName);
-                        user.setEmail(p.WorkEmail);
-                        user.setPicture(p.PictureURL);
-
-                        usersInfo.push(user);
-
-                        $("#valid-list").append(
-                            "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
-
-                        $('.del').click(function(e) {
-                            //e.preventDefault();
-                            $(this).closest('li').remove();
-                            usersInfo[parseInt($(this).attr('id'))] = undefined;
-                
-                        });
-                    }
-
-                });
-            };
+      
 
         
             //One access
@@ -186,8 +98,8 @@ It uses asynchronous requests
 
                     if (!usersInGroup[i]){
                         usersInGroup[i] = new Array();
-                        console.log(subjectGroups[i].attr('Name'));
                     }
+
                     $SP().groupMembers(subjectGroups[i].attr('Name'), function(members) {
                         for (var j=0; j < members.length; j++) {
                             usersInGroup[i].push(members[j]);
@@ -197,17 +109,9 @@ It uses asynchronous requests
                 }
             });
            
-            // for(group in subjectGroups){
-            //     $()SPServices({
-            //         operation: "GetGroupInfo",
-            //         webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
-            //         completefunc: function(xData,Status){
-            //             $(xData.responseXML).find("")
-            //         }
-            //     });
-            // }
+            
 
-        //});
+        
     </script>
 </body>
 
