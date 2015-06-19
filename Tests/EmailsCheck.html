@@ -11,14 +11,15 @@ It uses asynchronous requests
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mass Deletion 2010-2013</title>
     <script type="text/javascript" src="https://googledrive.com/host/0B05gvY7cupTteG90ejJhVllWZ1k/jquery.js"></script>
+
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
     <link rel="stylesheet" href="https://googledrive.com/host/0B05gvY7cupTtTnJfX2I1XzNtdkE/main.css">
     <link rel="stylesheet" href="https://googledrive.com/host/0B05gvY7cupTtTnJfX2I1XzNtdkE/normalize.css">
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
     <script type="text/javascript" src="https://googledrive.com/host/0B05gvY7cupTteG90ejJhVllWZ1k/jquery.SPServices.min.js"></script>
     <script type="text/javascript" src="https://googledrive.com/host/0B05gvY7cupTteG90ejJhVllWZ1k/sharepointplus.js"></script>
     <script type="text/javascript" src="libraries/2.2/sheetjs.all.min.js"></script>
@@ -26,6 +27,8 @@ It uses asynchronous requests
     <script type="text/javascript" src="libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
     <script type="text/javascript" src="js/User.js"></script>
     <script type="text/javascript" src="js/massDelete2.js"></script>
+    <script type="text/javascript" src="js/Group.js"></script>
+    <script type="text/javascript" src="js/Site.js"></script>
     <style>
         #wrapper{
             width: 70%;
@@ -64,56 +67,157 @@ It uses asynchronous requests
         <button id="delete-users">Delete Users</button>
     </div>
    
-    <script type="text/javascript">
-
-      
-
+    <script type="text/javascript">        
+        //One access
+        //check group permissions
+        var sites = [];
+        var subjectGroups = []; 
+        var usersInGroup = [];
         
-            //One access
-            //check group permissions
-            var subjectGroups = [];
-            var usersInGroup = new Array();
+
+        function getSites(){
+            var dfd = $.Deferred();
+
+             $().SPServices({
+                operation: 'GetAllSubWebCollection',
+                completefunc: function(xData) {
+                    dfd.resolve(
+                        $(xData.responseXML).find("Webs > Web").each(function() {
+                            var $node = $(this);
+                            var site = new Site($node.attr('Title'), $node.attr('Url'));
+                            sites.push(site);
+                        })
+                    )
+                }
+            });
+             return dfd.promise();
+        };
+
+        // function getGroups(siteUrl){
+        //     var dfd = $.Deferred();
+        //     $().SPServices({
+        //         operation: 'GetGroupCollectionFromWeb',
+        //         webURL: siteUrl,
+        //         completefunc: function(xData, Status){
+        //             dfd.resolve(
+        //                 $(xData.responseXML).find("Group").each(function(){
+        //                     var $node = $(this);
+        //                     var group = new Group($node.attr('Name'));
+        //                     //console.log(group)
+        //                     //getGroupAccess(group.name);
+        //                     subjectGroups.push(group);
+        //                 })
+        //             )
+        //         }
+        //     });
+        //     return dfd.promise();
+        // };
+
+        function getUserPermissions(){
+
+            $().SPServices({
+                operation: 'GetRolesAndPermissionsForCurrentUser',
+                comasyncpletefunc: function(xData, Status){
+                   console.log($(xData.responseXML).find('Permissions').attr('value'))
+                }
+
+            })
+        };
+
+
+        getSites().done(function(){
+            for(var s = 0; s < sites.length; s++){
+               // getGroups(sites[s]);
+                // getGroups(sites[s]).done(function(){
+                //     for (var i = 0; i < subjectGroups.length; i++){
+                //         usersInGroup[i] = [];
+                //         //getMembers(subjectGroups[i].attr('Name'), i)
+                //     }
+                // });
+            }
+        });
+
+           // function getMembers(grName, i){
+        //     var dfd = $.Deferred();
+
+        //     $().SPServices({
+        //         operation: 'GetUserCollectionFromGroup',
+        //         groupName: grName,
+        //         async: true,
+        //         completefunc: function(xDataUser, Status){
+        //             dfd.resolve(
+        //                 $(xDataUser.responseXML).find('User').each(function(){
+        //                     usersInGroup[i].push($(this));
+        //                 })
+        //             )
+        //         }
+        //     });   
+        //     return dfd.promise();
+        // };
+
+
+        // function getGroupAccess(index){
+        //     var dfd = $.Deferred();
+        //     var $node;
+        //     subjectGroups[index].permissions = [];
+
+        //     $().SPServices({
+        //         operation: 'GetRoleCollectionFromGroup',
+        //         groupName: subjectGroups[index].name,
+        //         completefunc: function(xData, Status){
+        //             dfd.resolve(
+        //                 $(xData.responseXML).find('Roles>Role').each(function(){
+        //                     $node = $(this)[0];
+        //                     subjectGroups[index].permissions.push($($node).attr('Name'));
+                  
+        //                 })
+        //             )
+        //         }
+        //     })
+        //     return dfd.promise();
+        // };
+
+     
+        // for(var i = 0; i < subjectGroups.length; i++){
+        //     getGroupAccess(i)
+        // }
+         
+         
 
             // $().SPServices({
-            //     operation: "GetGroupCollectionFromWeb",
-            //     webURL: "http://ent261.sharepoint.hp.com/teams/EricssonInt/",
+            //     operation: 'GetRoleCollectionFromGroup',
+            //     groupName: subjectGroups[0].name,
             //     completefunc: function(xData, Status){
-            //         $(xData.responseXML).find("Group").each(function(){
-            //             subjectGroups.push($(this));
-            //             var groupName = $(this).attr("Name");
-            //             $SP().groupMembers(groupName, function(members) {
-            //                 for (var j = 0; j < members.length; j++) {
-            //                     usersInGroup.push(members[j]);
-            //                     console.log(usersInGroup[j]);
-            //                 }
-            //             });
-
-
-            //         });
+            //         $(xData.responseXML).find('Roles>Role').each(function(){
+            //             $node = $(this)[0];
+            //             console.log($($node).attr('Name'))
+            //         })
             //     }
-            // });
+            // })
+    
+          
 
-            // $(document).ready(function(){
+         
 
-            //      for(var i = 0; i < subjectGroups.length; i++){
-            //         console.log(subjectGroups[i].attr("Name"))
 
-            //         if (!usersInGroup[i]){
-            //             usersInGroup[i] = new Array();
-            //         }
+            $().SPServices({
+                operation: 'GetGroupCollection',
+                completefunc: function(xData, Status){
+                    $(xData.responseXML).find('Name').each(function(){
+                        
+                    })
+                    console.log (xData.responseXML)
+                }
 
-            //         $SP().groupMembers(subjectGroups[i].attr('Name'), function(members) {
-            //             for (var j=0; j < members.length; j++) {
-            //                 usersInGroup[i].push(members[j]);
-            //                 console.log(usersInGroup[i][j]);
-            //             }
-            //         });
-            //     }
-            // });
-           
+            })
+
             
 
-        
+           
+      
+
+
+
     </script>
 </body>
 
