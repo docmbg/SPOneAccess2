@@ -86,6 +86,7 @@ Group.prototype.getPermissions = function(){
                     $node = $(this)[0];
                     _this.permissions.push($($node).attr('Name'));
                 })
+	            
             )
         }
     })

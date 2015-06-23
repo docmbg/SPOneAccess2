@@ -93,25 +93,6 @@ It uses asynchronous requests
              return dfd.promise();
         };
 
-        // function getGroups(siteUrl){
-        //     var dfd = $.Deferred();
-        //     $().SPServices({
-        //         operation: 'GetGroupCollectionFromWeb',
-        //         webURL: siteUrl,
-        //         completefunc: function(xData, Status){
-        //             dfd.resolve(
-        //                 $(xData.responseXML).find("Group").each(function(){
-        //                     var $node = $(this);
-        //                     var group = new Group($node.attr('Name'));
-        //                     //console.log(group)
-        //                     //getGroupAccess(group.name);
-        //                     subjectGroups.push(group);
-        //                 })
-        //             )
-        //         }
-        //     });
-        //     return dfd.promise();
-        // };
 
         function getUserPermissions(){
 
@@ -125,98 +106,30 @@ It uses asynchronous requests
         };
 
 
-        getSites().done(function(){
-            for(var s = 0; s < sites.length; s++){
-               // getGroups(sites[s]);
-                // getGroups(sites[s]).done(function(){
-                //     for (var i = 0; i < subjectGroups.length; i++){
-                //         usersInGroup[i] = [];
-                //         //getMembers(subjectGroups[i].attr('Name'), i)
-                //     }
-                // });
-            }
-        });
-
-           // function getMembers(grName, i){
-        //     var dfd = $.Deferred();
-
-        //     $().SPServices({
-        //         operation: 'GetUserCollectionFromGroup',
-        //         groupName: grName,
-        //         async: true,
-        //         completefunc: function(xDataUser, Status){
-        //             dfd.resolve(
-        //                 $(xDataUser.responseXML).find('User').each(function(){
-        //                     usersInGroup[i].push($(this));
-        //                 })
-        //             )
-        //         }
-        //     });   
-        //     return dfd.promise();
-        // };
+        getSites();
 
 
-        // function getGroupAccess(index){
-        //     var dfd = $.Deferred();
-        //     var $node;
-        //     subjectGroups[index].permissions = [];
-
-        //     $().SPServices({
-        //         operation: 'GetRoleCollectionFromGroup',
-        //         groupName: subjectGroups[index].name,
-        //         completefunc: function(xData, Status){
-        //             dfd.resolve(
-        //                 $(xData.responseXML).find('Roles>Role').each(function(){
-        //                     $node = $(this)[0];
-        //                     subjectGroups[index].permissions.push($($node).attr('Name'));
-                  
-        //                 })
-        //             )
-        //         }
-        //     })
-        //     return dfd.promise();
-        // };
-
-     
-        // for(var i = 0; i < subjectGroups.length; i++){
-        //     getGroupAccess(i)
-        // }
-         
-         
-
-            // $().SPServices({
-            //     operation: 'GetRoleCollectionFromGroup',
-            //     groupName: subjectGroups[0].name,
-            //     completefunc: function(xData, Status){
-            //         $(xData.responseXML).find('Roles>Role').each(function(){
-            //             $node = $(this)[0];
-            //             console.log($($node).attr('Name'))
-            //         })
-            //     }
-            // })
-    
-          
-
-         
-
-
-            $().SPServices({
-                operation: 'GetGroupCollection',
-                completefunc: function(xData, Status){
-                    $(xData.responseXML).find('Name').each(function(){
-                        
-                    })
-                    console.log (xData.responseXML)
+        var matrix = document.createElement('table');
+        for(var i = 0; i < sites.length; i++){
+            var row = document.createElement('tr');
+            var siteName = document.createElement('td');
+            siteName.innerHTML = sites[i].name;
+            row.appendChild(siteName);
+            for (var j = 0; j < sites[i].groups.length; j++){
+                var groupName = document.createElement('td');
+                groupName.innerHTML = sites[i].groups[j].name + '<br/>';
+                for (var p = 0; p < sites[i].groups[j].permissions.length; p++){
+                    var perm = document.createElement('span');
+                    perm.style.color = 'red';
+                    perm.innerHTML = sites[i].groups[j].permissions[p] + '<br/>';
+                    groupName.appendChild(perm);
                 }
+                row.appendChild(groupName);
+            }
+            matrix.appendChild(row);
+        };
 
-            })
-
-            
-
-           
-      
-
-
+        document.body.appendChild(matrix);
 
     </script>
 </body>
