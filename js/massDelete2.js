@@ -10,11 +10,8 @@ $(document).ready(function() {
    
 
 //Gettin the current SP site
-
     SITEENV = $().SPServices.SPGetCurrentSite();
-    var clip = new ZeroClipboard($("#d_clip_button"))
-    console.log(SITEENV);
-
+    var clip = new ZeroClipboard($("#d_clip_button"));
 
     function resetAll() {
         ep.reset();
