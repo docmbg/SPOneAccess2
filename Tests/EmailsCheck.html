@@ -29,7 +29,7 @@ It uses asynchronous requests
     <script type="text/javascript" src="js/massDelete2.js"></script>
     <script type="text/javascript" src="js/Group.js"></script>
     <script type="text/javascript" src="js/Site.js"></script>
-    <script type="text/javascript" src="js/generateExel.js"></script>
+    <script type="text/javascript" src="js/generateMatrix.js"></script>
     <style>
         #wrapper{
             width: 70%;
@@ -72,7 +72,31 @@ It uses asynchronous requests
         //One access
         //check group permissions
 
-        function getSites(){
+        var sites = [];
+        var groups = []; 
+        var usersInGroup = [];
+        var ep = new ExcelPlus();
+      
+
+        // function getSites(){
+        //     var dfd = $.Deferred();
+
+        //      $().SPServices({
+        //         operation: 'GetAllSubWebCollection',
+        //         completefunc: function(xData) {
+        //             dfd.resolve(
+        //                 $(xData.responseXML).find("Webs > Web").each(function() {
+        //                     var $node = $(this);
+        //                     var site = new Site($node.attr('Title'), $node.attr('Url'));
+        //                     sites.push(site);
+        //                 })
+        //             )
+        //         }
+        //     });
+        //      return dfd.promise();
+        // };
+
+         function getSites(){
             var dfd = $.Deferred();
 
              $().SPServices({
@@ -82,6 +106,8 @@ It uses asynchronous requests
                         $(xData.responseXML).find("Webs > Web").each(function() {
                             var $node = $(this);
                             var site = new Site($node.attr('Title'), $node.attr('Url'));
+                            // site.setName($node.attr('Title'));
+                            // site.setUrl($node.attr('Url'));
                             sites.push(site);
                         })
                     )
@@ -90,151 +116,37 @@ It uses asynchronous requests
              return dfd.promise();
         };
 
-        var sites = [];
-        var groups = []; 
-        var usersInGroup = [];
-        var ep = new ExcelPlus();
-        ep.createFile('test');
-        
         var button = document.createElement('button');
         button.innerHTML = 'Get Matrix';
         button.id = 'matrix';
         document.body.appendChild(button);
 
-
-        getSites().done(function(){
-
-            groups = [];
-            var permissionMatrix = document.createElement('table');
-            permissionMatrix.style.width = (sites.length + 1) * 200 + 'px';
-            var row1 = document.createElement('tr');
-            permissionMatrix.appendChild(row1);
-            var cell1 = document.createElement('th');
-            row1.appendChild(cell1);
-
-            for(var i = 0; i < sites.length; i++){
-                var site = document.createElement('th');
-                site.innerHTML = sites[i].name;
-                row1.appendChild(site);
-
-                for(var j = 0; j < sites[i].groups.length; j++){
-                    groups.push(sites[i].groups[j]);
-                }
-            }
-
-            for (var i = 0; i < groups.length; i++){
-                groups[i].url = [groups[i].url];
-                groups[i].permissions = [groups[i].permissions];
-
-                for (var j = i + 1; j < groups.length; j++){
-                   
-                    if (groups[i].name == groups[j].name){
-                        
-                        groups[i].url.push(groups[j].url);
-                        groups[i].permissions.push(groups[j].permissions);
-                        groups.splice(j, 1);
-                        j--;
-                    } 
-                }
-            }
-
-
-            for (var i = 0; i < groups.length; i++){
-                var row = document.createElement('tr');
-                var groupName = document.createElement('th');
-                groupName.innerHTML = groups[i].name;
-                row.appendChild(groupName);
-                for (var j = 0; j < sites.length; j++){
-
-                    var cell = document.createElement('td');
-                    cell.innerHTML = '';
-                    for (var k = 0; k < groups[i].url.length; k++){
-                        if (sites[j].url == groups[i].url[k]){
-                            var text = '';
-                            for(var p = 0; p < groups[i].permissions[k].length; p++){
-                                switch (groups[i].permissions[k][p]){
-                                    case 'Read':
-                                        cell.style.background = 'purple';
-                                        cell.style.color = 'white';
-                                        break;
-                                    case 'Contribute':
-                                        cell.style.background = 'green';
-                                        cell.style.color = 'white';
-                                        break;
-                                    case 'Owners Full Control':
-                                        cell.style.background = 'maroon';
-                                        cell.style.color = 'white';
-                                        break;
-                                }
-                                text += groups[i].permissions[k][p] + '<br/>'
-                            }
-                            cell.innerHTML = text;
-                            if (cell.innerHTML == 'Limited Access<br>'){
-                                cell.style.background = 'yellow';
-                            }
-                        }
-                    }
-                    row.appendChild(cell)
-                }
-                permissionMatrix.appendChild(row);
-            } 
-
-            document.body.appendChild(permissionMatrix);
-
-
-            $('tr').css('height','7em');
-            $('th').css('width','200px');
-            $('td').css('border','1px solid black');
-            $('td').css('text-align','center');
-
-            $('#matrix').click(function(){
+         $('#matrix').click(function(){
+            console.log(Date.now());
+            getSites().done(function(){
                 generateExelFile(sites, groups);
+                console.log(Date.now())
             });
-          
         });
 
+    
 
-       
+        // var userMatrix = document.createElement('table');
+        // for (var i = 0; i < groups.length; i++){
+        //     var row = document.createElement('tr');
+        //     var groupName = document.createElement('td');
+        //     groupName.innerHTML = groups[i].name;
+        //     row.appendChild(groupName);
+        //     for(var j = 0; j < groups[i].users.length; j++){
+        //         var user = document.createElement('td');
+        //         user.style.color = 'blue';
+        //         user.innerHTML = groups[i].users[j].getName();
+        //         row.appendChild(user);
+        //     }
+        //     userMatrix.appendChild(row);
+        // }
 
-
-        var matrix = document.createElement('table');
-        for(var i = 0; i < sites.length; i++){
-            var row = document.createElement('tr');
-            var siteName = document.createElement('td');
-            siteName.innerHTML = sites[i].name;
-            row.appendChild(siteName);
-            for (var j = 0; j < sites[i].groups.length; j++){
-                var groupName = document.createElement('td');
-                groupName.innerHTML = sites[i].groups[j].name + '<br/>';
-                for (var p = 0; p < sites[i].groups[j].permissions.length; p++){
-                    var perm = document.createElement('span');
-                    perm.style.color = 'red';
-                    perm.innerHTML = sites[i].groups[j].permissions[p] + '<br/>';
-                    groupName.appendChild(perm);
-                }
-                row.appendChild(groupName);
-            }
-            matrix.appendChild(row);
-        };
-
-        document.body.appendChild(matrix);       
-
-        var userMatrix = document.createElement('table');
-        for (var i = 0; i < groups.length; i++){
-            var row = document.createElement('tr');
-            var groupName = document.createElement('td');
-            groupName.innerHTML = groups[i].name;
-            row.appendChild(groupName);
-            for(var j = 0; j < groups[i].users.length; j++){
-                var user = document.createElement('td');
-                user.style.color = 'blue';
-                user.innerHTML = groups[i].users[j].getName();
-                row.appendChild(user);
-            }
-            userMatrix.appendChild(row);
-        }
-
-        document.body.appendChild(userMatrix);
+        // document.body.appendChild(userMatrix);
 
     </script>
 </body>
