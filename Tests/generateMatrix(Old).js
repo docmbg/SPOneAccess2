@@ -1,35 +1,3 @@
-      function saveExcelFile(data, fileName) {
-        //set the file name
-        var filename = fileName + ".xlsx";
-
-        //put the file stream together
-        var s2ab = function(s) {
-            var buf = new ArrayBuffer(s.length);
-            var view = new Uint8Array(buf);
-            for (var i = 0; i != s.length; ++i) {
-                view[i] = s.charCodeAt(i) & 0xFF;
-            }
-            return buf;
-        };
-        //invoke the saveAs method from FileSaver.js
-        saveAs(new Blob([s2ab(data)], {
-            type: "application/octet-stream"
-        }), filename);
-    };
-
-    function convertNumber(n) {
-        var ordA = 'A'.charCodeAt(0);
-        var ordZ = 'Z'.charCodeAt(0);
-        var len = ordZ - ordA + 1;
-      
-        var s = "";
-        while(n >= 0) {
-            s = String.fromCharCode(n % len + ordA) + s;
-            n = Math.floor(n / len) - 1;
-        }
-        return s;
-    };
-
     function generateExelFile(sites, groups){
         
         ep.createFile('Permission Matrix');
@@ -50,13 +18,34 @@
             ep.write({
                 'sheet' : 'Permission Matrix',
                 'cell' :  cellNumber,
-                'content' : sites[i].name
+                'content' : sites[i].getName()
             });
             //html matrix
             var site = document.createElement('th');
-            site.innerHTML = sites[i].name;
+            site.innerHTML = sites[i].getName();
             row1.appendChild(site);
-           
+            for(var j = 0; j < sites[i].getGroups().length; j++){
+                var group = {};
+                group.name = sites[i].getGroups()[j].getName();
+                group.url = sites[i].getGroups()[j].getUrl();
+                group.permissions = sites[i].getGroups()[j].getPermissions();
+                group.users = sites[i].getGroups()[j].getUsers();
+                groups.push(group);
+            }
+        }
+
+        for (var i = 0; i < groups.length; i++){
+            groups[i].url = [groups[i].url];
+            groups[i].permissions = [groups[i].permissions];
+
+            for (var j = i + 1; j < groups.length; j++){
+                if (groups[i].name == groups[j].name){
+                    groups[i].url.push(groups[j].url);
+                    groups[i].permissions.push(groups[j].permissions);
+                    groups.splice(j, 1);
+                    j--;
+                } 
+            }
         }
 
         for (var i = 0; i < groups.length; i++){
@@ -77,7 +66,7 @@
                 cell.innerHTML = '';
 
                 for(var k = 0; k < groups[i].url.length; k++){
-                    if (sites[j].url == groups[i].url[k]){
+                    if (sites[j].getUrl() == groups[i].url[k]){
                         var text = '';
                         cellNumber = '';
                         cellNumber = convertNumber(j + 1);
@@ -122,7 +111,7 @@
                 'content' : groups[i].name
             })
             for(var u = 0; u < groups[i].users.length; u++){
-                var userInfo = groups[i].users[u].email || groups[i].users[u].login;
+                var userInfo = groups[i].users[u].getEmail() || groups[i].users[u].getLogin();
                 ep.write({
                     'sheet' : 'Users',
                     'cell' : cellNumber + (u + 2),
@@ -142,6 +131,38 @@
 
     };
     
+
+    function saveExcelFile(data, fileName) {
+        //set the file name
+        var filename = fileName + ".xlsx";
+
+        //put the file stream together
+        var s2ab = function(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i != s.length; ++i) {
+                view[i] = s.charCodeAt(i) & 0xFF;
+            }
+            return buf;
+        };
+        //invoke the saveAs method from FileSaver.js
+        saveAs(new Blob([s2ab(data)], {
+            type: "application/octet-stream"
+        }), filename);
+    };
+
+    function convertNumber(n) {
+        var ordA = 'A'.charCodeAt(0);
+        var ordZ = 'Z'.charCodeAt(0);
+        var len = ordZ - ordA + 1;
+      
+        var s = "";
+        while(n >= 0) {
+            s = String.fromCharCode(n % len + ordA) + s;
+            n = Math.floor(n / len) - 1;
+        }
+        return s;
+    };
 
     // function generateExelFile(sites, groups){
         
@@ -163,19 +184,14 @@
     //         ep.write({
     //             'sheet' : 'Permission Matrix',
     //             'cell' :  cellNumber,
-    //             'content' : sites[i].getName()
+    //             'content' : sites[i].name
     //         });
     //         //html matrix
     //         var site = document.createElement('th');
-    //         site.innerHTML = sites[i].getName();
+    //         site.innerHTML = sites[i].name;
     //         row1.appendChild(site);
-    //         for(var j = 0; j < sites[i].getGroups().length; j++){
-    //             var group = {};
-    //             group.name = sites[i].getGroups()[j].getName();
-    //             group.url = sites[i].getGroups()[j].getUrl();
-    //             group.permissions = sites[i].getGroups()[j].getPermissions();
-    //             group.users = sites[i].getGroups()[j].getUsers();
-    //             groups.push(group);
+    //         for(var j = 0; j < sites[i].groups.length; j++){
+    //             groups.push(sites[i].groups[j]);
     //         }
     //     }
 
@@ -211,7 +227,7 @@
     //             cell.innerHTML = '';
 
     //             for(var k = 0; k < groups[i].url.length; k++){
-    //                 if (sites[j].getUrl() == groups[i].url[k]){
+    //                 if (sites[j].url == groups[i].url[k]){
     //                     var text = '';
     //                     cellNumber = '';
     //                     cellNumber = convertNumber(j + 1);
@@ -276,8 +292,6 @@
 
     // };
     
-
-  
 
   
 
