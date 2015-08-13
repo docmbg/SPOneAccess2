@@ -29,6 +29,7 @@ var Group =(function(){
     };
 
     Group.prototype.setPermissions = function(){
+        privateStore[this.id]._permissions = [];
         var _this = this;
         var SOAPEnvelope = {};
         SOAPEnvelope.header = "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body>";
@@ -61,23 +62,6 @@ var Group =(function(){
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetRoleCollectionFromGroup");
         req.setRequestHeader("Content-Type","text/xml;", "charset=utf-8");
         req.send(msg);
-
-        // var _this = this;
-        // var $node;
-        // _this.permissions = [];
-
-        // $().SPServices({
-        //     operation: 'GetRoleCollectionFromGroup',
-        //     groupName: privateStore[_this.id]._name,
-        //     webURL: privateStore[_this.id]._url,
-        //     async: false,
-        //     completefunc: function(xData, Status){
-        //         $(xData.responseXML).find('Roles>Role').each(function(){
-        //             $node = $(this)[0];
-        //             privateStore[_this.id]._permissions.push($($node).attr('Name'));
-        //         })
-        //     }
-        // });
     };
 
     Group.prototype.getPermissions = function(){
@@ -85,6 +69,7 @@ var Group =(function(){
     };
 
     Group.prototype.setUsers = function(){
+        privateStore[this.id]._users = [];
         var _this = this;
         var SOAPEnvelope = {};
         SOAPEnvelope.header = "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body>";
@@ -129,32 +114,57 @@ var Group =(function(){
         req.open('POST', privateStore[this.id]._url + '/_vti_bin/usergroup.asmx', false);
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetUserCollectionFromGroup");
         req.setRequestHeader("Content-Type","text/xml;", "charset=utf-8");
-        req.send(msg);
-        
-        // $().SPServices({
-        //     operation: 'GetUserCollectionFromGroup',
-        //     groupName: privateStore[_this.id]._name,
-        //     async: false,
-        //     completefunc: function(xDataUser, Status){
-        //         $(xDataUser.responseXML).find('User').each(function(){
-        //             var user = new User();
-        //             user.setName($(this).attr('Name'));
-        //             user.setLogin($(this).attr('LoginName'));
-        //             user.setEmail($(this).attr('Email'));
-        //             privateStore[_this.id]._users.push(user);
-        //         })
-        //     }
-        // });   
+        req.send(msg);  
     };
 
     Group.prototype.getUsers = function(){
         return privateStore[this.id]._users;
     };
 
+    Group.prototype.addUser = function(user){
+        var _this = this;
+        $().SPServices({
+            operation: "AddUserToGroup",
+            groupName: privateStore[_this.id]._name,
+            userName: user.getName(),
+            userLoginName: user.getLogin(),
+            userEmail: user.getEmail(),
+            async: false,
+            completefunc: function(xData, Status) {
+                if (Status == 'error'){
+                    console.log('Error!!! Cannot Add user to group - ' + groupName);
+                } else {
+                    if($(xData.responseXML).find("Group[Name='GroupName']").length == 1) {
+                        $("#zz9_ID_PersonalizePage").remove();
+                    }
+                    console.log('Success!!! User was added to group');
+                }
+                
+            }
+        });  
+    };
+
+    Group.prototype.removeUser = function(user){
+        var _this = this;
+        $().SPServices({
+            operation: "RemoveUserFromGroup",
+            groupName: privateStore[_this.id]._name, 
+            userLoginName: user.getLogin(),
+            completefunc: function(xData, Status) {
+                if (Status == 'error'){
+                    console.log('Error!!! User cannot be deleted');
+                } else{
+                    console.log('Success!!! User was deleted');
+                }
+            }
+        }); 
+    };
+    
     Group.prototype.toString = function groupToString(){
         var result = 'Name: ' + privateStore[this.id]._name + ' ,URL: ' + privateStore[this.id]._url + ' ,Pemissions: ' + privateStore[this.id]._permissions;
         return result;
     };
+
 
     return Group;
 }());

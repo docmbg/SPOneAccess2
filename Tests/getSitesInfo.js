@@ -4,46 +4,9 @@ importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassD
 importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/Site.js");
 importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/generateMatrix.js");
 
-    function getSites(SITEENV){
-        var sites = [];
-        var SOAPEnvelope = {};
-        SOAPEnvelope.header = "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body>";
-        SOAPEnvelope.opheader = "<GetAllSubWebCollection xmlns='http://schemas.microsoft.com/sharepoint/soap/'>";
-        SOAPEnvelope.payload = "";
-        SOAPEnvelope.opfooter =  "</GetAllSubWebCollection>";
-        SOAPEnvelope.footer = "</soap:Body></soap:Envelope>";
-
-        var msg = SOAPEnvelope.header + SOAPEnvelope.opheader + SOAPEnvelope.payload + SOAPEnvelope.opfooter + SOAPEnvelope.footer;
-        var req = new XMLHttpRequest();
-        req.onreadystatechange =  function(){
-             //result = req.responseXML.getElementsByTagName('Web');
-            var result = req.responseText.split('<Web');
-            for(var i = 2; i < result.length; i++){
-                var info = result[i].split('"');
-                var name = info[1];
-                var url = info[3];
-                var site = new Site();
-                site.setName(name);
-                site.setUrl(url);
-                site.setGroups();
-                sites.push(site);
-            }
-        }
-        req.open('POST', SITEENV + '/_vti_bin/webs.asmx', false);
-        req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/GetAllSubWebCollection");
-        req.setRequestHeader("Content-Type","text/xml", "charset=utf-8");
-        req.send(msg);
-     
-        return sites;
-    }
-
-    
-    //ar sites = [];
     // because its type is javascript/worker.
     self.onmessage = function(e) {
-        
-       
-        var result = getSites(e.data[0]);
+        var result = getSites(e.data[0], e.data[1]);
         var sites = [];
         var groups = [];
 
