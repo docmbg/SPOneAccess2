@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"res",
+				"responseText"
+			],
+			[
+				"add",
+				"addUser"
+			],
+			[
+				"rea",
+				"reattachMethods〔function〕"
+			],
+			[
+				"noti",
+				"notifyOnUserChanged〔function〕"
+			],
+			[
+				"use",
+				"userEmail〔variable〕"
+			],
+			[
+				"this",
+				"thisUserEmail"
+			],
+			[
+				"templ",
+				"tempGroups〔variable〕"
+			],
+			[
+				"thi",
+				"thisUserEmail"
+			],
+			[
+				"all",
+				"allocateUserDetails"
+			],
+			[
+				"tem",
+				"tempGroups〔variable〕"
+			],
+			[
+				"grou",
+				"groupArray〔variable〕"
+			],
+			[
+				"site",
+				"siteTemplate"
+			],
+			[
+				"comp",
+				"compareUserGroups"
+			],
+			[
+				"siteT",
+				"sitesToData"
+			],
+			[
+				"com",
+				"compareUser"
+			],
+			[
+				"rip",
+				"ripple-animation"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"list-s",
+				"list-style"
+			],
+			[
+				"html",
+				"html〔variable〕"
+			],
+			[
 				"set",
 				"setManager"
 			],
@@ -14,10 +98,6 @@
 			[
 				"pro",
 				"prototype"
-			],
-			[
-				"site",
-				"siteURL"
 			],
 			[
 				"list",
@@ -204,10 +284,98 @@
 	"buffers":
 	[
 		{
+			"file": "js/production/main.js",
+			"settings":
+			{
+				"buffer_size": 4247,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/production/pastePermissionsWorker.js",
+			"settings":
+			{
+				"buffer_size": 418,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/production/spgrind.js",
+			"settings":
+			{
+				"buffer_size": 2382,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/OneAccess.html",
+			"settings":
+			{
+				"buffer_size": 5242,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "libraries/2.2/excelplus-2.2.js",
+			"settings":
+			{
+				"buffer_size": 42471,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/style.css",
+			"settings":
+			{
+				"buffer_size": 2648,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/massDelete2.js",
+			"settings":
+			{
+				"buffer_size": 2885,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "js/OneAccess2.js",
 			"settings":
 			{
 				"buffer_size": 1659,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Tests/EmailsCheck.html",
+			"settings":
+			{
+				"buffer_size": 11561,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Tests/generateMatrix.js",
+			"settings":
+			{
+				"buffer_size": 11083,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Tests/getSitesInfo.js",
+			"settings":
+			{
+				"buffer_size": 2363,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Tests/Site.js",
+			"settings":
+			{
+				"buffer_size": 7374,
 				"line_ending": "Windows"
 			}
 		}
@@ -219,21 +387,53 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 368.0,
-		"last_filter": "cdn",
+		"height": 272.0,
+		"last_filter": "user ",
 		"selected_items":
 		[
 			[
-				"cdn",
+				"user ",
+				"Preferences: Settings - User"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"cdnjs",
 				"Cdnjs: Search"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
 			],
 			[
 				"xml",
 				"Set Syntax: XML"
 			],
 			[
-				"javas",
+				"java",
 				"Set Syntax: JavaScript"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"cndjs",
+				"Cdnjs: Search"
+			],
+			[
+				"cdn",
+				"Cdnjs: Search"
 			],
 			[
 				"sy",
@@ -242,14 +442,6 @@
 			[
 				"synth",
 				"Set Syntax: HTML"
-			],
-			[
-				"html",
-				"HTMLPrettify"
-			],
-			[
-				"java",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"",
@@ -280,14 +472,6 @@
 				"Set Syntax: JavaScript"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"cdnjs",
-				"Cdnjs: Search"
-			],
-			[
 				"cdnj",
 				"Cdnjs: Search"
 			],
@@ -296,20 +480,12 @@
 				"Cdnjs: Search"
 			],
 			[
-				"javasc",
-				"Set Syntax: JavaScript"
-			],
-			[
 				"synta",
 				"Set Syntax: HTML"
 			],
 			[
 				"syntax htm",
 				"Set Syntax: HTML"
-			],
-			[
-				"cndjs",
-				"Cdnjs: Search"
 			],
 			[
 				"git remo",
@@ -380,7 +556,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 632.0
+		"width": 382.0
 	},
 	"console":
 	{
@@ -402,22 +578,98 @@
 	[
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/css",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/images",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/production",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/libraries",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins"
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/libraries/2.2",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/libraries/zeroclipboard-2.2.0",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/Sprint Backlog",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/Tests"
 	],
 	"file_history":
 	[
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client/OneAccess.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/production/models.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/Tests/User.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Navigation/addRiskIssue/AddRiskIssue.htm",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/simsimeo/.gitconfig",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/ReportGenerator.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/Tests/Site.js",
+		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/CSScomb.sublime-settings",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/User.js",
+		"/C/Users/simsimeo/Downloads/MaterialDesign-Webfont-master/css/materialdesignicons.css",
+		"/C/Users/simsimeo/Downloads/MaterialDesign-Webfont-master/css/materialdesignicons.min.css",
+		"/C/Users/simsimeo/Downloads/MaterialDesign-Webfont-master/css/materialdesignicons.css.map",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/Tests/EmailsCheck.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Vodafone DIR Navigation (SP2013)/navigation.htm",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Navigation/central_navigation.htm",
+		"/C/Users/simsimeo/Desktop/Issue Log Form/User Access Matrix1.xsd",
+		"/C/Users/simsimeo/Downloads/styles.css",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Standalone/External/ReportGenerator.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Standalone/Internal/ReportGenerator.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Standalone/js/reportGenerator.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Standalone/External/js/reportGenerator.js",
+		"/C/Users/simsimeo/Desktop/Issue Log Form/GetGroupCollectionFromUser1.xsd",
+		"/C/Users/simsimeo/Desktop/New folder/Vodafone Issues Test/GetUserCollectionFromGroup1.xsd",
+		"/C/Users/simsimeo/AppData/Local/Temp/_PA826/manifest.xml",
+		"/C/Users/simsimeo/Desktop/manifest.xml",
+		"/C/Users/simsimeo/AppData/Local/Temp/_PA852/manifest.xml",
+		"/C/Users/simsimeo/Desktop/New folder/Vodafone Issues Test/manifest.xsf",
+		"/C/Users/simsimeo/Desktop/New folder/Vodafone Issues Test/CSDGenericContributorsGroup1.xsd",
+		"/C/Users/simsimeo/Desktop/New folder/Vodafone Issues Test/CSDGenericContributorsGroup2.xsd",
+		"/C/Users/simsimeo/Desktop/New folder/Vodafone Issues Test/CSDGenericContributorsGroup.xsd",
+		"/C/Users/simsimeo/Desktop/Handlebars Test/js/template.js",
+		"/C/Users/simsimeo/Desktop/test.html",
+		"/C/Users/simsimeo/Desktop/Handlebars Test/handlebars.html",
+		"/C/Users/simsimeo/Desktop/Handlebars Test/libs/handlebars-v3.0.3.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/libraries/sharepointplus-3.0.10.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/jquery.SPServices-2014.02.min.js",
+		"/C/Users/simsimeo/Desktop/ALU RIST/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Desktop/ALU RIST/WebParts/My_Active_Records_Custom_XSL.webpart",
+		"/C/Users/simsimeo/AppData/Local/Temp/_PA170/manifest.xml",
+		"/C/Users/simsimeo/Desktop/interview.js",
+		"/C/Users/simsimeo/Desktop/test.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Version 1.2/ReportGenerator.html",
+		"/C/Users/simsimeo/Desktop/interview2.js",
+		"/C/Users/simsimeo/Desktop/tesst.csv",
+		"/C/Users/simsimeo/Desktop/EmailsCheck.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/OFRG Implementation/Version 1.2/js/saveFileWorker.js",
+		"/C/Users/simsimeo/Desktop/MediaControls.ahk",
+		"/C/Users/simsimeo/Desktop/ESA RIST 2.2/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Desktop/ESA RIST 2.2/WebParts/My_Active_Records_Custom_XSL.webpart",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/reportGenerator.js",
+		"/C/Users/simsimeo/Desktop/anchor/readme.md",
+		"/C/Users/simsimeo/Desktop/jsonTest/jsonTest.js",
+		"/C/Users/simsimeo/Desktop/TestProject/test.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Vodafone DAIR Navigation/Vodafone_Dair_NAV.htm",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/enableAlerts.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Decisions Test Help Text/manifest.xsf",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Test 2/manifest.xsf",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Log/Test 1/manifest.xsf",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Navigation/libraries/spplus.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/ContentQueryMain.xsl",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/one_access.permission_handler2010.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/TextToHTML JavaScript (Calculated HTML Columns).js",
+		"/C/Users/simsimeo/Documents/Technical Projects/TextToHTML JavaScript (Calculated HTML Columns).txt",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/html/easyAccess2010.html",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/permissions_handler-2010.js",
+		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/massDelete2010.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/OneAccess2.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/massDelete2.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/massDelete.js",
+		"/C/Users/simsimeo/AppData/Local/Temp/7zOC75.tmp/jquery.SPServices-2014.02.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Navigation/EditItem.html",
+		"/C/Users/simsimeo/Documents/Technical Projects/Vodafone DAIR Navigation/Vodafone_Dair_NAV.htm",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins/sp-plugin.peopleahead.js",
+		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/css/sp-plugin.peopleahead.css",
+		"/C/Users/simsimeo/.gitconfig.swp",
 		"/C/Users/simsimeo/Documents/Technical Projects/OFRG 1.0 Implementation/js/saveFileWorker.js",
 		"/C/Users/simsimeo/Documents/Technical Projects/OFRG 1.0 Implementation/ReportGenerator.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/Avaya RIST Implementation/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
 		"/C/Users/simsimeo/Documents/Technical Projects/Avaya RIST Implementation/WebParts/My_Active_Records_Custom_XSL.webpart",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/plugins/sp-plugin.peopleahead.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/css/sp-plugin.peopleahead.css",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/client/OneAccess.html",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/js/OneAccess2.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/reportGenerator.js",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPOneAccess2/OneAccess.html",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/client/ReportGenerator.html",
 		"/C/Users/simsimeo/.npmrc",
@@ -426,7 +678,6 @@
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/List Templates/InactiveRecordsLibrary.stp",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/ItemStyleRecords.xsl",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/Header.xsl",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/XSL Style Sheets/ContentQueryMain.xsl",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My_Unspecified_Documents_Custom_XSL.webpart",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My_Active_Records_Custom_XSL.webpart",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint Projects/Records Identification Summary Tool 2.2 Update/DOCM_Implement_INT_RIST2.2_SP2010-Templates/WebParts/My Unspecified Documents-banner.dwp",
@@ -448,10 +699,8 @@
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/jquery.min.js",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/one_access.mass_delete.css",
 		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/one_access.permission_handler.css",
-		"/C/Users/simsimeo/.gitconfig",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/report_generator.sublime-project",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/sharepointplus-3.0.10.js",
-		"/C/Users/simsimeo/Desktop/jsonTest/jsonTest.js",
 		"/C/Users/simsimeo/Desktop/jsonTest/index.html",
 		"/C/Users/simsimeo/Desktop/ent61.sharepoint.hp.com.har",
 		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/libraries/excelplus.full.js",
@@ -468,79 +717,11 @@
 		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-EMEA.htm",
 		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-requests.htm",
 		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-MY-requests.htm",
-		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-AMS.htm",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/system/styles/patterns/checkboxes.css",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/control-utils.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/form.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/hf/hf-utils.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/hp-jquery-lib/accessibility.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/common/swfobject.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/hp-ui/scripts/common/form-reset.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/hp-ui/system/styles/patterns/buttons.css",
-		"/C/Users/simsimeo/Documents/Technical Projects/hp-ui/system/styles/patterns/checkboxes.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/checkboxes.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/buttons.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/buttons-ie.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/category-nav.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/patterns/dropdowns.css",
-		"/C/Users/simsimeo/Documents/hp-ui/system/styles/service/index.css",
-		"/C/Users/simsimeo/Documents/hp-ui/scripts/-ui-library-from-patterns.js",
-		"/C/Users/simsimeo/Documents/hp-ui/scripts/hp-jquery-lib/form.js",
-		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/IvanKolarov.xsn",
-		"/C/Users/simsimeo/Documents/Technical Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/app.css",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/js/one_access.permission_handler2010.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SP-OneAccess-Portal/easyAccess/js/select2.js",
-		"/C/Users/simsimeo/Desktop/Report Generator/js/report.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/ExcelPlusTest/xFileManager.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SPReportGenerator/js/sheetjs.all.min.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/today_date.js",
-		"/C/Program Files (x86)/Git/etc/gitconfig",
-		"/C/Program Files (x86)/Cntlm/cntlm.ini",
-		"/C/Users/simsimeo/Desktop/BowerTest/.bowerrc",
-		"/C/Users/simsimeo/Desktop/BowerTest/bower.json",
-		"/C/Users/simsimeo/Desktop/Report Generator/client/ReportGenerator.html",
-		"/C/Users/simsimeo/Desktop/Report Generator/.jshintrc",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
-		"/C/Users/simsimeo/Desktop/Report Generator/js/PRACS training V2_Jim_Lairmore.zip",
-		"/C/Users/simsimeo/Desktop/TestProject/test.js",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/cdnjs.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
-		"/C/Users/simsimeo/Desktop/AbbVie ESP Navigation/AbbVie_ESP_Navigation.htm",
-		"/C/Users/simsimeo/Desktop/Report Generator/report",
-		"/C/Users/simsimeo/Desktop/Report Generator/report.js",
-		"/C/Users/simsimeo/Desktop/Report Generator/jquery.min.js",
-		"/C/Users/simsimeo/Desktop/Report Generator/sharepointplus-3.0.10.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/TextToHTML JavaScript (Calculated HTML Columns).js",
-		"/C/Users/simsimeo/Desktop/employee.js",
-		"/C/Users/simsimeo/table.csv",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/js/one_access.mass_delete2007.js",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/html/deleteUsers-2010.html",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/sp_one_access.sublime-project",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/css/select2-backupcdn.css",
-		"/C/Users/simsimeo/Desktop/FolderNavigation.txt",
-		"/C/Users/simsimeo/Desktop/onboardingNav.html",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/css/oneAccess.css",
-		"/C/Users/simsimeo/Documents/Technical Projects/SharePoint-One-Access/css/main.css",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/permissions_handler-2007.js",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/underscore-min.js",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/sharepointplus.js",
-		"/C/Users/simsimeo/Google Drive/CDN/EasyOneAccess/js/matrix_generator.js",
-		"/C/Users/simsimeo/Desktop/Sublime Project Test/project.js",
-		"/C/Users/simsimeo/AppData/Local/Temp/_PA579/JavaScript/FolderNavigation.js",
-		"/C/Users/simsimeo/Desktop/Sublime Project Test/library/spservices.js",
-		"/C/Users/simsimeo/Desktop/Sublime Project Test/library/jquery.min.js",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/SublimeGit.sublime-settings",
-		"/C/Users/simsimeo/AppData/Roaming/Sublime Text 3/Packages/User/GitHub.sublime-settings"
+		"/C/Users/simsimeo/Desktop/Ivan Kolarov - Rotschild PRM Form/Design/nav/with Instructions/navigation-home---view-all-AMS.htm"
 	],
 	"find":
 	{
-		"height": 55.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -554,6 +735,70 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Add",
+			"Success!!! User was added to group.",
+			");\n",
+			"getGroups",
+			"remove",
+			"getsite",
+			"SPServices",
+			"name",
+			"1",
+			"center",
+			"teams",
+			"team",
+			"external",
+			"GetGroupCollectionFromUser",
+			"complexType",
+			"GetUserCollectionFromGroup",
+			"tns",
+			"GetUserCollectionFromGroup",
+			"	\n",
+			"GetUserCollectionFromGroupType",
+			"GetUserCollectionFromGroup",
+			"tns",
+			"CSD",
+			"GetUserCollectionFromGroup",
+			"GetUserCollectionFromGroupType",
+			"etUserCollectionFromGroupType",
+			"GetUserCollectionFromGroup",
+			"<s:elementname=\"GetUserCollectionFromGroup\">",
+			"<s:elementname=\"GetUserCollectionFromGroup\"> ",
+			"<s:importnamespace=",
+			"<s:importnamespace=\"http://www.w3.org/2001/XMLSchema\"></s:import>",
+			"GetGroupCollectionFromRole",
+			"Group",
+			"ajax",
+			"SPServices",
+			"currentContext",
+			"ajax",
+			"Fiscal Year",
+			"Fiscal",
+			"FY",
+			"Field",
+			"FY",
+			"1.0",
+			"enableAlerts",
+			"edit",
+			"userInput",
+			"ajax",
+			"edit",
+			"options",
+			"email",
+			"input",
+			"peopleahead-options",
+			"closest",
+			"limit",
+			"data-login",
+			"closest",
+			"Title",
+			"keyup",
+			"onselect",
+			"waitForSearch",
+			"clearTimeout",
+			"waitForSearch",
+			"SPGetUserLoginFromEmail",
+			"ConvertEmailListToXML",
 			"login",
 			"ERMS",
 			"TRIM",
@@ -617,30 +862,7 @@
 			"ContentTypeId",
 			"$.p.end",
 			"$.p.set",
-			"$(\"#cancel",
-			"cancel",
-			"$.p.end",
-			"getElementsByTagName",
-			"saveAs",
-			"input",
-			"console.log",
-			"regEx",
-			"fileName",
-			"filenmae",
-			"arr",
-			"trim",
-			"documentName",
-			"rawname",
-			"docname",
-			"staticName",
-			"console.log",
-			"staticName",
-			"javascript",
-			"\n",
-			"                ",
-			");\n",
-			"tern",
-			"http_proxy"
+			"$(\"#cancel"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -659,24 +881,210 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "js/OneAccess2.js",
+					"file": "js/production/main.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1659,
+						"buffer_size": 4247,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1115,
-								1115
+								759,
+								759
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"open_with_edit": true,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2322.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/production/pastePermissionsWorker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 418,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"open_with_edit": true,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/production/spgrind.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2382,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1540,
+								1540
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"open_with_edit": true,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "client/OneAccess.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3421,
+								3421
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "libraries/2.2/excelplus-2.2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 42471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2070,
+								2079
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "css/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								198
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 105.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "js/massDelete2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2885,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -691,7 +1099,163 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/OneAccess2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								468,
+								468
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Tests/EmailsCheck.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11561,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5867,
+								6254
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2556.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Tests/generateMatrix.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3294.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Tests/getSitesInfo.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								524,
+								533
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Tests/Site.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7374,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5425,
+								5425
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1764.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -703,7 +1267,7 @@
 	},
 	"input":
 	{
-		"height": 286.0
+		"height": 287.0
 	},
 	"layout":
 	{
@@ -730,7 +1294,7 @@
 	"menu_visible": false,
 	"output.exec":
 	{
-		"height": 311.0
+		"height": 138.0
 	},
 	"output.find_results":
 	{
@@ -752,7 +1316,7 @@
 	"project": "SPOneAccess2.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 114.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -770,12 +1334,12 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{

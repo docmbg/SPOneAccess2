@@ -101,7 +101,6 @@ var Site = (function(){
 
     return Site;
 }());
-
 function getSites(SITEENV, action){
     var sites = [];
     var SOAPEnvelope = {};
@@ -148,7 +147,8 @@ function getSites(SITEENV, action){
     req.send(msg);
  
     return sites;
-};
+}
+
 
 var entityMap = {
     "&": "&amp;",

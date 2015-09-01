@@ -4,21 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <link rel="stylesheet" type="text/css" href="../css/sp-plugin.peopleahead.css">
-    <title>OneAccess2</title>
+    <!--     <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'> -->
+    <title>HP OneAccess 2</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="../css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
 <body>
-    <form>
-        <label>Person Name:</label>
-        <input type="text" id="people-picker" class="sp-peopleahead">
-    </form>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="../libraries/sharepointplus-3.0.10.js"></script>
-    <script type="text/javascript" src="../plugins/sp-plugin.peopleahead.js"></script>
-    <script type="text/javascript" src="../js/OneAccess2.js"></script>
+    <main>
+        <div class="valign-wrapper stage z-depth-1">
+            <div id="logo-nav" class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h1 class="center logo">ONE ACCESS 2.0</h1>
+                        <h5 class="center logo-subtext">User Access Management</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="center">
+                        <ul id="central-nav">
+                            <li class="z-depth-1 waves-effect waves-hpe-turquoise">
+                                <a href="#"><i class="material-icons">&#xE03F;</i></a></li>
+                            <li class="z-depth-1 waves-effect waves-hpe-orange">
+                                <a href="#"><i class="material-icons">&#xE872;</i></a></li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple">
+                                <a href="#"><i class="material-icons">&#xE8EF;</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container main-content">
+            <div class="row">
+                <form id="user_form" class="col s8 offset-s2">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">&#xE0BE;</i>
+                            <input id="user_email" type="text" class="validate">
+                            <label for="user_email">User Email</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    <ul id="sites-container" class="collapsible" data-collapsible="accordion">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container main-content" hidden>
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    <div id="drop-box" class="card-panel center hpe-slate">
+                        <i class="large material-icons">insert_drive_file</i>
+                        <h5>Drop Excel Sheet Here</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="action-btn-contaier" class="fixed-action-btn" style="bottom: 45px; right: 24px;"></div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
+        <script type="text/javascript" src="../js/production/models.js"></script>
+        <script type="text/javascript" src="../js/production/spgrind.js"></script>
+        <script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
+        <script type="text/javascript" src="../js/production/main.js"></script>
+        <script src="../js/materialize.min.js"></script>
+        <script id="site-template" type="text/ractive">
+            {{#each site}}
+            <li>
+                <div class="collapsible-header" on-click="getGroups"><i class="material-icons">&#xE80B;</i>{{name}}</div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+                        {{#each groups}}
+                        <li class="collection-item dismissable">
+                            {{#if addable}}
+                            <div>{{name}}<a href="#!" class="secondary-content"><i class="material-icons" on-click="addUser">&#xE147;</i></a></div>
+                            {{else}}
+                            <div>{{name}}<a href="#!" class="secondary-content"><i class="material-icons hpe-orange" on-click="removeUser">&#xE15C;</i></a></div>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+        <script id="fab-template" type="text/ractive">
+            <a class="btn-floating btn-large">
+            {{#if copy}}
+            <i class="material-icons waves-effect {{color}}" on-click="copy">&#xE14D;</i>
+            {{else}}
+            {{#if !busy}}
+            <i class="material-icons waves-effect {{color}}" on-click="paste">&#xE14F;</i>
+            {{else}}
+            <i class="material-icons rotate {{color}}">&#xE863;</i>
+            {{/if}}
+            {{/if}}
+            </a> {{#if !copy && !busy}}
+            <ul>
+                <li><a id="clear-tmpGroups" class="btn-floating hpe-orange-bg" on-click="clearGroups"><i class="material-icons">&#xE14C;</i></a></li>
+            </ul>
+            {{/if}}
+        </script>
+    </main>
 </body>
 
 </html>

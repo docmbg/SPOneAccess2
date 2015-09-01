@@ -1,0 +1,159 @@
+nav {
+    background-color: rgb(66, 85, 99);
+}
+
+nav .input-field label i {
+    color: #fff;
+}
+
+.logo {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.hpe-turquoise {
+    color: rgb(42, 210, 201);
+}
+
+.hpe-slate {
+    color: rgb(66, 85, 99);
+}
+
+.hpe-orange-bg {
+    background-color: rgb(255, 141, 109);
+}
+
+.hpe-slate-bg {
+    background-color: rgb(66, 85, 99);
+}
+
+.hpe-orange {
+    color: rgb(255, 141, 109);
+}
+
+.logo-subtext {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+
+.user,
+.collapsible {
+    color: rgb(66, 85, 99);
+}
+
+.stage {
+    height: 300px;
+    transition: .3s background-color;
+    background-color: rgb(42, 210, 201);
+}
+
+.main-content {
+    margin-top: 20px;
+}
+
+.collection {
+    margin: 0;
+    border: 0;
+}
+
+.collection .collection-item {
+    background-color: rgba(0, 0, 0, 0.02);
+    ;
+}
+
+.input-field .prefix {
+    color: rgb(66, 85, 99);
+}
+
+#centrals-nav {
+    margin: 0;
+    list-style: none;
+}
+
+#central-nav li {
+    display: inline-block;
+    width: 2.7rem;
+    height: 2.7rem;
+    margin: 0 1.5em 0 1.5em;
+    transition: .3s box-shadow;
+    text-align: center;
+    border-radius: 999999px;
+    background: #fff;
+}
+
+#central-nav a {
+    display: block;
+    padding-top: 8px;
+    text-decoration: none;
+    color: rgb(66, 85, 99);
+    ;
+}
+
+#central-nav li:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+}
+
+.waves-effect.waves-hpe-slate .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(66, 85, 99, .65);
+}
+
+.waves-effect.waves-hpe-turquoise .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(42, 210, 201, .65);
+}
+
+.waves-effect.waves-hpe-orange .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(255, 141, 109, .65);
+}
+
+.waves-effect.waves-hpe-purple .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(97, 71, 103, .65);
+}
+
+.waves-effect.waves-hpe-dark-steel .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(97, 125, 120, .65);
+}
+
+.waves-effect.waves-hpe-dark-steel .waves-ripple {
+    /* The alpha value allows the text and background color
+     of the button to still show through. */
+    background-color: rgba(97, 125, 120, .65);
+}
+
+.rotate {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
