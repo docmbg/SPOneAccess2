@@ -3,7 +3,7 @@ var SPGrind = function(){};
 
 SPGrind.fn = SPGrind.prototype = {
 
-    getSPSites: function(context, action) {
+    getSPSites: function(context, action, isAllInfoNeeded) {
         var sites = [];
         var SOAPEnvelope = {};
         SOAPEnvelope.header = "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body>";
@@ -32,7 +32,7 @@ SPGrind.fn = SPGrind.prototype = {
                     site.setUrl(url);
 
                     if (action == "matrix") {
-                        site.setGroups();
+                        site.setGroups(isAllInfoNeeded);
                     }
 
                     sites.push(site);
@@ -45,7 +45,7 @@ SPGrind.fn = SPGrind.prototype = {
                     site.setName(result[i].getAttribute("Title"));
                     site.setUrl(result[i].getAttribute("Url"));
                     if (action == "matrix") {
-                        site.setGroups();
+                        site.setGroups(isAllInfoNeeded);
                     }
                     sites.push(site);
                 }

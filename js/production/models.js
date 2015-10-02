@@ -20,7 +20,7 @@ var Site = (function() {
         return this.url;
     };
 
-    Site.prototype.setGroups = function() {
+    Site.prototype.setGroups = function(isAllInfoNeeded) {
         this.groups = [];
         var _this = this;
         var SOAPEnvelope = {};
@@ -46,8 +46,10 @@ var Site = (function() {
                         group = new Group();
                         group.setName(name);
                         group.setUrl(_this.url);
-                        //group.setPermissions();
-                        //group.setUsers();
+                        if (isAllInfoNeeded){
+                            group.setPermissions();
+                            group.setUsers();
+                        }
                         _this.groups.push(group);
                     }
                 } else {
@@ -56,8 +58,10 @@ var Site = (function() {
                         group = new Group();
                         group.setName(escapeHtml(result[i].getAttribute("Name")));
                         group.setUrl(_this.url);
-                        //group.setPermissions();
-                        //group.setUsers();
+                        if (isAllInfoNeeded){
+                            group.setPermissions();
+                            group.setUsers();
+                        }
                         _this.groups.push(group);
                     }
                 }

@@ -33,7 +33,7 @@ It uses asynchronous requests
     <script type="text/javascript" src="js/Group.js"></script>
     <script type="text/javascript" src="js/Site.js"></script>
     <script type="text/javascript" src="js/generateMatrix.js"></script>
-
+    <script type="text/javascript" src="libraries/spin.js"></script>
     <style>
         #wrapper{
             width: 70%;
@@ -66,6 +66,9 @@ It uses asynchronous requests
             display: block;
             height: 100%;
             widows: 100%;
+        }
+        #matrix{
+            cursor: 'pointer';
         }
     </style>
 </head>
@@ -110,9 +113,6 @@ It uses asynchronous requests
                 <span>
                     <input id='emails' type='text' placeholder='Enter email' style='border: 1px solid black'/>
                 </span>
-                <span>
-                    <button id='search-permissions' type='submit'>Search</button>
-                </span>
             </div>
              <div class='permission-box'>
                 <ol id='all-groups' class='collapsible' data-collapsible='accordion'></ol>
@@ -120,25 +120,47 @@ It uses asynchronous requests
              <div class='permission-box'>
                 <ol id='user-groups' class='collapsible' data-collapsible='accordion'></ol>
             </div>
-          
-        </section>
-
-        <section id='copy-permissions' class='hidden'>
-           
-           
         </section>
 
         <section id='generate-matrix' class='hidden'>
-            <button id='matrix'>Generate Matrix</button>
+            <div>
+                <a id='matrix'><img src='pics/download.jpg' /></a>
+                <div id='foo'></div>
+            </div>
         </section>
 
     </div>
    
 
-   
 
+    <script type="text/javascript">  
 
-    <script type="text/javascript">        
+        //spin animation
+        var opts = {
+              lines: 9 // The number of lines to draw
+            , length: 26 // The length of each line
+            , width: 15 // The line thickness
+            , radius: 45 // The radius of the inner circle
+            , scale: 1 // Scales overall size of the spinner
+            , corners: 1 // Corner roundness (0..1)
+            , color: '#000' // #rgb or #rrggbb or array of colors
+            , opacity: 0.3 // Opacity of the lines
+            , rotate: 5 // The rotation offset
+            , direction: 1 // 1: clockwise, -1: counterclockwise
+            , speed: 0.6 // Rounds per second
+            , trail: 27 // Afterglow percentage
+            , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+            , zIndex: 2e9 // The z-index (defaults to 2000000000)
+            , className: 'spinner' // The CSS class to assign to the spinner
+            , top: '51%' // Top position relative to parent
+            , left: '50%' // Left position relative to parent
+            , shadow: false // Whether to render a shadow
+            , hwaccel: false // Whether to use hardware acceleration
+            , position: 'absolute' // Element positioning
+        }
+        var target = document.getElementById('foo')
+        var spinner = new Spinner(opts).spin(target);  
+
         //One access
         //permission matrix
         var sites = [];
@@ -159,6 +181,7 @@ It uses asynchronous requests
          $('#matrix').click(function(){
              if (!!window.Worker){
                 var worker = new Worker('js/getSitesInfo.js');
+                console.log(worker)
                  worker.onmessage = function(e){
                     
                     matrixSites = e.data[0];
@@ -297,12 +320,8 @@ It uses asynchronous requests
         $('#emails').on('keypress', function(ev){
             console.log(ev.keyCode)
             if (ev.keyCode == 59){
-                 console.log(this.value);
+                showPermissions();
             }
-           
-        })
-        $('#search-permissions').on('click', function(){
-            showPermissions();
         });
         
 

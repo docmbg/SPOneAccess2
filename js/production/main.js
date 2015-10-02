@@ -19,7 +19,7 @@ var accessFab = {
 };
 
 $(function() {
-    spData = _SPGrind.getSPSites(_CTX);
+    spData = _SPGrind.getSPSites(_CTX, false);
     currentUser = allocateUserDetails(thisUserEmail);
     siteTemplate = new Ractive({
         el: "#sites-container",
@@ -63,7 +63,7 @@ $(function() {
             notifyOnUserChanged(event.context, currentUser, siteTemplate, " removed from group.", 5000);
         },
         getGroups: function(event) {
-            event.context.setGroups();
+            event.context.setGroups(false);
             currentUser = allocateUserDetails(thisUserEmail);
             compareUser(event.context, currentUser, siteTemplate);
         }
@@ -151,5 +151,148 @@ $("#user_form").submit(function(e) {
         }
     } else {
         $("#user_email").val("Invalid email").addClass("invalid");
+    }
+});
+
+
+
+//for the matrix
+function saveExcelFile(data, fileName) {
+    //set the file name
+    var filename = fileName + ".xlsx";
+
+    //put the file stream together
+    var s2ab = function(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i = 0; i != s.length; ++i) {
+            view[i] = s.charCodeAt(i) & 0xFF;
+        }
+        return buf;
+    };
+    //invoke the saveAs method from FileSaver.js
+    saveAs(new Blob([s2ab(data)], {
+        type: "application/octet-stream"
+    }), filename);
+};
+
+function convertNumber(n) {
+    var ordA = 'A'.charCodeAt(0);
+    var ordZ = 'Z'.charCodeAt(0);
+    var len = ordZ - ordA + 1;
+  
+    var s = "";
+    while(n >= 0) {
+        s = String.fromCharCode(n % len + ordA) + s;
+        n = Math.floor(n / len) - 1;
+    }
+    return s;
+};
+
+function generateExelFile(sites, groups){
+    console.log('generating excel file');
+    
+    ep.createFile('Permission Matrix');
+    ep.createSheet('Users');
+    var cellNumber = '';            
+    for (var i = 0; i < sites.length; i++){
+        cellNumber = convertNumber(i + 1);
+        cellNumber += 1;
+        ep.write({
+            'sheet' : 'Permission Matrix',
+            'cell' :  cellNumber,
+            'content' : sites[i].name
+        });
+    }
+
+    for (var i = 0; i < groups.length; i++){
+        ep.write({
+            'sheet' : 'Permission Matrix',
+            'cell' : 'A' + (i + 2),
+            'content' : groups[i].name
+        });
+        for (var j = 0; j < sites.length; j++){
+            for(var k = 0; k < groups[i].url.length; k++){
+                if (sites[j].url == groups[i].url[k]){
+                    cellNumber = '';
+                    cellNumber = convertNumber(j + 1);
+                    cellNumber += (i + 2);
+                    for (var p = 0; p < groups[i].permissions[k].length; p++){
+                        ep.write({
+                            'sheet' : 'Permission Matrix',
+                            'cell' : cellNumber,
+                            'content' : groups[i].permissions[k][p]
+                        })
+                    }
+                }
+            }
+        }
+
+        cellNumber = convertNumber(i); 
+        ep.write({
+            'sheet' : 'Users',
+            'cell' : cellNumber + 1,
+            'content' : groups[i].name
+        })
+        for(var u = 0; u < groups[i].users.length; u++){
+            var userInfo = groups[i].users[u].email || groups[i].users[u].login;
+            ep.write({
+                'sheet' : 'Users',
+                'cell' : cellNumber + (u + 2),
+                'content' : userInfo
+            })
+        } 
+    }
+
+    var name = SITEENV.split('/');
+    name = name[name.length - 1] + ' - Permission Matrix';
+    ep.saveAs(name);
+
+};
+
+ $('#central-nav').on('click', function(e){
+    if (e.target.id == 'show-matrix'){
+        $('#access-section').hide();
+        $('#action-btn-contaier').hide();
+        $('#matrix-section').show();
+    } else if(e.target.id == 'show-access'){
+        $('#matrix-section').hide();
+        $('#access-section').show();
+        $('#action-btn-contaier').show();
+    }
+});
+
+var sites = [];
+var matrixSites = [];
+var groups = []; 
+var usersInGroup = [];
+var ep = new ExcelPlus();
+var worker;
+var SITEENV;
+SITEENV = $().SPServices.SPGetCurrentSite();
+  
+$('#matrix-section').on('click', function(e){
+    if (e.target.id == 'generate-matrix'){
+        $('#generate-matrix').hide()
+        $('#generating-matrix').show();
+        if (!!window.Worker){
+            worker = new Worker('../js/generateMatrixWorker.js');
+            worker.onmessage = function(e){
+                matrixSites = e.data[0];
+                groups = e.data[1];
+                generateExelFile(matrixSites, groups);
+                $('#generating-matrix').hide();
+                $('#ready-matrix').show();
+            }
+            worker.postMessage([SITEENV, 'matrix']);
+        }
+    } else if(e.target.id == 'cancel-matrix'){
+        $('#generating-matrix').hide();
+        $('#generate-matrix').show();
+        worker.terminate();
+        worker = undefined;
+    } else if(e.target.id == 'ready-matrix'){
+        $('#ready-matrix').hide();
+        $('#generate-matrix').show();
     }
 });
