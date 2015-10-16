@@ -1,4 +1,4 @@
-importScripts("models.js");
+importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/models.js");
 
 self.onmessage = function(e) {
     var user = e.data[0],

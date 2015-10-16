@@ -1,8 +1,6 @@
 
-importScripts("../js/production/models.js");
-importScripts("../js/production/spgrind.js");
-//importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/Site.js");
-//importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/generateMatrix.js");
+importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/models.js");
+importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/spgrind.js");
 
 
     // because its type is javascript/worker.
