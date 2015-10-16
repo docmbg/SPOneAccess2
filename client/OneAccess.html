@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--     <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'> -->
+    <title>HP OneAccess 2</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="../css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:TRIM msdt:dt="string"></mso:TRIM>
+<mso:Document_x0020_Description msdt:dt="string"></mso:Document_x0020_Description>
+<mso:FY msdt:dt="string">FY15</mso:FY>
+<mso:Document_x0020_Type msdt:dt="string">Unspecified</mso:Document_x0020_Type>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+    <main>
+        <div class="valign-wrapper stage z-depth-1">
+            <div id="logo-nav" class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h1 class="center logo">ONE ACCESS 2.0</h1>
+                        <h5 class="center logo-subtext">User Access Management</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="center">
+                        <ul id="central-nav">
+                            <li class="z-depth-1 waves-effect waves-hpe-turquoise">
+                                <a href="#"><i class="material-icons" id="show-access">&#xE03F;</i></a></li>
+                            <li class="z-depth-1 waves-effect waves-hpe-orange">
+                                <a href="#"><i class="material-icons" id="show-massDelete">&#xE872;</i></a></li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
+                                <a href="#"><i class="material-icons" id="show-matrix">&#xE8EF;</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--access management section-->
+        <div class="container main-content" id="access-section">
+            <div class="row">
+                <form id="user_form" class="col s8 offset-s2">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">&#xE0BE;</i>
+                            <input id="user_email" type="text" class="validate">
+                            <label for="user_email">User Email</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    <ul id="sites-container" class="collapsible" data-collapsible="accordion">
+                    </ul>
+                </div>
+            </div>
+             <div id="action-btn-contaier" class="fixed-action-btn" style="bottom: 45px; right: 24px;"></div>
+        </div>
+        <!--mass delete section-->
+        <div class="container main-content" id="massDelete-section" hidden>
+            <div>
+                <!--<object id='file-object'></object>-->
+                <input id="file-object" type="file" value="Open an Excel file">
+            </div>
+            <div id='valid'>
+                <p>valid users</p>
+                <ol id='valid-list'>
+                </ol>
+            </div>
+            <div id='invalid'>
+                <p>Invalid users</p>
+                <ol id='invalid-list'>
+                </ol>
+                <button id='d_clip_button'  data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection</button>
+                <button id='delete-users'>Delete Users</button>
+            </div>
+            <!--<div class="row">
+                <div class="col s8 offset-s2">
+                    <div id="drop-box" class="card-panel center hpe-slate">
+                        <i class="large material-icons">insert_drive_file</i>
+                        <h5>Drop Excel Sheet Here</h5>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <!--permission matrix-->
+        <div class="container main-content hpe-turquoise" id="matrix-section" style="text-align:center" hidden>
+            <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="generate-matrix"><br/>Generate matrix</i></a>
+            <div id="generating-matrix" hidden>
+                 <i class="fa fa-spinner fa-pulse fa-5x hpe-turquoise"></i>
+                 <h4>Please wait for your matrix to be generated!</h4>
+                 <a><i class="waves-effect hpe-turquoise" id="cancel-matrix">Cancel request</i></a>
+            </div>
+            <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-matrix" style="display: none"><br/>Done!</i></a>
+        </div>
+       
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
+        <script type="text/javascript" src="../libraries/2.2/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="../libraries/2.2/excelplus-2.2.min.js"></script>
+        <script type="text/javascript" src="../js/production/models.js"></script>
+        <script type="text/javascript" src="../js/production/spgrind.js"></script>
+        <script type="text/javascript" src='../libraries/ractive.js'></script>
+        <script type="text/javascript" src="../js/production/main.js"></script>
+        <script type="text/javascript" src="../libraries/materialize.min.js"></script>
+
+       
+        <script type="text/javascript" src="../libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
+        <script id="site-template" type="text/ractive">
+            {{#each site}}
+            <li>
+                <div class="collapsible-header" on-click="getGroups"><i class="material-icons">&#xE80B;</i>{{name}}</div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+                        {{#each groups}}
+                        <li class="collection-item dismissable">
+                            {{#if addable}}
+                            <div>{{name}}<a href="#!" class="secondary-content"><i class="material-icons" on-click="addUser">&#xE147;</i></a></div>
+                            {{else}}
+                            <div>{{name}}<a href="#!" class="secondary-content"><i class="material-icons hpe-orange" on-click="removeUser">&#xE15C;</i></a></div>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+        <script id="fab-template" type="text/ractive">
+            <a class="btn-floating btn-large">
+            {{#if copy}}
+            <i class="material-icons waves-effect {{color}}" on-click="copy">&#xE14D;</i>
+            {{else}}
+            {{#if !busy}}
+            <i class="material-icons waves-effect {{color}}" on-click="paste">&#xE14F;</i>
+            {{else}}
+            <i class="material-icons rotate {{color}}">&#xE863;</i>
+            {{/if}}
+            {{/if}}
+            </a> {{#if !copy && !busy}}
+            <ul>
+                <li><a id="clear-tmpGroups" class="btn-floating hpe-orange-bg" on-click="clearGroups"><i class="material-icons">&#xE14C;</i></a></li>
+            </ul>
+            {{/if}}
+        </script>
+        <script>
+          
+        </script>
+    </main>
+</body>
+
+</html>
