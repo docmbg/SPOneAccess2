@@ -112,7 +112,7 @@ function copyUserPermissions() {
 
 function pasteUserPermissions() {
     if (!!window.Worker) {
-        var pastePermissions = new Worker("http://ent264.sharepoint.hp.com/teams/DOCMeDev/WIP/OneAccess2/js/production/pastePermissionsWorker.js");
+        var pastePermissions = new Worker("../js/production/pastePermissionsWorker.js");
         pastePermissions.onmessage = function(e) {
             if (e.data === "working") {
                 Materialize.toast("Began pasting user permissions.", 5000);
@@ -137,11 +137,11 @@ function allocateUserDetails(email) {
     return user;
 }
 
-$("#user_form").submit(function(e) {
+$('#user_form').submit(function(e) {
     e.preventDefault();
     thisUserEmail = $("#user_email").val();
     currentUser = allocateUserDetails(thisUserEmail);
-    if (currentUser.getName() !== "") {
+    if (currentUser.getName() !== '') {
         $("#user_email").val(currentUser.getName());
         for (var i = 0; i < spData.length; i++) {
             if (spData[i].groups) {
@@ -150,7 +150,7 @@ $("#user_form").submit(function(e) {
             }
         }
     } else {
-        $("#user_email").val("Invalid email").addClass("invalid");
+        $('#user_email').val('Invalid email').addClass('invalid');
     }
 });
 
@@ -159,7 +159,7 @@ $("#user_form").submit(function(e) {
 //for the matrix
 function saveExcelFile(data, fileName) {
     //set the file name
-    var filename = fileName + ".xlsx";
+    var filename = fileName + '.xlsx';
 
     //put the file stream together
     var s2ab = function(s) {
@@ -172,7 +172,7 @@ function saveExcelFile(data, fileName) {
     };
     //invoke the saveAs method from FileSaver.js
     saveAs(new Blob([s2ab(data)], {
-        type: "application/octet-stream"
+        type: 'application/octet-stream'
     }), filename);
 };
 
@@ -253,12 +253,18 @@ function generateExelFile(sites, groups){
  $('#central-nav').on('click', function(e){
     if (e.target.id == 'show-matrix'){
         $('#access-section').hide();
-        $('#action-btn-contaier').hide();
+       // $('#action-btn-contaier').hide();
+        $('#massDelete-section').hide();
         $('#matrix-section').show();
     } else if(e.target.id == 'show-access'){
         $('#matrix-section').hide();
+        $('#massDelete-section').hide();
         $('#access-section').show();
-        $('#action-btn-contaier').show();
+       // $('#action-btn-contaier').show();
+    } else if (e.target.id == 'show-massDelete'){
+        $('#access-section').hide();
+        $('#matrix-section').hide();
+        $('#massDelete-section').show();
     }
 });
 
@@ -295,4 +301,122 @@ $('#matrix-section').on('click', function(e){
         $('#ready-matrix').hide();
         $('#generate-matrix').show();
     }
+});
+
+
+
+//mass delete section
+
+'use strict';
+var epDel = new ExcelPlus();
+var userEmails = [];
+var validUsers = [];
+//var html = "";
+//var unIdentifiedUsers = [];
+var invalidUsers = [];
+
+$(document).ready(function() {
+    var clip = new ZeroClipboard($("#d_clip_button"));
+
+    function resetAll() {
+        epDel.reset();
+        validUsers = [];
+        userEmails = [];
+    };
+
+    // we call openLocal() and when the file is loaded then we want to display its content
+    // openLocal() will use the FileAPI if exists, otherwise it will use a Flash object
+     epDel.openLocal({
+        "flashPath": "2.2/swfobject/",
+        "labelButton": "Open an Excel file"
+    }, function() {
+        var arr = epDel.selectSheet('MassDelete').readAll();
+        console.log(arr);
+        // iterate and push emails to userEmails array
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < arr[i].length; j++) {
+                userEmails.push(arr[i][j]);
+                console.log(arr[i][j]);
+            }
+        }
+        
+       // iterateUsers();
+    });
+
+    function iterateUsers() {
+        for (var x = 0; x < userEmails.length; x++) {
+            var user = new User();
+            console.log(userEmails[x])
+            //user.setEmail(userEmails[x]);
+            // if (true){
+            //     user.setInfoByEmail();
+            // }
+            
+            console.log(user.toString());
+            if (user.getLogin() !== ''){
+                 userEmails.push(user.getName()); 
+            } else{
+                 invalidUsers.push(userEmails[x]);
+            }
+             $("#valid-list").append(
+                    "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+
+                $('.del').click(function(e) {
+                    //e.preventDefault();
+                    $(this).closest('li').remove();
+                    validUsers[parseInt($(this).attr('id'))] = undefined;
+        
+                });
+            //var aName = getUserLogIn(userEmails[x]);
+        }
+    };
+
+    //Method for Getting the user login name
+    function getUserLogIn(email) {
+        $SP().people(email, {url: SITEENV}, function(p) {
+            if (typeof p === "string") {
+               invalidUsers.push(email);
+               $("#invalid-list").append('<li class="invalid-item">' + email + '</li>');
+               console.log('invalid')
+            } else{
+                var login = p;
+                console.log(login);
+
+                var user = new User();
+                user.setName(p.FirstName + " " + p.LastName);
+                user.setLogin(p.AccountName);
+                user.setEmail(p.WorkEmail);
+                user.setPicture(p.PictureURL);
+
+                validUsers.push(user);
+
+                $("#valid-list").append(
+                    "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+
+                $('.del').click(function(e) {
+                    //e.preventDefault();
+                    $(this).closest('li').remove();
+                    validUsers[parseInt($(this).attr('id'))] = undefined;
+        
+                });
+            }
+
+        });
+    };
+
+   
+    $('#delete-users').click(function(){
+        for(var i = 0 ; i < validUsers.length; i++){
+            if (validUsers[i] != undefined){
+                $().SPServices({
+                    operation:"RemoveUserFromSite",
+                    userLoginName: validUsers[i].getLogin(),
+                    async:true
+                });
+                console.log('validUsers['+ i +'] is deleted');
+            }else{
+                console.log('validUsers['+ i +'] is ' + validUsers[i]);
+            }
+        }
+    })
 });

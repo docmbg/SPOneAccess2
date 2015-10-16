@@ -1,5 +1,5 @@
 var ep = new ExcelPlus();
-var SITEENV;
+var massDel;
 var userEmails = [];
 var usersInfo = [];
 var html = "";
@@ -10,7 +10,7 @@ $(document).ready(function() {
    
 
 //Gettin the current SP site
-    SITEENV = $().SPServices.SPGetCurrentSite();
+    massDel = $().SPServices.SPGetCurrentSite();
     var clip = new ZeroClipboard($("#d_clip_button"));
 
     function resetAll() {
@@ -38,13 +38,33 @@ $(document).ready(function() {
 
     function iterateUsers() {
         for (var x = 0; x < userEmails.length; x++) {
-            var aName = getUserLogIn(userEmails[x]);
+            var user = new User();
+            user.setEmail(userEmails[x]);
+            user.setInfoByEmail();
+            //console.log(user.toString());
+
+            console.log()
+            if (user.getLogin() !== ''){
+                 usersInfo.push(user.getName()); 
+            } else{
+                 invalidUsers.push(userEmails[x]);
+            }
+             $("#valid-list").append(
+                    "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+
+                $('.del').click(function(e) {
+                    //e.preventDefault();
+                    $(this).closest('li').remove();
+                    usersInfo[parseInt($(this).attr('id'))] = undefined;
+        
+                });
+            //var aName = getUserLogIn(userEmails[x]);
         }
     };
 
     //Method for Getting the user login name
     function getUserLogIn(email) {
-        $SP().people(email, {url: SITEENV}, function(p) {
+        $SP().people(email, {url: massDel}, function(p) {
             if (typeof p === "string") {
                invalidUsers.push(email);
                $("#invalid-list").append('<li class="invalid-item">' + email + '</li>')
@@ -73,6 +93,7 @@ $(document).ready(function() {
 
         });
     };
+
    
 
     $('#delete-users').click(function(){

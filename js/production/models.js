@@ -169,6 +169,9 @@ var Group = (function() {
                         var userName = result[i].match('LoginName="(.*)Email');
                         userName = userName[1].substring(0, userName[1].length - 2);
                         var email = null;
+                        if (!result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)){
+                            console.log(result[i])
+                        }
                         if (!!result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0]) {
                             email = result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
                         }
