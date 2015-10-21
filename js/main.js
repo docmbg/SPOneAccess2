@@ -277,6 +277,8 @@ var worker;
 var SITEENV;
 SITEENV = $().SPServices.SPGetCurrentSite();
   
+  alert('working');
+  
 $('#matrix-section').on('click', function(e){
     if (e.target.id == 'generate-matrix'){
         $('#generate-matrix').hide()
