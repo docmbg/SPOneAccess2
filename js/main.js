@@ -277,7 +277,6 @@ var worker;
 var SITEENV;
 SITEENV = $().SPServices.SPGetCurrentSite();
   
-  alert('working');
 
 $('#matrix-section').on('click', function(e){
     if (e.target.id == 'generate-matrix'){
@@ -317,7 +316,7 @@ var validUsers = [];
 //var unIdentifiedUsers = [];
 var invalidUsers = [];
 
-$(document).ready(function() {
+
     var clip = new ZeroClipboard($("#d_clip_button"));
 
     function resetAll() {
@@ -420,5 +419,4 @@ $(document).ready(function() {
                 console.log('validUsers['+ i +'] is ' + validUsers[i]);
             }
         }
-    })
-});
+    });
