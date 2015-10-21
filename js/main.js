@@ -316,7 +316,7 @@ var validUsers = [];
 //var unIdentifiedUsers = [];
 var invalidUsers = [];
 
-
+$(document).ready(function() {
     var clip = new ZeroClipboard($("#d_clip_button"));
 
     function resetAll() {
@@ -420,3 +420,4 @@ var invalidUsers = [];
             }
         }
     });
+});
