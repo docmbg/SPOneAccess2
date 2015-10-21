@@ -112,7 +112,7 @@ function copyUserPermissions() {
 
 function pasteUserPermissions() {
     if (!!window.Worker) {
-        var pastePermissions = new Worker("js/production/pastePermissionsWorker.js");
+        var pastePermissions = new Worker("js/pastePermissionsWorker.js");
         pastePermissions.onmessage = function(e) {
             if (e.data === "working") {
                 Materialize.toast("Began pasting user permissions.", 5000);
