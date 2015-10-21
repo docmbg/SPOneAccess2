@@ -112,7 +112,7 @@ function copyUserPermissions() {
 
 function pasteUserPermissions() {
     if (!!window.Worker) {
-        var pastePermissions = new Worker("../js/production/pastePermissionsWorker.js");
+        var pastePermissions = new Worker("js/production/pastePermissionsWorker.js");
         pastePermissions.onmessage = function(e) {
             if (e.data === "working") {
                 Materialize.toast("Began pasting user permissions.", 5000);
@@ -278,13 +278,13 @@ var SITEENV;
 SITEENV = $().SPServices.SPGetCurrentSite();
   
   alert('working');
-  
+
 $('#matrix-section').on('click', function(e){
     if (e.target.id == 'generate-matrix'){
         $('#generate-matrix').hide()
         $('#generating-matrix').show();
         if (!!window.Worker){
-            worker = new Worker('../js/generateMatrixWorker.js');
+            worker = new Worker('js/generateMatrixWorker.js');
             worker.onmessage = function(e){
                 matrixSites = e.data[0];
                 groups = e.data[1];
