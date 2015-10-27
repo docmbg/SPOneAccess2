@@ -1,6 +1,7 @@
-importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/models.js");
+importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js");
 
 self.onmessage = function(e) {
+    console.log('copy permissions worker is runnig');
     var user = e.data[0],
         groups = e.data[1];
 

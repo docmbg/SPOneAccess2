@@ -64,8 +64,13 @@
                 </form>
             </div>
             <div class="row">
-                <div class="col s8 offset-s2">
+                <div class="col s6">
                     <ul id="sites-container" class="collapsible" data-collapsible="accordion">
+                    </ul>
+                </div>
+                <div class="col s5 offset-s1">
+                    <h5>Current User Groups</h5>
+                    <ul id="current-groups-container">
                     </ul>
                 </div>
             </div>
@@ -76,7 +81,9 @@
             <div class="row">
                 <!--<object id='file-object'></object>-->
                 <span class="col s5"><input id="file-object" type="file" value="Open an Excel file" /></span>
-                <span class="col s5"><a><i id="delete-users" class="waves-effect hpe-turquoise">Delete Users</i></a></span> <!--<button id="delete-users" >Delete Users</button>-->
+            </div>
+            <div class = "row">
+                <h3 class="col s5"><a><i id="delete-users" class="waves-effect hpe-turquoise">Delete Users</i></a></h3> <!--<button id="delete-users" >Delete Users</button>-->
             </div>
             <div class="row">
                 <div id='valid' class="col s5" style="border: 0.5em solid rgb(42, 210, 201);">
@@ -112,7 +119,8 @@
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/ractive.js"></script>
-        <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/main.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/1.4/js/main.js"></script> 
+        <!--<script type="text/javascript" src="js/main.js"></script> -->
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/materialize.min.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
         <script id="site-template" type="text/ractive">

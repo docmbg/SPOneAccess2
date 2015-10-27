@@ -85,6 +85,9 @@ nav .input-field label i {
     background: #fff;
 }
 
+#delete-users{
+    padding: 1em;
+}
 #central-nav a {
     display: block;
     padding-top: 8px;

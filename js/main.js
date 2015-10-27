@@ -35,6 +35,8 @@ $(function() {
         data: accessFab
     });
 
+    showCurrentUserGroups();
+
     fabTemplate.on({
         copy: function(event) {
             copyUserPermissions();
@@ -57,6 +59,7 @@ $(function() {
         addUser: function(event) {
             event.context.addUser(currentUser);
             notifyOnUserChanged(event.context, currentUser, siteTemplate, " added to group.", 5000);
+
         },
         removeUser: function(event) {
             event.context.removeUser(currentUser);
@@ -78,6 +81,7 @@ function notifyOnUserChanged(context, user, template, message, timeout) {
     } else {
         Materialize.toast("Action is not valid", timeout);
     }
+    showCurrentUserGroups();
 }
 
 function compareUser(obj, user, template) {
@@ -149,6 +153,7 @@ $('#user_form').submit(function(e) {
                 compareUser(spData[i], currentUser, siteTemplate);
             }
         }
+        showCurrentUserGroups();
     } else {
         $('#user_email').val('Invalid email').addClass('invalid');
     }
@@ -308,16 +313,17 @@ $('#matrix-section').on('click', function(e){
 
 //mass delete section
 
-'use strict';
 var epDel = new ExcelPlus();
 var userEmails = [];
 var validUsers = [];
-//var html = "";
-//var unIdentifiedUsers = [];
 var invalidUsers = [];
+var validUsersCounter = 0;
+var invalidUsersCounter = 0;
 
-$(document).ready(function() {
-    var clip = new ZeroClipboard($("#d_clip_button"));
+//for the copy clipboard
+// $(document).ready(function() {
+//     var clip = new ZeroClipboard($("#d_clip_button"));
+// });
 
     function resetAll() {
         epDel.reset();
@@ -337,87 +343,84 @@ $(document).ready(function() {
         for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < arr[i].length; j++) {
                 userEmails.push(arr[i][j]);
-                console.log(arr[i][j]);
+                //console.log(arr[i][j]);
             }
         }
         
-       // iterateUsers();
+        iterateUsers();
     });
 
     function iterateUsers() {
         for (var x = 0; x < userEmails.length; x++) {
             var user = new User();
-            console.log(userEmails[x])
-            //user.setEmail(userEmails[x]);
-            // if (true){
-            //     user.setInfoByEmail();
-            // }
-            
-            console.log(user.toString());
-            if (user.getLogin() !== ''){
-                 userEmails.push(user.getName()); 
-            } else{
-                 invalidUsers.push(userEmails[x]);
-            }
-             $("#valid-list").append(
-                    "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
-
-                $('.del').click(function(e) {
-                    //e.preventDefault();
-                    $(this).closest('li').remove();
-                    validUsers[parseInt($(this).attr('id'))] = undefined;
-        
-                });
-            //var aName = getUserLogIn(userEmails[x]);
-        }
-    };
-
-    //Method for Getting the user login name
-    function getUserLogIn(email) {
-        $SP().people(email, {url: SITEENV}, function(p) {
-            if (typeof p === "string") {
-               invalidUsers.push(email);
-               $("#invalid-list").append('<li class="invalid-item">' + email + '</li>');
-               console.log('invalid')
-            } else{
-                var login = p;
-                console.log(login);
-
-                var user = new User();
-                user.setName(p.FirstName + " " + p.LastName);
-                user.setLogin(p.AccountName);
-                user.setEmail(p.WorkEmail);
-                user.setPicture(p.PictureURL);
-
-                validUsers.push(user);
-
+            user.setEmail(userEmails[x]);
+            user.setInfoByEmail();
+            if (!!user.getLogin()){
+                validUsers.push(user); 
                 $("#valid-list").append(
-                    "<li style='width:200px'>"+ user.getName() +"  <span id='" + user.id +"' class='del' style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
-
-                $('.del').click(function(e) {
-                    //e.preventDefault();
-                    $(this).closest('li').remove();
-                    validUsers[parseInt($(this).attr('id'))] = undefined;
-        
-                });
+                    "<li class='row'><span class='col s6'>"+ user.getEmail() + "</span><span class='col s6 del-valid' id='" + validUsersCounter +"' style='cursor:pointer;position:relative;top:1px'>remove</span></li>");
+                validUsersCounter++;
+            } else {
+                invalidUsers.push(userEmails[x]);
+                $("#invalid-list").append(
+                    "<li class='row'><span class='col s6'>"+ userEmails[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+                invalidUsersCounter++;
             }
+        }
 
+        $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
+        $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);
+        //updating the view when user is removed from the valid user list
+        $('.del-valid').click(function(e) {
+            //e.preventDefault();
+            $(this).closest('li').remove();
+            validUsers[parseInt($(this).attr('id'))] = undefined;
+            validUsersCounter--;
+            updateValidUsersNumber();
         });
     };
 
-   
-    $('#delete-users').click(function(){
-        for(var i = 0 ; i < validUsers.length; i++){
-            if (validUsers[i] != undefined){
+    function updateValidUsersNumber(){
+        $($('#valid').children()[0]).html('Valid Users - ' + validUsersCounter);
+    }
+
+   function deleteUser(user){
+          if (validUsers[user] != undefined){
                 $().SPServices({
                     operation:"RemoveUserFromSite",
-                    userLoginName: validUsers[i].getLogin(),
-                    async:true
+                    userLoginName: validUsers[user].getLogin(),
+                    async:true,
+                    completefunc: function(xData, Status){
+                        if (Status == 'success'){
+                            console.log('validUsers['+ user +'] was deleted');
+                                validUsersCounter--;
+                                updateValidUsersNumber();
+                                $('#'+ user).closest('li').remove();                       
+                        } else {
+                            $('#'+ user).prev().css('background','red');
+                            console.log('validUsers['+ user +'] was not found on the server!!!');
+                        }
+                    }
                 });
-                console.log('validUsers['+ i +'] is deleted');
             }else{
-                console.log('validUsers['+ i +'] is ' + validUsers[i]);
+                console.log('validUsers['+ user +'] is ' + validUsers[user]);
             }
+   };
+
+    function showCurrentUserGroups(){
+        currentUser.setGroups();
+        $('#current-groups-container').html(''); 
+        for (var i = 0; i < currentUser.groups.length; i++){
+            $('#current-groups-container').append('<li style="border: 1px solid rgb(198, 201, 202)">' + currentUser.groups[i].name + '</li>');
+        }
+    };
+
+
+    $('#delete-users').click(function(){
+        for(var i = 0 ; i < validUsers.length; i++){
+            deleteUser(i);
         }
     });
-});
+
+   
+

@@ -1,6 +1,6 @@
 
-importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/models.js");
-importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/spgrind.js");
+importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js");
+importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.js");
 
 
     // because its type is javascript/worker.
@@ -54,7 +54,7 @@ importScripts("https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/
             }
         }
 
-        console.log(groups);
+        //console.log(groups);
         self.postMessage([sites, groups]);
     };
    
