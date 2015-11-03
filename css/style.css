@@ -89,6 +89,10 @@ nav .input-field label i {
     background: #fff;
 }
 
+#instructions{
+    display: inline;
+}
+
 #instructions > a > img {
     vertical-align: top;
 }
