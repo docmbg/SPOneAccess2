@@ -6,6 +6,10 @@ nav .input-field label i {
     color: #fff;
 }
 
+.image{
+    width: 1em;
+}
+
 .logo {
     font-size: 3em;
     font-weight: bold;
@@ -83,6 +87,14 @@ nav .input-field label i {
     text-align: center;
     border-radius: 999999px;
     background: #fff;
+}
+
+#instructions > a > img {
+    vertical-align: top;
+}
+
+#instr-nav > li{
+    margin: 1em;
 }
 
 #delete-users{

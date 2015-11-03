@@ -26,7 +26,7 @@ importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.
                 group.permissions = result[i].getGroups()[j].getPermissions();
                 group.users = [];
                 
-                console.log(group);
+                //console.log(group);
                 for (var u = 0; u < result[i].getGroups()[j].getUsers().length; u++){
                     var user = {};
                     user.name = result[i].getGroups()[j].getUsers()[u].getName();

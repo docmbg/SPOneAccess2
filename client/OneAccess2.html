@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="https://rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" />
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
@@ -28,99 +28,241 @@
 
 <body>
     <main>
+
+        <div id="instructionsModal" class="modal">
+            <div class="row hpe-turquoise">
+                <ul id="instr-nav" class="center">
+                    <li class="z-depth-2 waves-effect hpe-turquoise ">
+                        <a href="#" class="access-instr"> Access Management </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise">
+                        <a href="#" class="mass-delete-instr"> Mass Delete </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise" >
+                        <a href="#" class="matrix-instr"> Permission Matrix </a></li>
+                </ul>
+            </div>
+            <div id="instr-container" class="row">
+
+                <div class="row center access-instr">
+                    <div class="row hpe-turquoise">
+                        <h5>Access Management</h5> 
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            1. Enter user's email and press 'Enter'. If recognized, the user's name will appear. It works with one at a time only.
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/access1.png" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                          <div class="col s12 m12 l6 center">
+                            2. Current user's groups will appear in the right box. Beware that by default you are the current user.
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/access2.png" />
+                        </div>
+                    </div>
+
+                     <div class="row">
+                          <div class="col s12 m12 l6 center">
+                            3. Add and remove user's permission from the Sites & Groups menu. 
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/access3.png" />
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            4. <span class="hpe-turquoise">How to copy permissions</span>: first enter the user whose permissions need to be copied. Click on the <i>Copy/Paste</i> button. Then enter the user you need to grand the permissions and click the 
+                            <i>Copy/Paste</i> button again. Note that the permissions will stay copied in the background and you can paste multiple times. To clear them just hold your mouse on the <i>Copy/Paste</i> button and click the 'X' that will appear.      
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/access4.png" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row center mass-delete-instr" hidden>
+                    <div class="row hpe-turquoise">
+                        <h5>Mass Delete</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            1. Create an Excel file containing the emails of the users that need to be removed from the SharePoint. Rename the sheet to 'MassDelete'. Upload the file (ONLY ONE upload is allowed per session, so if you need to upload new file -> refresh the page). 
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/del1.png" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            2. Emails that are recognized as valid will appear on the left, the rest in the right box. Use 'remove from list' to remove users that you do NOT want to delete. For invalid emails will be considered inactive, wrong or missing(empty line) emails. 
+                        </div>
+                         <div class="col s12 m12 l6 center">
+                            <img src="pics/del2.png" />
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            3. Click <i>Delete Users</i> to start the deleting process. Successfully deleted users will disappear from the box. If a user cannot be deleted for some reason, he/she will be <span style='background: rgb(255, 141, 109)'> marked </span>. In these cases double check the email and verify that the user does not have permissions on the SP. Contact the technical team if there is a big number of users that cannot be deleted. 
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="pics/del3.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row center matrix-instr hidden" hidden>
+                    <div class="row">
+                        <h5 class="hpe-turquoise">Permission Matrix</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 center">
+                            Should take around 10min for the biggest sites and will automatically download on your PC. If it goes for more than 15min, contact the technical team. Note that permissions and users WILL NOT be taken from groups containing 'spacial' symbols, for example 'GSD San Jos<span style="background:rgb(255, 141, 109)">é</span> Owners'. Rename the group to escape this issue.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer center">
+                <a href="#!" class="modal-action modal-close waves-effect">OK</a>
+            </div>
+        </div>
+
+
         <div class="valign-wrapper stage z-depth-1">
             <div id="logo-nav" class="container">
                 <div class="row">
                     <div class="col s12">
-                        <h1 class="center logo">ONE ACCESS 2.0</h1>
+                        <h1 class="center logo">ONE ACCESS 2.0 
+                            <div id="instructions" class="center hide-on med-and-down">
+                                <a class="modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Instructions" href="#instructionsModal">
+                                    <!-- <i class="mdi-social-school fa-3x"></i> -->
+                                    <img src="pics/education.png" class="material-icons image" />
+                                </a>
+                            </div>
+                        </h1>
                         <h5 class="center logo-subtext">User Access Management</h5>
                     </div>
                 </div>
                 <div class="row">
                     <div class="center">
                         <ul id="central-nav">
-                            <li class="z-depth-1 waves-effect waves-hpe-turquoise">
-                                <a href="#"><i class="material-icons" id="show-access">&#xE03F;</i></a></li>
+                           <!-- 
+                           <li class="z-depth-1 waves-effect waves-hpe-turquoise">
+                                <a href="#"><i class="material-icons" id="show-access">&#xE898;</i></a></li>
                             <li class="z-depth-1 waves-effect waves-hpe-orange">
-                                <a href="#"><i class="material-icons" id="show-massDelete">&#xE872;</i></a></li>
+                                <a href="#" ><i class="material-icons" id="show-mass-delete">&#xE872;</i></a></li>
                             <li class="z-depth-1 waves-effect waves-hpe-purple" >
-                                <a href="#"><i class="material-icons" id="show-matrix">&#xE8EF;</i></a></li>
+                                <a href="#" ><i class="material-icons" id="show-matrix">&#xE8EF;</i></a></li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
+                                <a href="#" ><i class="material-icons" id="show-all-users">&#xE8D3;</i></a></li>
+                                 -->
+                            <li class="z-depth-1 waves-effect waves-hpe-turquoise">
+                                <a href="#"><img src="pics/access.png" class="material-icons image" id="show-access" /></a>
+                            </li>
+                            <li class="z-depth-1 waves-effect waves-hpe-orange">
+                                <a href="#"><img src="pics/trash.png" class="material-icons image" id="show-mass-delete" /></a>
+                            </li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
+                                <a href="#"><img src="pics/matrix.png" class="material-icons image" id="show-matrix" /></a>
+                            </li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
+                                <a href="#"><img src="pics/users.png" class="material-icons image" id="show-all-users" /></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
+                
             </div>
         </div>
-        <!--access management section-->
-        <div class="container main-content" id="access-section">
-            <div class="row">
-                <form id="user_form" class="col s8 offset-s2">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">&#xE0BE;</i>
-                            <input id="user_email" type="text" class="validate">
-                            <label for="user_email">User Email</label>
+
+        <div class="container main-content" id="main-section">
+            <!--access management section-->
+            <div class="show-access" id="access-section">
+                <div class="row">
+                    <form id="user_form" class="col s8 offset-s2">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">&#xE0BE;</i>
+                                <input id="user_email" type="text" class="validate">
+                                <label for="user_email">User Email</label>
+                            </div>
                         </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <ul id="sites-container" class="collapsible" data-collapsible="accordion">
+                        </ul>
                     </div>
-                </form>
-            </div>
-            <div class="row">
-                <div class="col s6">
-                    <ul id="sites-container" class="collapsible" data-collapsible="accordion">
-                    </ul>
+                    <div class="col s5 offset-s1" style="border: 1px solid rgb(198, 201, 202)">
+                        <h5 class="hpe-turquoise">Current User Groups</h5>
+                        <ul id="current-groups-container">
+                        </ul>
+                    </div>
                 </div>
-                <div class="col s5 offset-s1">
-                    <h5>Current User Groups</h5>
-                    <ul id="current-groups-container">
-                    </ul>
+                 <div id="action-btn-contaier" class="fixed-action-btn" style="bottom: 45px; right: 24px;">Copy Permissions</div>
+            </div>
+
+            <!--mass delete section-->
+            <div class="show-mass-delete" id="massDelete-section" hidden>
+                <div class="row">
+                    <!--<object id='file-object'></object>-->
+                    <span class="col s5"><input id="file-object" type="file" value="Open an Excel file" /></span>
+                </div>
+                <div class = "row">
+                    <h3 class="col s5"><a><i id="delete-users" class=" waves-effect hpe-turquoise">Delete Users</i></a></h3> <!--<button id="delete-users" >Delete Users</button>-->
+                </div>
+                <div class="row">
+                    <div id='valid' class="col s5" style="border: 0.5em solid rgb(42, 210, 201);">
+                        <h4 style="text-align:center;">Valid Users</h4>
+                        <ol id='valid-list' style="list-style: none;">
+                        </ol>
+                    </div>
+                    <div id='invalid' class="col s5 offset-s2"  style="border: 0.5em solid rgb(198, 201, 202);">
+                        <h4 style="text-align:center;">Invalid Users</h4>
+                        <ol id='invalid-list' style="list-style: none;">
+                        </ol>
+                    </div>
+                </div>
+                <!--        copy clipboard not working !!!!!!!
+                      <button id='d_clip_button'  data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection</button>
+                </div>-->
+            </div>
+            <!--permission matrix-->
+            <div class="show-matrix" id="matrix-section" style="text-align:center" hidden>
+                <div class="row hpe-turquoise">
+                    <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="generate-matrix"><br/>Generate Matrix</i></a>
+                    <div id="generating-matrix" class="" hidden>
+                         <i class="fa fa-spinner fa-pulse fa-5x hpe-turquoise"></i>
+                         <h4>Please wait for your matrix to be generated!</h4>
+                         <a><i class="waves-effect hpe-turquoise" id="cancel-matrix">Cancel request</i></a>
+                    </div>
+                    <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-matrix" style="display: none"><br/>Done!</i></a>
                 </div>
             </div>
-             <div id="action-btn-contaier" class="fixed-action-btn" style="bottom: 45px; right: 24px;">Copy Permissions</div>
-        </div>
-        <!--mass delete section-->
-        <div class="container main-content" id="massDelete-section" hidden>
-            <div class="row">
-                <!--<object id='file-object'></object>-->
-                <span class="col s5"><input id="file-object" type="file" value="Open an Excel file" /></span>
+            <!-- get all users -->
+            <div class="show-all-users" id="all-users-section" hidden>
+                <div class="row center">
+                    <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="get-all-users"><br/>Get All Users</i></a>
+                    <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-users" style="display: none"><br/>Done!</i></a>
+                </di>
             </div>
-            <div class = "row">
-                <h3 class="col s5"><a><i id="delete-users" class="waves-effect hpe-turquoise">Delete Users</i></a></h3> <!--<button id="delete-users" >Delete Users</button>-->
-            </div>
-            <div class="row">
-                <div id='valid' class="col s5" style="border: 0.5em solid rgb(42, 210, 201);">
-                    <h4 style="text-align:center;">Valid Users</h4>
-                    <ol id='valid-list' style="list-style: none;">
-                    </ol>
-                </div>
-                <div id='invalid' class="col s5 offset-s2"  style="border: 0.5em solid rgb(198, 201, 202);">
-                    <h4 style="text-align:center;">Invalid Users</h4>
-                    <ol id='invalid-list' style="list-style: none;">
-                    </ol>
-                </div>
-            </div>
-            <!--        copy clipboard not working !!!!!!!
-                  <button id='d_clip_button'  data-clipboard-target='invalid-list' data-clipboard-text='Default clipboard text from attribute' title='Click me to copy to clipboard.'> Copy selection</button>
-            </div>-->
-        </div>
-        <!--permission matrix-->
-        <div class="container main-content hpe-turquoise" id="matrix-section" style="text-align:center" hidden>
-            <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="generate-matrix"><br/>Generate matrix</i></a>
-            <div id="generating-matrix" hidden>
-                 <i class="fa fa-spinner fa-pulse fa-5x hpe-turquoise"></i>
-                 <h4>Please wait for your matrix to be generated!</h4>
-                 <a><i class="waves-effect hpe-turquoise" id="cancel-matrix">Cancel request</i></a>
-            </div>
-            <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-matrix" style="display: none"><br/>Done!</i></a>
+
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/2.2/sheetjs.all.min.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/2.2/excelplus-2.2.min.js"></script>
-        <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js"></script> 
+       <!-- <script type="text/javascript" src="js/models.js"></script> -->
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/ractive.js"></script>
-        <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/1.4/js/main.js"></script> 
-        <!--<script type="text/javascript" src="js/main.js"></script> -->
+        <!-- <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.7/js/main.js"></script> -->
+        <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/materialize.min.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
         <script id="site-template" type="text/ractive">

@@ -100,6 +100,7 @@ function compareUser(obj, user, template) {
     }
 
     template.update();
+    
 
     function hasGroup(group) {
         return user.groups.some(function(v) {
@@ -124,6 +125,7 @@ function pasteUserPermissions() {
             } else if (e.data === "done") {
                 Materialize.toast("Done pasting user permissions.", 5000);
                 fabTemplate.set("busy", false);
+                showCurrentUserGroups();
             } else {
                 Materialize.toast("Sorry, can't paste user permissions.", 5000);
             }
@@ -252,37 +254,23 @@ function generateExelFile(sites, groups){
     var name = SITEENV.split('/');
     name = name[name.length - 1] + ' - Permission Matrix';
     ep.saveAs(name);
-
 };
 
- $('#central-nav').on('click', function(e){
-    if (e.target.id == 'show-matrix'){
-        $('#access-section').hide();
-       // $('#action-btn-contaier').hide();
-        $('#massDelete-section').hide();
-        $('#matrix-section').show();
-    } else if(e.target.id == 'show-access'){
-        $('#matrix-section').hide();
-        $('#massDelete-section').hide();
-        $('#access-section').show();
-       // $('#action-btn-contaier').show();
-    } else if (e.target.id == 'show-massDelete'){
-        $('#access-section').hide();
-        $('#matrix-section').hide();
-        $('#massDelete-section').show();
-    }
-});
 
 var sites = [];
 var matrixSites = [];
 var groups = []; 
 var usersInGroup = [];
 var ep = new ExcelPlus();
+var epUsers = new ExcelPlus();
 var worker;
 var SITEENV;
 SITEENV = $().SPServices.SPGetCurrentSite();
-  
+var allUsers = [];
+var epUsers = new ExcelPlus();
 
+
+//mass delete section
 $('#matrix-section').on('click', function(e){
     if (e.target.id == 'generate-matrix'){
         $('#generate-matrix').hide()
@@ -309,118 +297,218 @@ $('#matrix-section').on('click', function(e){
     }
 });
 
-
-
-//mass delete section
-
-var epDel = new ExcelPlus();
-var userEmails = [];
-var validUsers = [];
-var invalidUsers = [];
-var validUsersCounter = 0;
-var invalidUsersCounter = 0;
+//var epDel = new ExcelPlus();
+var epDel =  new ExcelPlus();
+    userEmails = [],
+    validUsers = [],
+    invalidUsers = [],
+    validUsersCounter = 0,
+    invalidUsersCounter = 0;
 
 //for the copy clipboard
 // $(document).ready(function() {
 //     var clip = new ZeroClipboard($("#d_clip_button"));
 // });
+    // $('#instr-nav').on('click', function(e){
+    //     $('#instr-container').children().hide();
+    //     $($('.' + e.target.className)).show();
+    // });
 
-    function resetAll() {
-        epDel.reset();
-        validUsers = [];
-        userEmails = [];
-    };
+function resetAll() {
+    //epDel.reset();
+    userEmails = [];
+    validUsers = [];
+    userEmails = [];
+};
 
     // we call openLocal() and when the file is loaded then we want to display its content
     // openLocal() will use the FileAPI if exists, otherwise it will use a Flash object
-     epDel.openLocal({
-        "flashPath": "2.2/swfobject/",
-        "labelButton": "Open an Excel file"
-    }, function() {
-        var arr = epDel.selectSheet('MassDelete').readAll();
-        console.log(arr);
-        // iterate and push emails to userEmails array
-        for (var i = 0; i < arr.length; i++) {
-            for (var j = 0; j < arr[i].length; j++) {
-                userEmails.push(arr[i][j]);
-                //console.log(arr[i][j]);
-            }
+ epDel.openLocal({
+    "flashPath": "2.2/swfobject/",
+    "labelButton": "Open an Excel file"
+}, function() {
+    resetAll();
+    var arr = epDel.selectSheet('MassDelete').readAll();
+    console.log(arr);
+
+    // iterate and push emails to userEmails array
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].length; j++) {
+            userEmails.push(arr[i][j]);
         }
-        
-        iterateUsers();
-    });
+    }
+    iterateUsers();
+});
 
-    function iterateUsers() {
-        for (var x = 0; x < userEmails.length; x++) {
-            var user = new User();
-            user.setEmail(userEmails[x]);
-            user.setInfoByEmail();
-            if (!!user.getLogin()){
-                validUsers.push(user); 
-                $("#valid-list").append(
-                    "<li class='row'><span class='col s6'>"+ user.getEmail() + "</span><span class='col s6 del-valid' id='" + validUsersCounter +"' style='cursor:pointer;position:relative;top:1px'>remove</span></li>");
-                validUsersCounter++;
-            } else {
-                invalidUsers.push(userEmails[x]);
-                $("#invalid-list").append(
-                    "<li class='row'><span class='col s6'>"+ userEmails[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
-                invalidUsersCounter++;
-            }
+function iterateUsers() {
+    for (var x = 0; x < userEmails.length; x++) {
+        var user = new User();
+        user.setEmail(userEmails[x]);
+        user.setInfoByEmail();
+        if (!!user.getLogin()){
+            validUsers.push(user); 
+            $("#valid-list").append(
+                "<li class='row'><span class='col s6'>"+ user.getEmail() + "</span><span class='col s6 del-valid' id='" + validUsersCounter +"' style='cursor:pointer;position:relative;top:1px'>remove from list</span></li>");
+            validUsersCounter++;
+        } else {
+            invalidUsers.push(userEmails[x]);
+            $("#invalid-list").append(
+                "<li class='row'><span class='col s6'>"+ userEmails[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+            invalidUsersCounter++;
         }
-
-        $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
-        $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);
-        //updating the view when user is removed from the valid user list
-        $('.del-valid').click(function(e) {
-            //e.preventDefault();
-            $(this).closest('li').remove();
-            validUsers[parseInt($(this).attr('id'))] = undefined;
-            validUsersCounter--;
-            updateValidUsersNumber();
-        });
-    };
-
-    function updateValidUsersNumber(){
-        $($('#valid').children()[0]).html('Valid Users - ' + validUsersCounter);
     }
 
-   function deleteUser(user){
-          if (validUsers[user] != undefined){
-                $().SPServices({
-                    operation:"RemoveUserFromSite",
-                    userLoginName: validUsers[user].getLogin(),
-                    async:true,
-                    completefunc: function(xData, Status){
-                        if (Status == 'success'){
-                            console.log('validUsers['+ user +'] was deleted');
-                                validUsersCounter--;
-                                updateValidUsersNumber();
-                                $('#'+ user).closest('li').remove();                       
-                        } else {
-                            $('#'+ user).prev().css('background','red');
-                            console.log('validUsers['+ user +'] was not found on the server!!!');
-                        }
-                    }
-                });
-            }else{
-                console.log('validUsers['+ user +'] is ' + validUsers[user]);
-            }
-   };
-
-    function showCurrentUserGroups(){
-        currentUser.setGroups();
-        $('#current-groups-container').html(''); 
-        for (var i = 0; i < currentUser.groups.length; i++){
-            $('#current-groups-container').append('<li style="border: 1px solid rgb(198, 201, 202)">' + currentUser.groups[i].name + '</li>');
-        }
-    };
-
-
-    $('#delete-users').click(function(){
-        for(var i = 0 ; i < validUsers.length; i++){
-            deleteUser(i);
-        }
+    $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
+    $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);
+    //updating the view when user is removed from the valid user list
+    $('.del-valid').click(function(e) {
+        //e.preventDefault();
+        $(this).closest('li').remove();
+        validUsers[parseInt($(this).attr('id'))] = undefined;
+        validUsersCounter--;
+        updateValidUsersNumber();
     });
+};
 
+function updateValidUsersNumber(){
+    $($('#valid').children()[0]).html('Valid Users - ' + validUsersCounter);
+}
+
+function deleteUser(user){
+    if (validUsers[user] != undefined){
+        $().SPServices({
+            operation:"RemoveUserFromSite",
+            userLoginName: validUsers[user].getLogin(),
+            async:true,
+            completefunc: function(xData, Status){
+                if (Status == 'success'){
+                    console.log('validUsers['+ user +'] was deleted');
+                        validUsersCounter--;
+                        updateValidUsersNumber();
+                        $('#'+ user).closest('li').remove();                       
+                } else {
+                    $('#'+ user).prev().css('background','rgb(255, 141, 109)');
+                    console.log('validUsers['+ user +'] was not found on the server!!!');
+                }
+            }
+        });
+    }else{
+        console.log('validUsers['+ user +'] is ' + validUsers[user]);
+    }
+};
+
+function showCurrentUserGroups(){
+    currentUser.setGroups();
+    $('#current-groups-container').html(''); 
+    for (var i = 0; i < currentUser.groups.length; i++){
+        $('#current-groups-container').append('<li style="border: 1px solid rgb(198, 201, 202)">' + currentUser.groups[i].name + '</li>');
+    }
+};
+
+
+$('#delete-users').click(function(){
+    for(var i = 0 ; i < validUsers.length; i++){
+        deleteUser(i);
+    }
+});
+
+
+$(document).ready(function(){
+     $('.modal-trigger').leanModal();
+ });
+
+$('#instr-nav').on('click', function(e){
+    $('#instr-container').children().hide();
+    $($('.' + e.target.className)).show();
+});
+
+
+
+function getAllUsers(){
+    allUsers = [];
+    $().SPServices({
+        async: false,
+        operation: 'GetUserCollectionFromSite',
+        completefunc: function(xData, Status){
+            $(xData.responseXML).find('User').each(function(){
+                var user = new User();
+                user.setEmail($(this).attr('Email'));
+                user.setName($(this).attr('Name'));
+                user.setLogin($(this).attr('LoginName')); 
+                allUsers.push(user)});
+         }
+    })
+};
+
+function generateAllUsersExcel(){
+     
+    epUsers.createFile('All Users');
+    epUsers.createSheet('Users');
+
+    for (var i = 0; i < allUsers.length; i++){
+        epUsers.write({
+            'sheet' : 'All Users',
+            'cell' :  'A' + (i + 1),
+            'content' : allUsers[i].getEmail() || '--- NO EMAIL ---'
+        });
+        epUsers.write({
+            'sheet' : 'All Users',
+            'cell' :  'B' + (i + 1),
+            'content' : allUsers[i].getName()
+        }); 
+        epUsers.write({
+            'sheet' : 'All Users',
+            'cell' :  'C' + (i + 1),
+            'content' : allUsers[i].getLogin()
+        });  
+    }   
+
+    var name = SITEENV.split('/');
+    name = name[name.length - 1] + ' - All users';
+    epUsers.saveAs(name);
    
+};
 
+$('#all-users-section').on('click', function(e){
+    if (e.target.id == 'get-all-users'){
+        $('#get-all-users').hide();
+        getAllUsers();
+        $('#ready-users').show();
+        generateAllUsersExcel();
+    } else if(e.target.id == 'ready-users'){
+        $('#ready-users').hide();
+        $('#get-all-users').show();
+    }
+});
+
+
+    // $('#central-nav').on('click', function(e){
+    //     if (e.target.id == 'show-matrix'){
+    //         $('#access-section').hide();
+    //        // $('#action-btn-contaier').hide();
+    //         $('#massDelete-section').hide();
+    //         $('#matrix-section').show();
+    //     } else if(e.target.id == 'show-access'){
+    //         $('#matrix-section').hide();
+    //         $('#massDelete-section').hide();
+    //         $('#access-section').show();
+    //        // $('#action-btn-contaier').show();
+    //     } else if (e.target.id == 'show-massDelete'){
+    //         $('#access-section').hide();
+    //         $('#matrix-section').hide();
+    //         $('#massDelete-section').show();
+    //     }
+    // });
+
+
+     // $('#instr-nav').on('click', function(e){
+     //        $('#instr-container').children().hide();
+     //        $($('.' + e.target.className)).show();
+     //    });
+
+$('#central-nav').on('click', function(e){
+    if (e.target.id){
+        $('#main-section').children().hide();
+        $($('.' + e.target.id)[0]).show();
+    }
+});

@@ -130,6 +130,10 @@ var Group = (function() {
                         _this.permissions.push(result[i].getAttribute("Name"));
                     }
                 }
+            } 
+            if (req.status == 500) {
+                $('main').append('<div class="container error" style="background: rgb(255, 141, 109);">Ups!!!Something went wrong with group with name <b>'+ _this.name + '</b></div>');
+                console.log('Unable to get permissions for group ' + _this.name);
             }
         };
 
@@ -372,11 +376,13 @@ var User = (function() {
             operation: "GetUserLoginFromEmail",
             emailXml: '<Users><User Email="' + _this.email + '" /></Users>',
             completefunc: function(xData, Status) {
-                if (Status == "error") {
-                    console.log("Invalid email");
+                if (Status == 'error') {
+                    console.log('Invalid email');
                 } else {
-                    $(xData.responseXML).find("User").each(function() {
-                        _this.setLogin($(this).attr('Login'));
+                    $(xData.responseXML).find('User').each(function() {
+                        var login = $(this).attr('Login');
+                        //login = login.substring(login.indexOf("|") + 1);
+                        _this.setLogin(login);
                         _this.setName($(this).attr('DisplayName'));
                     });
                 }
