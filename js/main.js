@@ -443,7 +443,6 @@ function getAllUsers(){
 function generateAllUsersExcel(){
      
     epUsers.createFile('All Users');
-    epUsers.createSheet('Users');
 
     for (var i = 0; i < allUsers.length; i++){
         epUsers.write({

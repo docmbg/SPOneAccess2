@@ -1,3 +1,7 @@
+* {
+    font-family: Arial;
+}
+
 nav {
     background-color: rgb(66, 85, 99);
 }
@@ -99,6 +103,7 @@ nav .input-field label i {
 
 #instr-nav > li{
     margin: 1em;
+    padding: 0.5em;
 }
 
 #delete-users{
