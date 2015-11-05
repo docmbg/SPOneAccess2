@@ -1,8 +1,6 @@
 
-importScripts("../js/production/models.js");
-importScripts("../js/production/spgrind.js");
-//importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/Site.js");
-//importScripts("http://ent261.sharepoint.hp.com/teams/EricssonInt/OneAccess/MassDelete/js/generateMatrix.js");
+importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js");
+importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.js");
 
 
     // because its type is javascript/worker.
@@ -28,7 +26,7 @@ importScripts("../js/production/spgrind.js");
                 group.permissions = result[i].getGroups()[j].getPermissions();
                 group.users = [];
                 
-                console.log(group);
+                //console.log(group);
                 for (var u = 0; u < result[i].getGroups()[j].getUsers().length; u++){
                     var user = {};
                     user.name = result[i].getGroups()[j].getUsers()[u].getName();
@@ -56,7 +54,7 @@ importScripts("../js/production/spgrind.js");
             }
         }
 
-        console.log(groups);
+        //console.log(groups);
         self.postMessage([sites, groups]);
     };
    
