@@ -1,9 +1,17 @@
+* {
+    font-family: Arial;
+}
+
 nav {
     background-color: rgb(66, 85, 99);
 }
 
 nav .input-field label i {
     color: #fff;
+}
+
+.image{
+    width: 1em;
 }
 
 .logo {
@@ -85,6 +93,22 @@ nav .input-field label i {
     background: #fff;
 }
 
+#instructions{
+    display: inline;
+}
+
+#instructions > a > img {
+    vertical-align: top;
+}
+
+#instr-nav > li{
+    margin: 1em;
+    padding: 0.5em;
+}
+
+#delete-users{
+    padding: 1em;
+}
 #central-nav a {
     display: block;
     padding-top: 8px;
