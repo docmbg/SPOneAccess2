@@ -96,6 +96,7 @@ function compareUser(obj, user, template) {
         }
         for (var j = 0; j < groups.length; j++) {
             groups[j].addable = !hasGroup(groups[j].name);
+            console.log(groups[j].addable + ' \ ' + groups[j]);
         }
     }
 

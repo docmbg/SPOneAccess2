@@ -1,5 +1,70 @@
 "use strict";
 
+var List = (function(){
+    function List(){};
+
+    List.prototype.setUrl = function(url){
+        this.ulr = url;
+    };
+
+    List.prototype.getName = function(){
+        return this.url;
+    };
+
+    List.prototype.setName = function(name){
+        this.name = name;
+    };
+
+    List.prototype.getName = function(){
+        return this.name;
+    }
+
+    // List.prototype.setPermissions = function(){
+    //     this.permissions = [];
+    // };
+
+    // List.prototype.getPermissions = function(){
+    //     return this.permissions;
+    // };
+
+    List.prototype.setGroups = function(){
+        this.groups = [];
+        var _this = this;
+        $().SPServices({
+            async: false,
+            operation: "GetGroupCollectionFromWeb",
+            url: this.getUrl(),
+            completefunc: function(xData, Status) {
+               $(xData.responseXML).find('Grouups > Group').each(function(){
+                  
+
+                    group = new Group();
+                    group.setName(escapeHtml(this.getAttribute("Name")));
+                    group.setUrl(_this.url);
+                  
+                    group.setPermissions();
+                    group.setUsers();
+                  
+                    _this.groups.push(group);
+               
+
+
+               })
+            }
+        });
+    };
+
+    List.prototype.getGroups = function(){
+        return this.groups;
+    }
+
+    return List;
+})();
+
+
+
+
+
 var Site = (function() {
 
     function Site() {}
@@ -45,6 +110,7 @@ var Site = (function() {
                         name = name[1].substring(0, name[1].length - 2);
                         group = new Group();
                         group.setName(name);
+                         console.log(group.getName())
                         group.setUrl(_this.url);
                         if (isAllInfoNeeded){
                             group.setPermissions();
@@ -56,6 +122,8 @@ var Site = (function() {
                     result = req.responseXML.getElementsByTagName("Group");
                     for (i = 0; i < result.length; i++) {
                         group = new Group();
+                        //group.setName(result[i].getAttribute("Name"));
+                        //console.log(group.getName())
                         group.setName(escapeHtml(result[i].getAttribute("Name")));
                         group.setUrl(_this.url);
                         if (isAllInfoNeeded){
@@ -130,6 +198,10 @@ var Group = (function() {
                         _this.permissions.push(result[i].getAttribute("Name"));
                     }
                 }
+            } 
+            if (req.status == 500) {
+                $('main').append('<div class="container error" style="background: rgb(255, 141, 109);">Ups!!!Something went wrong with group with name <b>'+ _this.name + '</b></div>');
+                console.log('Unable to get permissions for group ' + _this.name);
             }
         };
 
@@ -245,7 +317,7 @@ var Group = (function() {
                     //     _this.groups.push(group);
 
                 }
-            }
+            } 
         };
         req.open("POST", this.url + "/_vti_bin/usergroup.asmx", false);
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/AddUserToGroup");
@@ -328,7 +400,8 @@ var User = (function() {
                 } else {
                     $(xData.responseXML).find("Group").each(function() {
                         var group = new Group();
-                        group.setName($(this).attr("Name"));
+                        group.setName(escapeHtml($(this).attr('Name')));
+                        //group.setName($(this).attr("Name"));
                         group.setUrl($().SPServices.SPGetCurrentSite());
                         _this.groups.push(group);
                     });
@@ -372,11 +445,13 @@ var User = (function() {
             operation: "GetUserLoginFromEmail",
             emailXml: '<Users><User Email="' + _this.email + '" /></Users>',
             completefunc: function(xData, Status) {
-                if (Status == "error") {
-                    console.log("Invalid email");
+                if (Status == 'error') {
+                    console.log('Invalid email');
                 } else {
-                    $(xData.responseXML).find("User").each(function() {
-                        _this.setLogin($(this).attr('Login'));
+                    $(xData.responseXML).find('User').each(function() {
+                        var login = $(this).attr('Login');
+                        //login = login.substring(login.indexOf("|") + 1);
+                        _this.setLogin(login);
                         _this.setName($(this).attr('DisplayName'));
                     });
                 }
