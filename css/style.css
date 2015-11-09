@@ -106,6 +106,10 @@ nav .input-field label i {
     padding: 0.5em;
 }
 
+#instr-nav > a{
+    color: rgba(255, 141, 109, .65);
+}
+
 #delete-users{
     padding: 1em;
 }

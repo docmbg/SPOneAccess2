@@ -1,5 +1,70 @@
 "use strict";
 
+var List = (function(){
+    function List(){};
+
+    List.prototype.setUrl = function(url){
+        this.ulr = url;
+    };
+
+    List.prototype.getName = function(){
+        return this.url;
+    };
+
+    List.prototype.setName = function(name){
+        this.name = name;
+    };
+
+    List.prototype.getName = function(){
+        return this.name;
+    }
+
+    // List.prototype.setPermissions = function(){
+    //     this.permissions = [];
+    // };
+
+    // List.prototype.getPermissions = function(){
+    //     return this.permissions;
+    // };
+
+    List.prototype.setGroups = function(){
+        this.groups = [];
+        var _this = this;
+        $().SPServices({
+            async: false,
+            operation: "GetGroupCollectionFromWeb",
+            url: this.getUrl(),
+            completefunc: function(xData, Status) {
+               $(xData.responseXML).find('Grouups > Group').each(function(){
+                  
+
+                    group = new Group();
+                    group.setName(escapeHtml(this.getAttribute("Name")));
+                    group.setUrl(_this.url);
+                  
+                    group.setPermissions();
+                    group.setUsers();
+                  
+                    _this.groups.push(group);
+               
+
+
+               })
+            }
+        });
+    };
+
+    List.prototype.getGroups = function(){
+        return this.groups;
+    }
+
+    return List;
+})();
+
+
+
+
+
 var Site = (function() {
 
     function Site() {}
@@ -45,6 +110,7 @@ var Site = (function() {
                         name = name[1].substring(0, name[1].length - 2);
                         group = new Group();
                         group.setName(name);
+                         console.log(group.getName())
                         group.setUrl(_this.url);
                         if (isAllInfoNeeded){
                             group.setPermissions();
@@ -56,6 +122,8 @@ var Site = (function() {
                     result = req.responseXML.getElementsByTagName("Group");
                     for (i = 0; i < result.length; i++) {
                         group = new Group();
+                        //group.setName(result[i].getAttribute("Name"));
+                        //console.log(group.getName())
                         group.setName(escapeHtml(result[i].getAttribute("Name")));
                         group.setUrl(_this.url);
                         if (isAllInfoNeeded){
@@ -249,7 +317,7 @@ var Group = (function() {
                     //     _this.groups.push(group);
 
                 }
-            }
+            } 
         };
         req.open("POST", this.url + "/_vti_bin/usergroup.asmx", false);
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/AddUserToGroup");
@@ -332,7 +400,8 @@ var User = (function() {
                 } else {
                     $(xData.responseXML).find("Group").each(function() {
                         var group = new Group();
-                        group.setName($(this).attr("Name"));
+                        group.setName(escapeHtml($(this).attr('Name')));
+                        //group.setName($(this).attr("Name"));
                         group.setUrl($().SPServices.SPGetCurrentSite());
                         _this.groups.push(group);
                     });
