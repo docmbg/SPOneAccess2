@@ -110,7 +110,6 @@ var Site = (function() {
                         name = name[1].substring(0, name[1].length - 2);
                         group = new Group();
                         group.setName(name);
-                         console.log(group.getName())
                         group.setUrl(_this.url);
                         if (isAllInfoNeeded){
                             group.setPermissions();

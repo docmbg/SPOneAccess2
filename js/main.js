@@ -224,13 +224,19 @@ function generateExelFile(sites, groups){
                     cellNumber = '';
                     cellNumber = convertNumber(j + 1);
                     cellNumber += (i + 2);
+                    var groupPermissions = '';
                     for (var p = 0; p < groups[i].permissions[k].length; p++){
-                        ep.write({
+                        var comma = ', '
+                        if (p == groups[i].permissions[k].length - 1){
+                            comma = ''
+                        }
+                        groupPermissions += groups[i].permissions[k][p] + comma;
+                    }
+                    ep.write({
                             'sheet' : 'Permission Matrix',
                             'cell' : cellNumber,
-                            'content' : groups[i].permissions[k][p]
+                            'content' : groupPermissions
                         })
-                    }
                 }
             }
         }
@@ -267,7 +273,6 @@ var worker;
 var SITEENV;
 SITEENV = $().SPServices.SPGetCurrentSite();
 var allUsers = [];
-var epUsers = new ExcelPlus();
 
 
 //mass delete section
