@@ -1,16 +1,17 @@
 
-importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/models.js");
-importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.js");
+importScripts("models.js");
+importScripts("spgrind.js");
 
 
     // because its type is javascript/worker.
     self.onmessage = function(e) {
-        console.log('worker is working');
+        console.log('Generating matrix worker');
 
         //var result = getSites(e.data[0], e.data[1]);
-        var result = SPGrind.fn.getSPSites(e.data[0], e.data[1], true)
+        var result = SPGrind.fn.getSPSites(e.data[0], e.data[1], true);
         var sites = [];
         var groups = [];
+        var lists = [];
 
         var count = 1;
         for (var i = 0; i < result.length; i++){
@@ -18,14 +19,13 @@ importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.
             site.name = result[i].getName();
             site.url = result[i].getUrl();
             sites.push(site);
+            
             for(var j = 0; j < result[i].getGroups().length; j++){
-            //for(var j = 0; j < 1; j++){  
                 var group = {};
                 group.name = result[i].getGroups()[j].getName();
                 group.url = result[i].getGroups()[j].getUrl();
                 group.permissions = result[i].getGroups()[j].getPermissions();
                 group.users = [];
-                
                 //console.log(group);
                 for (var u = 0; u < result[i].getGroups()[j].getUsers().length; u++){
                     var user = {};
@@ -35,11 +35,17 @@ importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.
                     //console.log(user.name + ' | ' + user.email + ' | ' + user.login + ' | ' + count); count++;
                     group.users.push(user);
                 }
-
                 groups.push(group);
             }
-        }
 
+            for(var l = 0; l < result[i].lists.length; l++){
+                if(result[i].lists[l].getIsRestricted()){
+                    lists.push(result[i].lists[l])
+                }
+                
+               
+            }
+        }
         for (var i = 0; i < groups.length; i++){
             groups[i].url = [groups[i].url];
             groups[i].permissions = [groups[i].permissions];
@@ -53,8 +59,6 @@ importScripts("https://cdn.rawgit.com/docmbg/SPOneAccess2/production/js/spgrind.
                 } 
             }
         }
-
-        //console.log(groups);
-        self.postMessage([sites, groups]);
+        self.postMessage([sites, groups, lists]);
     };
    

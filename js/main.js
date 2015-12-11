@@ -20,6 +20,7 @@ var accessFab = {
 
 $(function() {
     spData = _SPGrind.getSPSites(_CTX, false);
+    //currentUser = allocateUserDetails(thisUserEmail);
     currentUser = allocateUserDetails(thisUserEmail);
     siteTemplate = new Ractive({
         el: "#sites-container",
@@ -135,19 +136,26 @@ function pasteUserPermissions() {
     siteTemplate.update();
 }
 
-function allocateUserDetails(email) {
+function allocateUserDetails(userData) {
     var user = new User();
-    user.setEmail(email);
-    user.setInfoByEmail();
+    if (!!userData.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)){
+        user.setEmail(userData);
+        user.setInfoByEmail(_CTX);
+    }else{
+        user.setLogin(userData);
+        user.setInfoByLogin(_CTX);
+        thisUserEmail = user.getEmail();
+    }
     user.setGroups();
     return user;
-}
+};
 
 $('#user_form').submit(function(e) {
     e.preventDefault();
-    thisUserEmail = $("#user_email").val();
+    thisUserEmail = $('#user_email').val();
     currentUser = allocateUserDetails(thisUserEmail);
-    if (currentUser.getName() !== '') {
+    //thisUserEmail = currentUser.email;
+    if (currentUser.getName() !== '' && currentUser.getName() !== undefined) {
         $("#user_email").val(currentUser.getName());
         for (var i = 0; i < spData.length; i++) {
             if (spData[i].groups) {
@@ -157,10 +165,10 @@ $('#user_form').submit(function(e) {
         }
         showCurrentUserGroups();
     } else {
-        $('#user_email').val('Invalid email').addClass('invalid');
+        $('#user_email').val('Invalid Email/Login').addClass('invalid');
+        $('#current-groups-container').children().remove();
     }
 });
-
 
 
 //for the matrix
@@ -195,12 +203,11 @@ function convertNumber(n) {
     }
     return s;
 };
-
-function generateExelFile(sites, groups){
-    console.log('generating excel file');
-    
+function generateMatrixExcel(sites, groups, lists){
+    var ep = new ExcelPlus();
     ep.createFile('Permission Matrix');
     ep.createSheet('Users');
+    ep.createSheet('Restricted Lists');
     var cellNumber = '';            
     for (var i = 0; i < sites.length; i++){
         cellNumber = convertNumber(i + 1);
@@ -211,7 +218,6 @@ function generateExelFile(sites, groups){
             'content' : sites[i].name
         });
     }
-
     for (var i = 0; i < groups.length; i++){
         ep.write({
             'sheet' : 'Permission Matrix',
@@ -233,14 +239,13 @@ function generateExelFile(sites, groups){
                         groupPermissions += groups[i].permissions[k][p] + comma;
                     }
                     ep.write({
-                            'sheet' : 'Permission Matrix',
-                            'cell' : cellNumber,
-                            'content' : groupPermissions
-                        })
+                        'sheet' : 'Permission Matrix',
+                        'cell' : cellNumber,
+                        'content' : groupPermissions
+                    })
                 }
             }
         }
-
         cellNumber = convertNumber(i); 
         ep.write({
             'sheet' : 'Users',
@@ -255,9 +260,24 @@ function generateExelFile(sites, groups){
                 'content' : userInfo
             })
         } 
-    }
-
-    var name = SITEENV.split('/');
+    };
+    ep.write({'sheet': 'Restricted Lists', 'cell': 'A1', 'content': 'List Name'});
+    ep.write({'sheet': 'Restricted Lists', 'cell': 'B1', 'content': 'URL'});
+    for(var i = 0; i < lists.length; i++){
+        //var name = lists[i].name;
+        //var url = lists[i].url;
+        ep.write({
+            'sheet' : 'Restricted Lists',
+            'cell' : 'A' + (i + 2),
+            'content' : lists[i].name
+        });
+        ep.write({
+            'sheet' : 'Restricted Lists',
+            'cell' : 'B' + (i + 2),
+            'content' : lists[i].url
+        });
+    };
+    var name = _CTX.split('/');
     name = name[name.length - 1] + ' - Permission Matrix';
     ep.saveAs(name);
 };
@@ -266,18 +286,16 @@ function generateExelFile(sites, groups){
 var sites = [];
 var matrixSites = [];
 var groups = []; 
+var restrictedLists = [];
 var usersInGroup = [];
-var ep = new ExcelPlus();
-var epUsers = new ExcelPlus();
 var worker;
-var SITEENV;
-SITEENV = $().SPServices.SPGetCurrentSite();
 var allUsers = [];
+var emptyFolders = [];
+var libraryName = location.pathname.split('/');
+libraryName = libraryName[libraryName.length - 2];
 
-
-//mass delete section
 $('#matrix-section').on('click', function(e){
-    if (e.target.id == 'generate-matrix'){
+    if (e.target.id == 'generate-matrix' || $(e.target).parent()[0].id == 'generate-matrix'){
         $('#generate-matrix').hide()
         $('#generating-matrix').show();
         if (!!window.Worker){
@@ -285,23 +303,94 @@ $('#matrix-section').on('click', function(e){
             worker.onmessage = function(e){
                 matrixSites = e.data[0];
                 groups = e.data[1];
-                generateExelFile(matrixSites, groups);
+                restrictedLists = e.data[2];
+                generateMatrixExcel(matrixSites, groups, restrictedLists);
                 $('#generating-matrix').hide();
                 $('#ready-matrix').show();
             }
-            worker.postMessage([SITEENV, 'matrix']);
+            worker.postMessage([_CTX, 'matrix']);
         }
     } else if(e.target.id == 'cancel-matrix'){
         $('#generating-matrix').hide();
         $('#generate-matrix').show();
         worker.terminate();
         worker = undefined;
-    } else if(e.target.id == 'ready-matrix'){
+    } else if(e.target.id == 'ready-matrix' || $(e.target).parent()[0].id == 'ready-matrix'){
         $('#ready-matrix').hide();
         $('#generate-matrix').show();
     }
 });
 
+
+//structure section
+$('#structure-section').on('click', function(e){
+    if (e.target.id == 'generate-structure' || $(e.target).parent()[0].id == 'generate-structure'){
+        $('#generate-structure').hide()
+        $('#generating-structure').show();
+        if (!!window.Worker){
+            worker = new Worker('js/structureCreatorWorker.js');
+            worker.onmessage = function(e){
+                info = e.data[0];
+                window.localStorage.setItem('Info', JSON.stringify(info));
+                window.open(_CTX + "/" + libraryName + "/client/visio.html", '_blank');
+                window.focus();
+                $('#generating-structure').hide();
+                $('#generate-structure').show();
+            }
+            worker.postMessage([_CTX,'structure']);
+        }
+    } else if(e.target.id == 'cancel-structure'){
+        $('#generating-structure').hide();
+        $('#generate-structure').show();
+        worker.terminate();
+        worker = undefined;
+    }/* else if(e.target.id == 'ready-struct'){
+        $('#ready-matrix').hide();
+        $('#generate-matrix').show();
+    }*/
+});
+
+//empty-folders
+$('#empty-folders-section').on('click',function(e){
+    if(e.target.id == 'generate-empty-folders' || $(e.target).parent()[0].id == 'generate-empty-folders'){
+        $('#generate-empty-folders').hide();
+        $('#generating-empty-folders').show();
+        if (!!window.Worker){
+            worker = new Worker('js/getEmptyFoldersWorker.js');
+            worker.onmessage = function(e){
+                emptyFolders = e.data[0];
+                generateEmptyFoldersExcel(emptyFolders);
+                $('#generating-empty-folders').hide();
+                $('#ready-empty-folders').show();
+            }
+            worker.postMessage([_CTX,'structure']);
+        } 
+    }else if(e.target.id == 'cancel-empty-folders'){
+        $('#generating-empty-folders').hide();
+        $('#generate-empty-folders').show();
+        worker.terminate();
+        worker = undefined;
+    }else if(e.target.id == 'ready-empty-folders' || $(e.target).parent()[0].id == 'ready-empty-folders'){
+        $('#ready-empty-folders').hide();
+        $('#generate-empty-folders').show();
+    }
+});
+
+//get all users
+$('#all-users-section').on('click', function(e){
+    if (e.target.id == 'get-all-users' || $(e.target).parent()[0].id == 'get-all-users'){
+        $('#get-all-users').hide();
+        getAllUsers();
+        $('#ready-users').show();
+        generateAllUsersExcel();
+    } else if(e.target.id == 'ready-users' || $(e.target).parent()[0].id == 'ready-users'){
+        $('#ready-users').hide();
+        $('#get-all-users').show();
+    }
+});
+
+
+//MASS DELETE
 //var epDel = new ExcelPlus();
 var epDel =  new ExcelPlus();
     userEmails = [],
@@ -342,26 +431,35 @@ function resetAll() {
             userEmails.push(arr[i][j]);
         }
     }
-    iterateUsers();
+    if (!!window.Worker){
+        worker = new Worker('js/identifyUsersWorker.js');
+        worker.onmessage = function(e){
+            validUsers = e.data[0];
+            invalidUsers = e.data[1];
+            console.log('worker ready');
+            iterateUsers();
+             $('#identifying-users').hide();
+             $('#delete-button').show();
+        }
+        worker.postMessage([userEmails, _CTX]);
+        $('#identifying-users').show()
+    }
+
 });
 
 function iterateUsers() {
-    for (var x = 0; x < userEmails.length; x++) {
-        var user = new User();
-        user.setEmail(userEmails[x]);
-        user.setInfoByEmail();
-        if (!!user.getLogin()){
-            validUsers.push(user); 
-            $("#valid-list").append(
-                "<li class='row'><span class='col s6'>"+ user.getEmail() + "</span><span class='col s6 del-valid' id='" + validUsersCounter +"' style='cursor:pointer;position:relative;top:1px'>remove from list</span></li>");
-            validUsersCounter++;
-        } else {
-            invalidUsers.push(userEmails[x]);
+    //var max = Math.max(validUsers.length, invalidUsers.length)
+    for (var x = 0; x < validUsers.length; x++) { 
+        $("#valid-list").append(
+            "<li class='row'><span class='col s6'>"+ validUsers[x].email + "</span><span class='col s6 del-valid' id='" + validUsersCounter +"' style='cursor:pointer;position:relative;top:1px'>remove from list</span></li>");
+        validUsersCounter++;
+    }  
+    for(var x = 0; x < invalidUsers.length; x++){
             $("#invalid-list").append(
-                "<li class='row'><span class='col s6'>"+ userEmails[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
+                "<li class='row'><span class='col s6'>"+ invalidUsers[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
             invalidUsersCounter++;
-        }
     }
+    
 
     $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
     $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);
@@ -383,7 +481,7 @@ function deleteUser(user){
     if (validUsers[user] != undefined){
         $().SPServices({
             operation:"RemoveUserFromSite",
-            userLoginName: validUsers[user].getLogin(),
+            userLoginName: validUsers[user].login,
             async:true,
             completefunc: function(xData, Status){
                 if (Status == 'success'){
@@ -410,13 +508,12 @@ function showCurrentUserGroups(){
     }
 };
 
-
 $('#delete-users').click(function(){
     for(var i = 0 ; i < validUsers.length; i++){
         deleteUser(i);
     }
+    $('#delete-button').hide();
 });
-
 
 $(document).ready(function(){
      $('.modal-trigger').leanModal();
@@ -426,9 +523,6 @@ $('#instr-nav').on('click', function(e){
     $('#instr-container').children().hide();
     $($('.' + e.target.className)).show();
 });
-
-
-
 function getAllUsers(){
     allUsers = [];
     $().SPServices({
@@ -446,7 +540,7 @@ function getAllUsers(){
 };
 
 function generateAllUsersExcel(){
-     
+    var epUsers = new ExcelPlus();
     epUsers.createFile('All Users');
 
     for (var i = 0; i < allUsers.length; i++){
@@ -467,23 +561,13 @@ function generateAllUsersExcel(){
         });  
     }   
 
-    var name = SITEENV.split('/');
+    var name = _CTX.split('/');
     name = name[name.length - 1] + ' - All users';
     epUsers.saveAs(name);
    
 };
 
-$('#all-users-section').on('click', function(e){
-    if (e.target.id == 'get-all-users'){
-        $('#get-all-users').hide();
-        getAllUsers();
-        $('#ready-users').show();
-        generateAllUsersExcel();
-    } else if(e.target.id == 'ready-users'){
-        $('#ready-users').hide();
-        $('#get-all-users').show();
-    }
-});
+
 
 
     // $('#central-nav').on('click', function(e){
@@ -516,3 +600,39 @@ $('#central-nav').on('click', function(e){
         $($('.' + e.target.id)[0]).show();
     }
 });
+
+// get empty folders
+function generateEmptyFoldersExcel(sites){
+    var ep = new ExcelPlus();
+    var cellsLetters = ['A','B','C','D','E','F'];
+
+    ep.createFile("Empty Folders");
+    ep.write({'cell':'A1','content': 'Folder Name'});
+    ep.write({'cell':'B1','content': 'URL'});
+    ep.write({'cell':'C1','content': 'Date Created'});
+    ep.write({'cell':'D1','content': 'Last Modified'});
+    ep.write({'cell':'E1','content': 'Editor'});
+    ep.write({'cell':'F1','content': 'Author/Creator'});
+    var row = 2;
+    for(var i = 0; i < sites.length; i++){
+        for(var j = 0; j < sites[i].lists.length; j++){
+            for(var f = 0; f < sites[i].lists[j].emptyFolders.length; f++){
+                var count = 0;
+                for(var key in sites[i].lists[j].emptyFolders[f]) {
+                    var value = sites[i].lists[j].emptyFolders[f][key].toString();
+                    var cellName = (cellsLetters[count] + row).toString();
+                    ep.write({'cell': cellName, 'content': value});
+                    count++;
+                };
+                 row++;
+            }
+        }
+    }
+    var name = _CTX.split('/');
+    name = name[name.length - 1] + ' - Empty Folders';
+    ep.saveAs(name);
+};
+
+
+
+

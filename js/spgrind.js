@@ -18,22 +18,28 @@ SPGrind.fn = SPGrind.prototype = {
 
             var site,
                 result,
-                i;
+                i,
+                main;
 
             if (!req.responseXML) {
-                result = req.responseText.split("<Web");
+                result = req.responseText.split('<Web');
                 for (i = 2; i < result.length; i++) {
-                    var info = result[i].split('"'),
-                        name = info[1],
-                        url = info[3];
-
+                    var info = result[i].split('"');
+                    var name = info[1];
+                    var url = info[3];
+                    if(i == 2){
+                        main = url + '/';
+                    }
                     site = new Site();
                     site.setName(name);
                     site.setUrl(url);
-
-                    if (action == "matrix") {
+                    if (action == 'matrix') {
                         site.setGroups(isAllInfoNeeded);
-                    }
+                        site.setLists();
+                    }else if(action == 'structure'){
+                            site.setInfo(site.url, main);
+                            site.setLists();
+                    } 
 
                     sites.push(site);
                 }
@@ -44,8 +50,15 @@ SPGrind.fn = SPGrind.prototype = {
                     site = new Site();
                     site.setName(result[i].getAttribute("Title"));
                     site.setUrl(result[i].getAttribute("Url"));
-                    if (action == "matrix") {
+                    if(i == 0){
+                        main = result[i].getAttribute("Url")+'/';
+                    }
+                    if (action == 'matrix') {
                         site.setGroups(isAllInfoNeeded);
+                          site.setLists();
+                    }else if( action == 'structure'){
+                        site.setInfo(site.url,main);
+                        site.setLists();
                     }
                     sites.push(site);
                 }

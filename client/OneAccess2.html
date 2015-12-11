@@ -14,8 +14,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" />
-
+   <!-- <link href="https://rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" /> -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
 <mso:TRIM msdt:dt="string"></mso:TRIM>
@@ -38,6 +38,8 @@
                         <a href="#" class="mass-delete-instr"> Mass Delete </a></li>
                     <li class="z-depth-2 waves-effect hpe-turquoise" >
                         <a href="#" class="matrix-instr"> Permission Matrix </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise" >
+                        <a href="#" class="all-users-instr"> All Users </a></li>
                 </ul>
             </div>
             <div id="instr-container" class="row">
@@ -124,6 +126,16 @@
                         </div>
                     </div>
                 </div>
+                 <div class="row center all-users-instr hidden" hidden>
+                    <div class="row">
+                        <h5 class="hpe-turquoise">All Users</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 center">
+                            This will give you all users on the SharePoint, including the users in pdls.
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer center">
                 <a href="#!" class="modal-action modal-close waves-effect">OK</a>
@@ -159,17 +171,23 @@
                             <li class="z-depth-1 waves-effect waves-hpe-purple" >
                                 <a href="#" ><i class="material-icons" id="show-all-users">&#xE8D3;</i></a></li>
                                  -->
-                            <li class="z-depth-1 waves-effect waves-hpe-turquoise">
-                                <a href="#"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/access.png" class="material-icons image" id="show-access" /></a>
+                            <li class="z-depth-1 waves-effect waves-hpe-turquoise hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Access Management"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/access.png" class="material-icons image" id="show-access" /></a>
                             </li>
-                            <li class="z-depth-1 waves-effect waves-hpe-orange">
-                                <a href="#"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/trash.png" class="material-icons image" id="show-mass-delete" /></a>
+                            <li class="z-depth-1 waves-effect waves-hpe-orange hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Mass Delete"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/trash.png" class="material-icons image" id="show-mass-delete" /></a>
                             </li>
-                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
-                                <a href="#"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/matrix.png" class="material-icons image" id="show-matrix" /></a>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down" >
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Permission Matrix"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/matrix.png" class="material-icons image" id="show-matrix" /></a>
                             </li>
-                            <li class="z-depth-1 waves-effect waves-hpe-purple" >
-                                <a href="#"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/users.png" class="material-icons image" id="show-all-users" /></a>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="All Users"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/users.png" class="material-icons image"  id="show-all-users" /></a>
+                            </li>
+                             <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="SP Structure"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/distribution.png" class="material-icons image"  id="show-structure" /></a>
+                            </li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Empty Folders"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/empty_folders.png" class="material-icons image"  id="show-empty-folders" /></a>
                             </li>
                         </ul>
                     </div>
@@ -187,7 +205,7 @@
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">&#xE0BE;</i>
                                 <input id="user_email" type="text" class="validate">
-                                <label for="user_email">User Email</label>
+                                <label for="user_email">User Email/Login</label>
                             </div>
                         </div>
                     </form>
@@ -213,16 +231,25 @@
                     <span class="col s5"><input id="file-object" type="file" value="Open an Excel file" /></span>
                 </div>
                 <div class = "row">
-                    <h3 class="col s5"><a><i id="delete-users" class=" waves-effect hpe-turquoise">Delete Users</i></a></h3> <!--<button id="delete-users" >Delete Users</button>-->
+                    <div id="delete-button" class="center" hidden>
+                        <h3 class="col s5"><a><i id="delete-users" class=" waves-effect hpe-turquoise">
+                            <span class="text-style">Delete Users</span>
+                        </i></a></h3> <!--<button id="delete-users" >Delete Users</button>-->
+                    </div>
+                   <div id="identifying-users" class="center" hidden>
+                         <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                         <h4 class="hpe-turquoise text-style ">Please wait for the users to be identified!</h4>
+                         <!--<a><i class="waves-effect hpe-turquoise" id="cancel-matrix">Cancel request</i></a>-->
+                    </div>
                 </div>
                 <div class="row">
                     <div id='valid' class="col s5" style="border: 0.5em solid rgb(42, 210, 201);">
-                        <h4 style="text-align:center;">Valid Users</h4>
+                        <h4 class="text-style" style="text-align:center;">VALID USERS</h4>
                         <ol id='valid-list' style="list-style: none;">
                         </ol>
                     </div>
                     <div id='invalid' class="col s5 offset-s2"  style="border: 0.5em solid rgb(198, 201, 202);">
-                        <h4 style="text-align:center;">Invalid Users</h4>
+                        <h4 class="text-style" style="text-align:center;">INVALID USERS</h4>
                         <ol id='invalid-list' style="list-style: none;">
                         </ol>
                     </div>
@@ -234,35 +261,73 @@
             <!--permission matrix-->
             <div class="show-matrix" id="matrix-section" style="text-align:center" hidden>
                 <div class="row hpe-turquoise">
-                    <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="generate-matrix"><br/>Generate Matrix</i></a>
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-matrix"><br/>
+                        <span class="text-style">GENERATE MATRIX</span>
+                    </i></a>
                     <div id="generating-matrix" class="" hidden>
-                         <i class="fa fa-spinner fa-pulse fa-5x hpe-turquoise"></i>
-                         <h4>Please wait for your matrix to be generated!</h4>
-                         <a><i class="waves-effect hpe-turquoise" id="cancel-matrix">Cancel request</i></a>
+                         <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                         <h4 class="text-style">Please wait for your matrix to be generated!</h4>
+                         <a><i class="waves-effect hpe-turquoise text-style" id="cancel-matrix">Cancel request</i></a>
                     </div>
-                    <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-matrix" style="display: none"><br/>Done!</i></a>
+                    <a><i class="fa fa-check-square fa-3x waves-effect hpe-turquoise" id="ready-matrix" style="display: none"><br/>
+                        <span class="text-style">Matrix is ready!</span>
+                    </i></a>
                 </div>
             </div>
             <!-- get all users -->
             <div class="show-all-users" id="all-users-section" hidden>
                 <div class="row center">
-                    <a><i class="fa fa-download waves-effect fa-5x hpe-turquoise" id="get-all-users"><br/>Get All Users</i></a>
-                    <a><i class="fa fa-check-square fa-5x waves-effect hpe-turquoise" id="ready-users" style="display: none"><br/>Done!</i></a>
-                </di>
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="get-all-users"><br/>
+                        <span class="text-style">GET ALL USERS</span>
+                    </i></a>
+                    <a><i class="fa fa-check-square fa-4x waves-effect hpe-turquoise" id="ready-users" style="display: none"><br/>
+                        <span class="text-style">Done!</span>
+                    </i></a>
+                </div>
             </div>
-
+            <!-- draw structure -->
+             <div class="show-structure" id="structure-section" hidden>
+                <div class="row center hpe-turquoise">
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-structure"><br/>
+                        <span class="text-style">DRAW STRUCTURE</span>
+                    </i></a>
+                    <div id="generating-structure" class="" hidden>
+                        <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                        <h4 class="text-style">Please wait!</h4>
+                        <a><i class="waves-effect hpe-turquoise" id="cancel-structure">Cancel request</i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- get empty folders -->
+            <div class="show-empty-folders center" id="empty-folders-section" hidden>
+                <div class="row center hpe-turquoise">
+                     <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-empty-folders"><br/>
+                        <span class="text-style">GET EMPTY FOLDERS</span>
+                    </i></a>
+                 <div id="generating-empty-folders" class="" hidden>
+                         <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                         <h4 class="text-style">Please wait!</h4>
+                         <a><i class="waves-effect hpe-turquoise text-style" id="cancel-empty-folders">Cancel request</i></a>
+                    </div>
+                </div>
+                <a><i class="fa fa-check-square fa-4x waves-effect hpe-turquoise" id="ready-empty-folders" style="display: none"><br/>
+                    <span class="text-style">Empty Folders are ready!</span>
+                </i></a>
+            </div>
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/sheetjs.all.min.js"></script>
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/excelplus-2.2.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.8/js/models.js"></script> 
-      <!--  <script type="text/javascript" src="js/models.js"></script> -->
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.8/js/spgrind.js"></script>
+      <!--  <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.9/js/models.js"></script> -->
+       <script type="text/javascript" src="js/models.js"></script> 
+       <!-- <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.8/js/spgrind.js"></script> -->
+        <script type="text/javascript" src="js/spgrind.js"></script> 
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/ractive.js"></script>
-         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.8/js/main.js"></script> 
-       <!--<script type="text/javascript" src="js/main.js"></script> -->
+       <!-- <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.1.1/js/main.js"></script>  -->
+      <script type="text/javascript" src="js/main.js"></script> 
+      <script type="text/javascript" src="js/gojs.js"></script> 
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/materialize.min.js"></script>
        <!-- <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/production/libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script> -->
         <script id="site-template" type="text/ractive">

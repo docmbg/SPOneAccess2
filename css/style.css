@@ -9,6 +9,10 @@ nav {
 nav .input-field label i {
     color: #fff;
 }
+.text-style{
+    font-family: Arial !important;
+    font-weight: bold;
+}
 
 .image{
     width: 1em;
@@ -184,4 +188,18 @@ nav .input-field label i {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+/* Visio styles*/
+#controls{
+    background-color: rgb(42, 210, 201);
+    padding: 1em;
+    text-align: center;
+    font-weight: bold;
+}
+#controls > span{
+    margin: 1em;
+}
+#myDiagramDiv0{
+    top: 40%;
 }
