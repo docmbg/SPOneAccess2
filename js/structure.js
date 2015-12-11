@@ -10,6 +10,8 @@ subSites = JSON.parse(window.localStorage.Info);
     option.attr({'value': url}).text(url);
     $('#filter').append(option);
   }
+
+
 $('#draw').on('click',function(){
         //subSites = JSON.parse(window.localStorage.Info);
         var filteredSites = filterData(subSites,$('#filter').val());
@@ -19,7 +21,8 @@ $('#draw').on('click',function(){
         var div = document.getElementById(diagramDiv);
         div.style.display = 'block';
         $('#draw').hide();
-      })
+      });
+
 function openWindow( url )
 {
   window.open(url, '_blank');

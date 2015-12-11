@@ -330,7 +330,7 @@ var List = (function(){
                         url = urlName.split('#')[1];
                         if(_this.subUrl.indexOf('/external/') > -1){
                             var newString = '/external/';
-                            var newUrl = url1.split('/');
+                            var newUrl = urlName.split('/');
                             for(var j = 1; j < newUrl.length; j++){
                                 newString += newUrl[j] + '/';
                             }

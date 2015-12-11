@@ -1,5 +1,5 @@
-importScripts("models.js");
-importScripts("spgrind.js");
+importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/models.js");
+importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/spgrind.js");
 
  self.onmessage = function(e) {
        console.log('Generating empty folders worker');
