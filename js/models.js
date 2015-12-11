@@ -145,9 +145,12 @@ var Site = (function() {
                 var text = req.responseText.split('<_sList');
                 for(var i = 1; i < text.length; i++){
                     var name = text[i].match('Title>(.*)</T')[1];
-                    //var url = _this.url + '/' + name;
-                    var url = _this.url.split('.com')[0] + '.com' + text[i].match('DefaultViewUrl>(.*)</D')[1];
-                    //url = url.replace('/Forms/AllItems.aspx','');
+                    var url = 'no url found';
+                    if(!!text[i].match('DefaultViewUrl>(.*)</D')){
+                        url = _this.url.split('.com')[0] + '.com' + text[i].match('DefaultViewUrl>(.*)</D')[1];
+                    } else{
+                        console.log(text[i]);
+                    }
                     var isRestricted = text[i].match('Security>(.*)</Inh')[1]; // returns true if the list has same permissions as the subsite
                     switch(isRestricted){
                         case 'true': isRestricted = false;
