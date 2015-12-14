@@ -290,9 +290,11 @@ var restrictedLists = [];
 var usersInGroup = [];
 var worker;
 var allUsers = [];
+var pdls = [];
 var emptyFolders = [];
 var libraryName = location.pathname.split('/');
 libraryName = libraryName[libraryName.length - 2];
+
 
 $('#matrix-section').on('click', function(e){
     if (e.target.id == 'generate-matrix' || $(e.target).parent()[0].id == 'generate-matrix'){
@@ -383,6 +385,7 @@ $('#all-users-section').on('click', function(e){
         getAllUsers();
         $('#ready-users').show();
         generateAllUsersExcel();
+       
     } else if(e.target.id == 'ready-users' || $(e.target).parent()[0].id == 'ready-users'){
         $('#ready-users').hide();
         $('#get-all-users').show();
@@ -525,42 +528,81 @@ $('#instr-nav').on('click', function(e){
 });
 function getAllUsers(){
     allUsers = [];
+    pdls = [];
+    // $().SPServices({       returns all users, including users in pdls
+    //     async: false,
+    //     operation: 'GetUserCollectionFromSite',
+    //     completefunc: function(xData, Status){
+    //         $(xData.responseXML).find('User').each(function(){
+    //             var user = new User();
+    //             user.setEmail($(this).attr('Email'));
+    //             user.setName($(this).attr('Name'));
+    //             user.setLogin($(this).attr('LoginName')); 
+    //             allUsers.push(user)});
+    //      }
+    // });
+
     $().SPServices({
         async: false,
-        operation: 'GetUserCollectionFromSite',
+        operation: 'GetListItems',
+        listName: 'User Information List',
         completefunc: function(xData, Status){
-            $(xData.responseXML).find('User').each(function(){
+            $(xData.responseXML).find('row').each(function(){
                 var user = new User();
-                user.setEmail($(this).attr('Email'));
-                user.setName($(this).attr('Name'));
-                user.setLogin($(this).attr('LoginName')); 
-                allUsers.push(user)});
+                user.setEmail($(this).attr('ows_EMail'));
+                user.setName($(this).attr('ows_Title'));
+                user.setLogin($(this).attr('ows_Name'));
+                if(user.getName().indexOf(',') > -1){
+                    allUsers.push(user)
+                }else{
+                    pdls.push(user)
+                }
+            });
          }
-    })
+    });
 };
 
 function generateAllUsersExcel(){
     var epUsers = new ExcelPlus();
-    epUsers.createFile('All Users');
-
+    //epUsers.createFile('All Users');
+    epUsers.createFile('Users');
+    epUsers.createSheet('PDLs');
     for (var i = 0; i < allUsers.length; i++){
         epUsers.write({
-            'sheet' : 'All Users',
+            'sheet' : 'Users',
             'cell' :  'A' + (i + 1),
             'content' : allUsers[i].getEmail() || '--- NO EMAIL ---'
         });
         epUsers.write({
-            'sheet' : 'All Users',
+            'sheet' : 'Users',
             'cell' :  'B' + (i + 1),
             'content' : allUsers[i].getName()
         }); 
         epUsers.write({
-            'sheet' : 'All Users',
+            'sheet' : 'Users',
             'cell' :  'C' + (i + 1),
             'content' : allUsers[i].getLogin()
         });  
     }   
 
+   
+    for(var i = 0; i < pdls.length; i++){
+        epUsers.write({
+            'sheet' : 'PDLs',
+            'cell' :  'A' + (i + 1),
+            'content' : pdls[i].getEmail() || '--- NO EMAIL ---'
+        });
+         epUsers.write({
+            'sheet' : 'PDLs',
+            'cell' :  'B' + (i + 1),
+            'content' : pdls[i].getName()
+        }); 
+        epUsers.write({
+            'sheet' : 'PDLs',
+            'cell' :  'C' + (i + 1),
+            'content' : pdls[i].getLogin()
+        });  
+    }
     var name = _CTX.split('/');
     name = name[name.length - 1] + ' - All users';
     epUsers.saveAs(name);

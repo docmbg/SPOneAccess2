@@ -148,8 +148,6 @@ var Site = (function() {
                     var url = 'no url found';
                     if(!!text[i].match('DefaultViewUrl>(.*)</D')){
                         url = _this.url.split('.com')[0] + '.com' + text[i].match('DefaultViewUrl>(.*)</D')[1];
-                    } else{
-                        console.log(text[i]);
                     }
                     var isRestricted = text[i].match('Security>(.*)</Inh')[1]; // returns true if the list has same permissions as the subsite
                     switch(isRestricted){
@@ -300,9 +298,6 @@ var List = (function(){
                 // }
                 var i;
                 for(i = 0; i < text.length; i++){
-                    // if(_this.name == '4. PPMC Administration'){
-                    //       console.log(i);
-                    // } 
                     var objType = textConvert('ows_FSObjType="',text[i]).split('#')[1]; //"FSObjType" is 0 for a file and 1 for a folder
                     if(objType == 0){
                         var url = 'none',
@@ -375,16 +370,6 @@ var List = (function(){
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/GetListItems");
         req.setRequestHeader("Content-Type", "text/xml", "charset=utf-8");
         req.send(msg);
-
-        function textConvert(word, string){
-            var start = string.indexOf(word)+word.length;
-            var end = start;
-            for(end; end < string.length; end++){
-                if(string[end] == '"'){ // if(string[end] == '"'){
-                    return string.substring(start,end);
-                }
-            }
-        };
     };
     List.prototype.setEmptyFolders = function(){
         this.emptyFolders = [];
@@ -926,12 +911,20 @@ var entityMap = {
     "'": '&#39;',
     "/": '&#x2F;'
 };
-
 function escapeHtml(string) {
     return String(string).replace(/[&<>"'\/]/g, function(s) {
         return entityMap[s];
     });
-}
+};
+function textConvert(word, string){
+    var start = string.indexOf(word)+word.length;
+    var end = start;
+    for(end; end < string.length; end++){
+        if(string[end] == '"'){ // if(string[end] == '"'){
+            return string.substring(start,end);
+        }
+    }
+};
 
 // var sites = {
 //     "site": []

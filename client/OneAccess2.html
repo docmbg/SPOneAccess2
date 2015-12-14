@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'> -->
-    <title>HP OneAccess 2</title>
+    <title>HPE OneAccess 2</title>
     <!-- Compiled and minified CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
@@ -40,6 +40,10 @@
                         <a href="#" class="matrix-instr"> Permission Matrix </a></li>
                     <li class="z-depth-2 waves-effect hpe-turquoise" >
                         <a href="#" class="all-users-instr"> All Users </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise" >
+                        <a href="#" class="structure-instr"> Structure </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise" >
+                        <a href="#" class="empty-folders-instr"> Empty Folders </a></li>
                 </ul>
             </div>
             <div id="instr-container" class="row">
@@ -93,7 +97,7 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            1. Create an Excel file containing the emails of the users that need to be removed from the SharePoint. Rename the sheet to 'MassDelete'. Upload the file (ONLY ONE upload is allowed per session, so if you need to upload new file -> refresh the page). 
+                            1. Create an excel file containing the emails of the users that need to be removed from the SharePoint. Rename the sheet to 'MassDelete' and upload the file. Please note that ONLY ONE upload is allowed per session, so if you need to upload new file just refresh the page. 
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/del1.png" />
@@ -101,7 +105,7 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            2. Emails that are recognized as valid will appear on the left, the rest in the right box. Use 'remove from list' to remove users that you do NOT want to delete. For invalid emails will be considered inactive, wrong or missing(empty line) emails. 
+                            2. Emails that are recognized as valid will appear on the left, the rest in the right box. Use 'remove from list' to remove users that you do NOT wish to delete. For invalid emails will be considered inactive, wrong or missing(empty line) emails. 
                         </div>
                          <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/del2.png" />
@@ -122,7 +126,7 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l12 center">
-                            Should take around 10min for the biggest sites and will automatically download on your PC. If it goes for more than 15min, contact the technical team. Note that permissions and users WILL NOT be taken from groups containing 'spacial' symbols, for example 'GSD San Jos<span style="background:rgb(255, 141, 109)">é</span> Owners'. Rename the group to escape this issue.
+                            Should take around 10 min for the biggest sites and will automatically download an excel file on your PC. If it goes for more than 20 min, contact the technical team. Note that permissions and users WILL NOT be taken from groups containing 'spacial' symbols, for example 'GSD San Jos<span style="background:rgb(255, 141, 109)">é</span> Owners'. Rename the group to escape this issue.
                         </div>
                     </div>
                 </div>
@@ -132,7 +136,40 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l12 center">
-                            This will give you all users on the SharePoint, including the users in pdls.
+                            1. This will generate & download an excel file with two sheets - 'Users' & 'PDLs'. 'Users' will NOT contain the users that are in the PDLs on the SharePoint. Please double check the 'Users' list for PDLs! It should not take more than 10 seconds.
+                        </div>
+                    </div>
+                </div>
+                 <div class="row center structure-instr hidden" hidden>
+                    <div class="row">
+                        <h5 class="hpe-turquoise">Structure</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l6 center">
+                            1. USE Chrome!!! Click 'Draw Structure' and a new window should open within 10-20 seconds. If the window does not appear, check the upper right corner of your browser for a popup blocker. If there is, click it, select 'Allow...' and click the url.
+                        </div>
+                        <div class="col s12 m12 l6 center">
+                            <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.2.3/pics/strucure1.png" />
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col s12 m12 l12 center">
+                            2. Click the 'Draw' button to get the structure with the default properties. Hold 'Ctrl' and sctoll with the mouse to zoom in/out. Click on the text inside a box and it will become dragable. Double click on the text and you will be able to make changes. Click on the border of a box and you will have the option to create new connections between the boxes. Use 'Ctrl' + 'Z' for undo.
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col s12 m12 l12 center">
+                            3. To donwload the structure simply click 'Get PNG'. In the new tab click on the image with the right button and select 'Save image as...'
+                        </div>
+                    </div>
+                </div>
+                 <div class="row center empty-folders-instr hidden" hidden>
+                    <div class="row">
+                        <h5 class="hpe-turquoise">Empty Folders</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 center">
+                            1. This will generate and download you an excel file containing all the empty folders on the SharePoint.
                         </div>
                     </div>
                 </div>
@@ -155,7 +192,7 @@
                                 </a>
                             </div>
                         </h1>
-                        <h5 class="center logo-subtext">User Access Management</h5>
+                        <h5 class="center logo-subtext" style="font-weight: bold;">HPE DOCM</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -325,12 +362,12 @@
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/ractive.js"></script>
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/main.js"></script> 
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/materialize.min.js"></script>
-
-
-        <!--   <script type="text/javascript" src="models.js"></script> 
+      
+        <!--  
+        <script type="text/javascript" src="js/main.js"></script> 
+        <script type="text/javascript" src="models.js"></script> 
         <script type="text/javascript" src="js/spgrind.js"></script> 
-        <script type="text/javascript" src="js/main.js"></script> -->
-        
+         -->
        <!-- <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/production/libraries/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script> -->
         <script id="site-template" type="text/ractive">
             {{#each site}}
