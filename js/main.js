@@ -587,25 +587,32 @@ function generateAllUsersExcel(){
         });  
     }   
 
+    var rowPDLs = 0;
+    var rowExtrenal = 0;
+    var row;
     for(var i = 0; i < pdls.length; i++){
         if (pdls[i].login.indexOf('EXTRANET') > -1){
             epUsers.selectSheet('External');
+            rowExtrenal++;
+            row = rowExtrenal;
         }else{
             epUsers.selectSheet('PDLs');
+            rowPDLs++;
+            row = rowPDLs;
         }
         epUsers.write({
            // 'sheet' : 'PDLs',
-            'cell' :  'A' + (i + 1),
+            'cell' :  'A' + row,
             'content' : pdls[i].getEmail() || '--- NO EMAIL ---'
         });
          epUsers.write({
            // 'sheet' : 'PDLs',
-            'cell' :  'B' + (i + 1),
+            'cell' :  'B' + row,
             'content' : pdls[i].getName()
         }); 
         epUsers.write({
             //'sheet' : 'PDLs',
-            'cell' :  'C' + (i + 1),
+            'cell' :  'C' + row,
             'content' : pdls[i].getLogin()
         });  
     }
