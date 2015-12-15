@@ -564,9 +564,11 @@ function getAllUsers(){
 
 function generateAllUsersExcel(){
     var epUsers = new ExcelPlus();
-    //epUsers.createFile('All Users');
     epUsers.createFile('Users');
     epUsers.createSheet('PDLs');
+    if (_CTX.indexOf('external') > -1 ){
+        epUsers.createSheet('External');
+    }
     for (var i = 0; i < allUsers.length; i++){
         epUsers.write({
             'sheet' : 'Users',
@@ -585,20 +587,24 @@ function generateAllUsersExcel(){
         });  
     }   
 
-   
     for(var i = 0; i < pdls.length; i++){
+        if (pdls[i].login.indexOf('EXTRANET') > -1){
+            epUsers.selectSheet('External');
+        }else{
+            epUsers.selectSheet('PDLs');
+        }
         epUsers.write({
-            'sheet' : 'PDLs',
+           // 'sheet' : 'PDLs',
             'cell' :  'A' + (i + 1),
             'content' : pdls[i].getEmail() || '--- NO EMAIL ---'
         });
          epUsers.write({
-            'sheet' : 'PDLs',
+           // 'sheet' : 'PDLs',
             'cell' :  'B' + (i + 1),
             'content' : pdls[i].getName()
         }); 
         epUsers.write({
-            'sheet' : 'PDLs',
+            //'sheet' : 'PDLs',
             'cell' :  'C' + (i + 1),
             'content' : pdls[i].getLogin()
         });  
@@ -608,33 +614,6 @@ function generateAllUsersExcel(){
     epUsers.saveAs(name);
    
 };
-
-
-
-
-    // $('#central-nav').on('click', function(e){
-    //     if (e.target.id == 'show-matrix'){
-    //         $('#access-section').hide();
-    //        // $('#action-btn-contaier').hide();
-    //         $('#massDelete-section').hide();
-    //         $('#matrix-section').show();
-    //     } else if(e.target.id == 'show-access'){
-    //         $('#matrix-section').hide();
-    //         $('#massDelete-section').hide();
-    //         $('#access-section').show();
-    //        // $('#action-btn-contaier').show();
-    //     } else if (e.target.id == 'show-massDelete'){
-    //         $('#access-section').hide();
-    //         $('#matrix-section').hide();
-    //         $('#massDelete-section').show();
-    //     }
-    // });
-
-
-     // $('#instr-nav').on('click', function(e){
-     //        $('#instr-container').children().hide();
-     //        $($('.' + e.target.className)).show();
-     //    });
 
 $('#central-nav').on('click', function(e){
     if (e.target.id){
