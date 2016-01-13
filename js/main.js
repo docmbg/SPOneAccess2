@@ -102,7 +102,6 @@ function compareUser(obj, user, template) {
 
     template.update();
     
-
     function hasGroup(group) {
         return user.groups.some(function(v) {
             return v.name == group;
@@ -261,22 +260,60 @@ function generateMatrixExcel(sites, groups, lists){
             })
         } 
     };
-    ep.write({'sheet': 'Restricted Lists', 'cell': 'A1', 'content': 'List Name'});
-    ep.write({'sheet': 'Restricted Lists', 'cell': 'B1', 'content': 'URL'});
-    for(var i = 0; i < lists.length; i++){
-        //var name = lists[i].name;
-        //var url = lists[i].url;
+    for(var i = 0; i < restrictedLists.length; i++){
+        var cellNumber = convertNumber(i);
+        //cellNumber += 1;
         ep.write({
-            'sheet' : 'Restricted Lists',
-            'cell' : 'A' + (i + 2),
-            'content' : lists[i].name
-        });
-        ep.write({
-            'sheet' : 'Restricted Lists',
-            'cell' : 'B' + (i + 2),
-            'content' : lists[i].url
-        });
-    };
+            'sheet': 'Restricted Lists',
+            'cell' : cellNumber + 1,
+            'content' : restrictedLists[i].name
+        })
+         ep.write({
+            'sheet': 'Restricted Lists',
+            'cell' : cellNumber + 2,
+            'content' : restrictedLists[i].url
+        })
+        for(var j = 0; j < restrictedLists[i].groups.length; j++){
+            var cellN = cellNumber + (j + 3);
+            var groupPermission;
+            switch(restrictedLists[i].groups[j].mask){
+                case '138612833': groupPermission = 'Read'; 
+                    break;
+                case '1011028719': groupPermission = 'Contribute'; 
+                    break;
+                case '2082937855': groupPermission = 'Owners Full Control';
+                    break;
+                case '2134318079': groupPermission = 'Owners Full Control';
+                    break;
+                case '-1': groupPermission = 'Owner';
+                    break;
+                default: groupPermission = restrictedLists[i].groups[j].mask;
+                    break;
+            }
+            ep.write({
+                'sheet': 'Restricted Lists',
+                'cell' : cellN,
+                'content' : restrictedLists[i].groups[j].name + ' - ' + groupPermission
+            })
+        }
+    }
+
+    // ep.write({'sheet': 'Restricted Lists', 'cell': 'A1', 'content': 'List Name'});
+    // ep.write({'sheet': 'Restricted Lists', 'cell': 'B1', 'content': 'URL'});
+    // for(var i = 0; i < lists.length; i++){
+    //     //var name = lists[i].name;
+    //     //var url = lists[i].url;
+    //     ep.write({
+    //         'sheet' : 'Restricted Lists',
+    //         'cell' : 'A' + (i + 2),
+    //         'content' : lists[i].name
+    //     });
+    //     ep.write({
+    //         'sheet' : 'Restricted Lists',
+    //         'cell' : 'B' + (i + 2),
+    //         'content' : lists[i].url
+    //     });
+    // };
     var name = _CTX.split('/');
     name = name[name.length - 1] + ' - Permission Matrix';
     ep.saveAs(name);
@@ -462,7 +499,6 @@ function iterateUsers() {
                 "<li class='row'><span class='col s6'>"+ invalidUsers[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
             invalidUsersCounter++;
     }
-    
 
     $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
     $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);

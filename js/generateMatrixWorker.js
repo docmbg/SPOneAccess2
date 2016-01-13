@@ -1,4 +1,4 @@
-importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.2/js/models.js");
+importScripts("models.js");
 importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/spgrind.js");
 
 
@@ -39,10 +39,9 @@ importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/spgrind.js");
 
             for(var l = 0; l < result[i].lists.length; l++){
                 if(result[i].lists[l].getIsRestricted()){
+                    result[i].lists[l].setGroups();
                     lists.push(result[i].lists[l])
                 }
-                
-               
             }
         }
         for (var i = 0; i < groups.length; i++){

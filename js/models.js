@@ -7,19 +7,15 @@ var Site = (function() {
     Site.prototype.setName = function(name) {
         this.name = name;
     };
-
     Site.prototype.getName = function() {
         return this.name;
     };
-
     Site.prototype.setUrl = function(url) {
         this.url = url;
     };
-
     Site.prototype.getUrl = function() {
         return this.url;
     };
-
     Site.prototype.setGroups = function(isAllInfoNeeded) {
         this.groups = [];
         var _this = this;
@@ -72,11 +68,9 @@ var Site = (function() {
         req.setRequestHeader("Content-Type", "text/xml;", "charset=utf-8");
         req.send(msg);
     };
-
     Site.prototype.getGroups = function() {
         return this.groups;
     };
-
     Site.prototype.setInfo = function(url, main){
         this.parents = [];
         this.parentsURL = [];
@@ -124,11 +118,6 @@ var Site = (function() {
             this.head = header;
         }
     };
-    
-    // Site.prototype.getParents = function() {
-    //     return this.parents;
-    // };
-
     Site.prototype.setLists = function(){
         this.lists = [];
         var _this = this;
@@ -171,7 +160,6 @@ var Site = (function() {
         req.setRequestHeader("Content-Type", "text/xml", "charset=utf-8");
         req.send(msg);
     };
-
     Site.prototype.getLists = function(){
         return this.lists;
     }
@@ -180,100 +168,27 @@ var Site = (function() {
 }());
 
 var List = (function(){
+
     function List(){};
     
     List.prototype.setSubUrl = function(subUrl){
         this.subUrl = subUrl;
     };
-
     List.prototype.getSubUrl = function(){
         return this.subUrl;
     };
-
     List.prototype.setUrl = function(url){
         this.url = url;
     };
-
     List.prototype.getUrl = function(){
         return this.url;
     };
-
     List.prototype.setName = function(name){
         this.name = name;
     };
-
     List.prototype.getName = function(){
         return this.name;
     };
-
-    // List.prototype.setFiles = function(){
-    //     this.files = [];
-    //     var _this = this;
-
-    // //root folder url
-    //     // var currentFolderPath;
-    //     $().SPServices({
-    //         operation: "GetList",
-    //         async: false,
-    //         listName: 'Unsorted',
-    //         completefunc: function(xData, Status) {
-    //             $(xData.responseXML).find("List").each(function() {
-    //                 currentFolderPath = $(this).attr("RootFolder");
-    //             });
-    //         }
-    //     });
-    //  //get files from list
-    //     //var queryOptions = '<QueryOptions><Folder><![CDATA[' + currentFolderPath.substring(1) + ']]></Folder></QueryOptions>';
-    //     var queryOptions = '<QueryOptions><Folder><![CDATA[]]></Folder></QueryOptions>';
-    //     var query = "<Query><Where><Eq><FieldRef Name='FSObjType'></FieldRef><Value Type='Lookup'>0</Value></Eq></Where></Query>";
-    //     var viewFields = "<ViewFields Properties='true'><FieldRef Name='Level' /></ViewFields>";
-    //     var promFolders = [];
-    //     promFolders[0] = $().SPServices({
-    //         operation: "GetListItems",
-    //         listName: _this.name,
-    //         CAMLQuery: query,
-    //         CAMLQueryOptions: queryOptions,
-    //         CAMLViewFields: viewFields,
-    //         completefunc: function(xData, Status){
-    //             $(xData.responseXML).find('z:row').each(function(){
-    //                 var file = new File();
-    //                 file.setName($(this).attr('FileLeafRef').split('#')[1]);
-    //                 file.setID($(this).attr('ID'));
-    //                 _this.files.push(file);
-    //             });
-    //         }
-    //     });
-            
-             //get folders from list
-        // var query = "<Query><Where><Eq><FieldRef Name='FSObjType'></FieldRef><Value Type='Lookup'>1</Value></Eq></Where></Query>";
-        // var queryOptions = '<QueryOptions><Folder><![CDATA[]]></Folder></QueryOptions>';
-        // var viewFields = "<ViewFields Properties='true'><FieldRef Name='Level' /></ViewFields>";
-        // var promFolders = [];
-
-        //   $().SPServices({
-        //     async: false,
-        //     operation: "GetListItems",
-        //     listName: _this.name,
-        //     CAMLQuery: query,
-        //     CAMLQueryOptions: queryOptions,
-        //     CAMLViewFields: viewFields,
-        //     completefunc: function(xData, Status){
-        //         console.log(Status + '  |  ' + _this.url);
-        //         var response = (xData.responseText).split('z:row');
-        //         for(var i = 1; i < response.length; i++){
-        //             var name = response[i].match("FileLeafRef='(.*)' ows_PermMask")[1];
-        //             name = name.split('#')[1];
-        //             var url = response[i].match("ID='(.*)' ows_U")[1];
-        //             var folder = new Folder();
-        //             folder.setName(name);
-        //             folder.setID(url);
-        //             _this.folders.push(folder);
-        //         }
-        //     }
-        // });      
-
-
-    // };
     List.prototype.setItems = function(){
         this.folders = [];
         this.files = [];
@@ -408,59 +323,48 @@ var List = (function(){
     List.prototype.getPermissions = function(){
         return this.permissions;
     };
-
     List.prototype.setGroups = function(){
         this.groups = [];
+        var type = 'list';
         var _this = this;
         var SOAPEnvelope = {};
-        SOAPEnvelope.header = "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body>";
-        SOAPEnvelope.opheader = "<GetGroupCollectionFromSite xmlns='http://schemas.microsoft.com/sharepoint/soap/directory/'>";
-        SOAPEnvelope.payload = "";
-        SOAPEnvelope.opfooter = "</GetGroupCollectionFromSite>";
-        SOAPEnvelope.footer = "</soap:Body></soap:Envelope>";
+        SOAPEnvelope.header = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body>';
+        SOAPEnvelope.opheader = '<GetPermissionCollection xmlns="http://schemas.microsoft.com/sharepoint/soap/directory/">';
+        SOAPEnvelope.payload = '<objectName>' + this.name + '</objectName><objectType>' + type + '</objectType>';
+        SOAPEnvelope.opfooter = '</GetPermissionCollection>';
+        SOAPEnvelope.footer = '</soap:Body></soap:Envelope>';
         var msg = SOAPEnvelope.header + SOAPEnvelope.opheader + SOAPEnvelope.payload + SOAPEnvelope.opfooter + SOAPEnvelope.footer;
-        //msg = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><GetGroupCollectionFromWeb xmlns="http://schemas.microsoft.com/sharepoint/soap/directory/" /></soap:Body></soap:Envelope>';
         var req = new XMLHttpRequest();
         req.onreadystatechange = function() {
-            var result,
-                group,
-                i;
-            console.log(req)
             if (req.status == 200 && req.readyState == 4) {
-                if (!req.responseXML) {
-                    result = req.responseText.split("<Group");
-                    for (i = 2; i < result.length; i++) {
-                        var name = result[i].match('Name="(.*)Description');
-                        name = name[1].substring(0, name[1].length - 2);
-                        group = new Group();
+                if(!req.responseXML){
+                    var text = req.responseText.split('<Permission');
+                    for(var i = 2; i < text.length; i++){
+                        var group = new Group();
+                        var name;
+                        if (!!text[i].match('GroupName="(.*)" ')){
+                            name = text[i].match('GroupName="(.*)" ')[1];
+                        }else{
+                            console.log(text[i])
+                        }
+                        var mask = text[i].match('Mask="(.*)" Member')[1].match('(.*)" ')[1];
                         group.setName(name);
-                        group.setUrl(_this.url);
-                        group.setPermissions();
-                        // if (isAllInfoNeeded){
-                        //     group.setPermissions();
-                        //     group.setUsers();
-                        // }
+                        group.setMask(mask);
                         _this.groups.push(group);
                     }
-                } else {
-                    result = req.responseXML.getElementsByTagName("Group");
-                    for (i = 0; i < result.length; i++) {
-                        group = new Group();
-                        group.setName(escapeHtml(result[i].getAttribute("Name")));
-                        group.setUrl(_this.url);
-                        group.setPermissions();
-                        // if (isAllInfoNeeded){
-                        //     group.setPermissions();
-                        //     group.setUsers();
-                        // }
-                        _this.groups.push(group);
-                    }
+                }else{
+                    $(req.responseXML).find('Permission').each(function(){
+                        console.log($(this));
+                        groups.push($(this).attr('GroupName'));
+                    })
                 }
+            }else if(req.readyState == 4){
+                console.log('Problem with setting groups for list ' + _this.name);
             }
-        };
-        req.open("POST", this.url + "/_vti_bin/usergroup.asmx", false);
-        req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetGroupCollectionFromSite");
-        req.setRequestHeader("Content-Type", "text/xml;", "charset=utf-8");
+        }
+        req.open("POST", this.subUrl + "/_vti_bin/Permissions.asmx", false);
+        req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetPermissionCollection");
+        req.setRequestHeader("Content-Type", "text/xml", "charset=utf-8");
         req.send(msg);
     };
     List.prototype.getGroups = function(){
@@ -472,28 +376,24 @@ var List = (function(){
 
 // list item
 var File = (function(){
+
     function File(){};
 
     File.prototype.setName = function(name){
         this.name = name;
     };
-
     File.prototype.getName = function(){
         return this.name;
     };
-
     File.prototype.setUrl = function(url){
         this.url = url;
     };
-
     File.prototype.getUrl = function(){
         return this.url;
     };
-
     File.prototype.setID = function(id){
         this.id = id;
     };
-
     File.prototype.getID = function(){
         return this.id;
     };
@@ -503,40 +403,33 @@ var File = (function(){
 
 // list folder
 var Folder = (function(){
+
     function Folder(){};
 
     Folder.prototype.setListName = function(listName){
         this.listName = listName;
     };
-
     Folder.prototype.getListName = function(){
         return this.listName;
     };
-
     Folder.prototype.setID = function(id){
         this.id = id;
     };
-
     Folder.prototype.getID = function(){
         return this.id;
     };
-
     Folder.prototype.setName = function(name){
         this.name = name;
     };
-
     Folder.prototype.getName = function(){
         return this.name;
     };
-
     Folder.prototype.setUrl = function(url){
         this.url = url;
     };
-
     Folder.prototype.getUrl = function(){
         return this.url;
     };
-
     Folder.prototype.setInfo = function(dateCreated, lastModified, editor, author){
         this.dateCreated = dateCreated;
         this.lastModified = lastModified;
@@ -557,15 +450,12 @@ var Group = (function() {
     Group.prototype.setName = function(name) {
         this.name = name;
     };
-
     Group.prototype.getName = function() {
         return this.name;
     };
-
     Group.prototype.setUrl = function(url) {
         this.url = url;
     };
-
     Group.prototype.getUrl = function() {
         return this.url;
     };
@@ -583,36 +473,48 @@ var Group = (function() {
         req.onreadystatechange = function() {
             var result,
                 i;
-            if (req.status == 200 && req.readyState == 4) {
-                if (!req.responseXML) {
-                    result = req.responseText.split("<Role");
-                    for (i = 2; i < result.length; i++) {
-                        var role = result[i].match('Name="(.*)Description');
-                        role = role[1].substring(0, role[1].length - 2);
-                        _this.permissions.push(role);
+                if (req.status == 200 && req.readyState == 4) {
+                    if (!req.responseXML) {
+                        result = req.responseText.split("<Role");
+                        for (i = 2; i < result.length; i++) {
+                            var role = result[i].match('Name="(.*)Description');
+                            role = role[1].substring(0, role[1].length - 2);
+                            _this.permissions.push(role);
+                        }
+                    } else {
+                        result = req.responseXML.getElementsByTagName("Role");
+                        for (i = 0; i < result.length; i++) {
+                            _this.permissions.push(result[i].getAttribute("Name"));
+                        }
                     }
-                } else {
-                    result = req.responseXML.getElementsByTagName("Role");
-                    for (i = 0; i < result.length; i++) {
-                        _this.permissions.push(result[i].getAttribute("Name"));
-                    }
+                }else if(req.readyState == 4){
+                    console.log('Unable to get permissions for group ' + _this.name);
                 }
-            } 
-            if (req.status == 500) {
-                $('main').append('<div class="container error" style="background: rgb(255, 141, 109);">Ups!!!Something went wrong with group with name <b>'+ _this.name + '</b></div>');
-                console.log('Unable to get permissions for group ' + _this.name);
-            }
+            
+            // if(req.status == 500){
+            //     var div = document.createElement('div');
+            //     div.style.background = 'rgb(255, 141, 109)';
+            //     div.innerHTML = 'Ups!!!Something went wrong with group with name <b>' + _this.name +'</b>';
+            //     div.className = 'container error';
+            //     document.getElementsByTagName('main')[0].appendChild(div);
+            //     //$('main').append('<div class="container error" style="background: rgb(255, 141, 109);">Ups!!!Something went wrong with group with name <b>'+ _this.name + '</b></div>');
+            //     console.log();
+            // }
         };
         req.open("POST", _this.url + "/_vti_bin/usergroup.asmx", false);
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetRoleCollectionFromGroup");
         req.setRequestHeader("Content-Type", "text/xml;", "charset=utf-8");
         req.send(msg);
     };
-
     Group.prototype.getPermissions = function() {
         return this.permissions;
     };
-
+    Group.prototype.setMask = function(mask){
+        this.mask = mask;
+    };
+    Group.prototype.getMask = function(){
+        return this.mask;
+    };
     Group.prototype.setUsers = function() {
         this.users = [];
         var _this = this;
@@ -638,11 +540,10 @@ var Group = (function() {
                         var userName = result[i].match('LoginName="(.*)Email');
                         userName = userName[1].substring(0, userName[1].length - 2);
                         var email = null;
-                        if (!result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)){
-                            console.log(result[i])
-                        }
-                        if (!!result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0]) {
+                        if (!!result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)) {
                             email = result[i].match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
+                        }else{
+                            console.log(result[i])
                         }
                         user.setName(name);
                         user.setLogin(userName);
@@ -666,11 +567,9 @@ var Group = (function() {
         req.setRequestHeader("Content-Type", "text/xml;", "charset=utf-8");
         req.send(msg);
     };
-
     Group.prototype.getUsers = function() {
         return this.users;
     };
-
     Group.prototype.addUser = function(user) {
         var _this = this;
         var SOAPEnvelope = {};
@@ -730,35 +629,27 @@ var User = (function() {
     User.prototype.setName = function(name) {
         this.name = name;
     };
-
     User.prototype.getName = function() {
         return this.name;
     };
-
     User.prototype.setLogin = function(login) {
         this.login = login;
     };
-
     User.prototype.getLogin = function() {
         return this.login;
     };
-
     User.prototype.setEmail = function(email) {
         this.email = email;
     };
-
     User.prototype.getEmail = function() {
         return this.email;
     };
-
     User.prototype.setPicture = function(picture) {
         this.picture = picture;
     };
-
     User.prototype.getPicture = function() {
         return this.picture;
     };
-
     User.prototype.setGroups = function() {
         this.groups = [];
         var _this = this;
@@ -803,7 +694,6 @@ var User = (function() {
                     }
                     console.log("Success!!! User was added to group");
                 }
-
             }
         });
     };
@@ -842,23 +732,6 @@ var User = (function() {
         req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/directory/GetUserLoginFromEmail");
         req.setRequestHeader("Content-Type", "text/xml;", "charset=utf-8");
         req.send(msg);
-        // $().SPServices({
-        //     async: false,
-        //     operation: "GetUserLoginFromEmail",
-        //     emailXml: '<Users><User Email="' + _this.email + '" /></Users>',
-        //     completefunc: function(xData, Status) {
-        //         if (Status == 'error') {
-        //             console.log('Invalid email');
-        //         } else {
-        //             $(xData.responseXML).find('User').each(function() {
-        //                 var login = $(this).attr('Login');
-        //                 //login = login.substring(login.indexOf("|") + 1);
-        //                 _this.setLogin(login);
-        //                 _this.setName($(this).attr('DisplayName'));
-        //             });
-        //         }
-        //     }
-        // });
     };
     User.prototype.setInfoByLogin = function(siteURL){
         var _this = this;
@@ -911,11 +784,13 @@ var entityMap = {
     "'": '&#39;',
     "/": '&#x2F;'
 };
+
 function escapeHtml(string) {
     return String(string).replace(/[&<>"'\/]/g, function(s) {
         return entityMap[s];
     });
 };
+
 function textConvert(word, string){
     var start = string.indexOf(word)+word.length;
     var end = start;
@@ -925,12 +800,3 @@ function textConvert(word, string){
         }
     }
 };
-
-// var sites = {
-//     "site": []
-// };
-
-// sites.site.push(site1, site2);
-
-// console.log(JSON.stringify(sites));
-// console.log(site1.name);
