@@ -102,6 +102,7 @@ function compareUser(obj, user, template) {
 
     template.update();
     
+
     function hasGroup(group) {
         return user.groups.some(function(v) {
             return v.name == group;
@@ -202,27 +203,36 @@ function convertNumber(n) {
     }
     return s;
 };
+function saveWorkbook(workbook, name) {
+    workbook.save({ type: 'blob' }, function (data) {
+        saveAs(data, name);
+    }, function (error) {
+        alert('Error exporting: : ' + error);
+    });
+}
+
 function generateMatrixExcel(sites, groups, lists){
-    var ep = new ExcelPlus();
-    ep.createFile('Permission Matrix');
-    ep.createSheet('Users');
-    ep.createSheet('Restricted Lists');
+    var cell ;
     var cellNumber = '';            
-    for (var i = 0; i < sites.length; i++){
+    var format;
+    var workbook = new $.ig.excel.Workbook($.ig.excel.WorkbookFormat.excel2007);
+    var matrix = workbook.worksheets().add('Permission Matrix');
+    var users = workbook.worksheets().add('Users');
+    var resLists = workbook.worksheets().add('Restricted Lists');
+
+    for (var i = 0; i < sites.length; i++){ //vsichki koloni sus sitovete
         cellNumber = convertNumber(i + 1);
         cellNumber += 1;
-        ep.write({
-            'sheet' : 'Permission Matrix',
-            'cell' :  cellNumber,
-            'content' : sites[i].name
-        });
+        cell = matrix.getCell(cellNumber);
+        cell.value(sites[i].name);
+        format = matrix.getCell(cellNumber).cellFormat();
+        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#01a982', '#01a982'));
+
     }
     for (var i = 0; i < groups.length; i++){
-        ep.write({
-            'sheet' : 'Permission Matrix',
-            'cell' : 'A' + (i + 2),
-            'content' : groups[i].name
-        });
+        cellNumber = 'A' + (i + 2);
+        cell = matrix.getCell(cellNumber);
+        cell.value(groups[i].name);
         for (var j = 0; j < sites.length; j++){
             for(var k = 0; k < groups[i].url.length; k++){
                 if (sites[j].url == groups[i].url[k]){
@@ -237,86 +247,54 @@ function generateMatrixExcel(sites, groups, lists){
                         }
                         groupPermissions += groups[i].permissions[k][p] + comma;
                     }
-                    ep.write({
-                        'sheet' : 'Permission Matrix',
-                        'cell' : cellNumber,
-                        'content' : groupPermissions
-                    })
+                    cell = matrix.getCell(cellNumber);
+                    cell.value(groupPermissions);
+                    
+                    if(groupPermissions.indexOf('Read') > -1){
+                        format = matrix.getCell(cellNumber).cellFormat();
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#FF8D6D', '#FF8D6D'));
+                    }
+                    if(groupPermissions.indexOf('Limited Access') > -1){
+                        format = matrix.getCell(cellNumber).cellFormat();
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#C6C9CA', '#C6C9CA'));
+                    }
+                    if(groupPermissions.indexOf('Full Control') > -1){
+                        format = matrix.getCell(cellNumber).cellFormat();
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#C2AEC8', '#C2AEC8'));
+                    }
+                    if(groupPermissions.indexOf('Contribute') > -1){
+                        format = matrix.getCell(cellNumber).cellFormat();
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#7DE6E0', '#7DE6E0'));
+                    }
                 }
             }
         }
-        cellNumber = convertNumber(i); 
-        ep.write({
-            'sheet' : 'Users',
-            'cell' : cellNumber + 1,
-            'content' : groups[i].name
-        })
+      cellNumber = convertNumber(i); 
+        cell = users.getCell(cellNumber+1);
+        cell.value(groups[i].name);
         for(var u = 0; u < groups[i].users.length; u++){
             var userInfo = groups[i].users[u].email || groups[i].users[u].login;
-            ep.write({
-                'sheet' : 'Users',
-                'cell' : cellNumber + (u + 2),
-                'content' : userInfo
-            })
+            cell = users.getCell(cellNumber+(u+2));
+            cell.value(userInfo);
+            
         } 
     };
-    for(var i = 0; i < restrictedLists.length; i++){
-        var cellNumber = convertNumber(i);
-        //cellNumber += 1;
-        ep.write({
-            'sheet': 'Restricted Lists',
-            'cell' : cellNumber + 1,
-            'content' : restrictedLists[i].name
-        })
-         ep.write({
-            'sheet': 'Restricted Lists',
-            'cell' : cellNumber + 2,
-            'content' : restrictedLists[i].url
-        })
-        for(var j = 0; j < restrictedLists[i].groups.length; j++){
-            var cellN = cellNumber + (j + 3);
-            var groupPermission;
-            switch(restrictedLists[i].groups[j].mask){
-                case '138612833': groupPermission = 'Read'; 
-                    break;
-                case '1011028719': groupPermission = 'Contribute'; 
-                    break;
-                case '2082937855': groupPermission = 'Owners Full Control';
-                    break;
-                case '2134318079': groupPermission = 'Owners Full Control';
-                    break;
-                case '-1': groupPermission = 'Owner';
-                    break;
-                default: groupPermission = restrictedLists[i].groups[j].mask;
-                    break;
-            }
-            ep.write({
-                'sheet': 'Restricted Lists',
-                'cell' : cellN,
-                'content' : restrictedLists[i].groups[j].name + ' - ' + groupPermission
-            })
-        }
-    }
-
-    // ep.write({'sheet': 'Restricted Lists', 'cell': 'A1', 'content': 'List Name'});
-    // ep.write({'sheet': 'Restricted Lists', 'cell': 'B1', 'content': 'URL'});
-    // for(var i = 0; i < lists.length; i++){
-    //     //var name = lists[i].name;
-    //     //var url = lists[i].url;
-    //     ep.write({
-    //         'sheet' : 'Restricted Lists',
-    //         'cell' : 'A' + (i + 2),
-    //         'content' : lists[i].name
-    //     });
-    //     ep.write({
-    //         'sheet' : 'Restricted Lists',
-    //         'cell' : 'B' + (i + 2),
-    //         'content' : lists[i].url
-    //     });
-    // };
+    cell = resLists.getCell('A1');
+    cell.value('List Name');
+    cell = resLists.getCell('B1');
+    cell.value('URL');
+    for(var i = 0; i < lists.length; i++){
+        //var name = lists[i].name;
+        //var url = lists[i].url;
+        cell = resLists.getCell('A'+(i+2));
+        cell.value(lists[i].name);
+        cell = resLists.getCell('B'+(i+2));
+        cell.value(lists[i].url);
+    };
     var name = _CTX.split('/');
     name = name[name.length - 1] + ' - Permission Matrix';
-    ep.saveAs(name);
+    saveWorkbook(workbook,name)
+
 };
 
 
@@ -371,7 +349,7 @@ $('#structure-section').on('click', function(e){
             worker.onmessage = function(e){
                 info = e.data[0];
                 window.localStorage.setItem('Info', JSON.stringify(info));
-                window.open(_CTX + "/" + libraryName + "/client/visio.html", '_blank');
+                window.open(_CTX + "/" + libraryName + "/client/visio.aspx", '_blank');
                 window.focus();
                 $('#generating-structure').hide();
                 $('#generate-structure').show();
@@ -499,6 +477,7 @@ function iterateUsers() {
                 "<li class='row'><span class='col s6'>"+ invalidUsers[x] +"</span></li>"); //<span class='col s6 del-invalid' id='" + invalidUsersCounter +"'  style='cursor:pointer;position:relative;top:1px'>delete</span></li>");
             invalidUsersCounter++;
     }
+    
 
     $($('#valid').children()[0]).html($($('#valid').children()[0]).html() + ' - ' + validUsers.length);
     $($('#invalid').children()[0]).html($($('#invalid').children()[0]).html() + ' - ' + invalidUsers.length);
@@ -696,6 +675,7 @@ function generateEmptyFoldersExcel(sites){
     name = name[name.length - 1] + ' - Empty Folders';
     ep.saveAs(name);
 };
+
 
 
 
