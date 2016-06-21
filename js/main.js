@@ -647,15 +647,18 @@ $('#central-nav').on('click', function(e){
 // get empty folders
 function generateEmptyFoldersExcel(sites){
     var ep = new ExcelPlus();
-    var cellsLetters = ['A','B','C','D','E','F'];
+    var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
 
     ep.createFile("Empty Folders");
     ep.write({'cell':'A1','content': 'Folder Name'});
     ep.write({'cell':'B1','content': 'URL'});
-    ep.write({'cell':'C1','content': 'Date Created'});
-    ep.write({'cell':'D1','content': 'Last Modified'});
-    ep.write({'cell':'E1','content': 'Editor'});
-    ep.write({'cell':'F1','content': 'Author/Creator'});
+    ep.write({'cell':'C1','content': 'ID'});
+    ep.write({'cell':'D1','content': 'Date Created'});
+    ep.write({'cell':'E1','content': 'Last Modified'});
+    ep.write({'cell':'F1','content': 'Editor'});
+    ep.write({'cell':'G1','content': 'Name'});
+    ep.write({'cell':'H1','content': 'Subsite'});
+    ep.write({'cell':'I1','content': 'Library'});
     var row = 2;
     for(var i = 0; i < sites.length; i++){
         for(var j = 0; j < sites[i].lists.length; j++){
@@ -675,6 +678,75 @@ function generateEmptyFoldersExcel(sites){
     name = name[name.length - 1] + ' - Empty Folders';
     ep.saveAs(name);
 };
+
+$('#delete-folders').on('click',function(){
+    parse();
+});
+
+function deleteEmptyFolders(data){
+    left = data.length;
+    for(var i =  0 ;i < data.length; i++){
+        deleteFile(data[i]['ID'],data[i]['URL'],data[i]['Library'],data[i]['Subsite']);
+    }
+}
+
+function parse(){
+    $('#loading').show();
+    var target = $('#delete-empty-folders')[0];
+    var file = target.files[0];
+      var filteredData = [];
+       Papa.parse(file, {
+          header: true,
+          dynamicTyping: true,
+          complete: function(results) {
+            data = results.data;
+            for(var i = 0 ;i < data.length; i++){
+              if(data[i]['Folder Name'] != ''){
+                filteredData.push(data[i])
+              }
+            }
+            deleteEmptyFolders(filteredData);
+          }
+       })     
+    }
+
+function deleteFile( itemID, fileRef, listName,webURL) {
+    console.log(left);
+	// This is the command needed to delete the specified file. It uses the ID and the URL of the file name. These values must be passed into this function when calling it.
+	var batchCmd = "<Batch OnError='Continue'><Method ID='1' Cmd='Delete'><Field Name='ID'>" + itemID + "</Field><Field Name='FileRef'>" + fileRef + "</Field></Method></Batch>";
+	// Use SPServices to delete the file.
+	$().SPServices({
+		operation: "UpdateListItems",
+		async: false,
+		listName: listName,
+		updates: batchCmd,
+        webURL : webURL,
+		completefunc: function ( xData, Status ) {
+
+			// Check the error codes for the web service call.
+			$( xData.responseXML ).SPFilterNode( 'ErrorCode' ).each( function(){
+				responseError = $( this ).text();
+
+				// If the error codes indicate that the file was successfully deleted, inform the user.
+				if ( responseError === '0x00000000' ) {
+                    console.log(left);
+					//alert( "The file has been successfully deleted." );
+                    left--;
+                    if(left == 0){      
+                        $('#loading').hide();
+                        alert('DONE');
+                    }
+				}
+
+				// If the error codes indicate that the file was NOT successfully deleted, inform the user.
+				else {
+					//alert( "There was an error trying to delete the file." );
+                
+				}
+			});
+		}
+	});
+}
 
 
 
