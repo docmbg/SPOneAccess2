@@ -2,6 +2,30 @@ var _CTX = $().SPServices.SPGetCurrentSite(),
     _SPGrind = new SPGrind(),
     tempGroups;
 
+var subSites;
+$('#getSubSites').click(function(){
+     $('#getSubSites').hide();
+     $('#loadingSites').show();
+    if (!!window.Worker){
+        worker = new Worker('js/getSubSitesWorker.js');
+        worker.onmessage = function(e){
+            subSites = e.data[0];
+            for (var i = 0 ; i < subSites.length; i++){
+                 $('#emptyFoldersSites').append($('<option>',{
+                    value: subSites[i].url,
+                    text: subSites[i].name + ' (' + subSites[i].url.split('/')[subSites[i].url.split('/').length-1]+')' 
+                    }));
+            }
+            $('#loadingSites').hide();
+            $('#emptyFoldersSites').css({'display':'block'})
+        }
+        worker.postMessage([_CTX,'structure', false]);
+        
+    }
+     
+});
+
+
 var siteTemplate,
     fabTemplate,
     spData,
@@ -368,7 +392,12 @@ $('#structure-section').on('click', function(e){
 });
 
 //empty-folders
+ 
 $('#empty-folders-section').on('click',function(e){
+   
+    
+
+    
     if(e.target.id == 'generate-empty-folders' || $(e.target).parent()[0].id == 'generate-empty-folders'){
         $('#generate-empty-folders').hide();
         $('#generating-empty-folders').show();
@@ -380,7 +409,7 @@ $('#empty-folders-section').on('click',function(e){
                 $('#generating-empty-folders').hide();
                 $('#ready-empty-folders').show();
             }
-            worker.postMessage([_CTX,'structure']);
+            worker.postMessage([_CTX,'structure',$('#emptyFoldersSites').find(":selected").val()]);
         } 
     }else if(e.target.id == 'cancel-empty-folders'){
         $('#generating-empty-folders').hide();
@@ -535,6 +564,8 @@ $('#delete-users').click(function(){
 
 $(document).ready(function(){
      $('.modal-trigger').leanModal();
+     
+
  });
 
 $('#instr-nav').on('click', function(e){
@@ -644,11 +675,12 @@ $('#central-nav').on('click', function(e){
     }
 });
 
+
 // get empty folders
 function generateEmptyFoldersExcel(sites){
     var ep = new ExcelPlus();
     var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
-
+  
     ep.createFile("Empty Folders");
     ep.write({'cell':'A1','content': 'Folder Name'});
     ep.write({'cell':'B1','content': 'URL'});
@@ -662,15 +694,18 @@ function generateEmptyFoldersExcel(sites){
     var row = 2;
     for(var i = 0; i < sites.length; i++){
         for(var j = 0; j < sites[i].lists.length; j++){
-            for(var f = 0; f < sites[i].lists[j].emptyFolders.length; f++){
-                var count = 0;
-                for(var key in sites[i].lists[j].emptyFolders[f]) {
-                    var value = sites[i].lists[j].emptyFolders[f][key].toString();
-                    var cellName = (cellsLetters[count] + row).toString();
-                    ep.write({'cell': cellName, 'content': value});
-                    count++;
-                };
-                 row++;
+            if(sites[i].lists[j].hasOwnProperty('emptyFolders')){
+                
+                for(var f = 0; f < sites[i].lists[j].emptyFolders.length; f++){
+                    var count = 0;
+                    for(var key in sites[i].lists[j].emptyFolders[f]) {
+                        var value = sites[i].lists[j].emptyFolders[f][key].toString();
+                        var cellName = (cellsLetters[count] + row).toString();
+                        ep.write({'cell': cellName, 'content': value});
+                        count++;
+                    };
+                     row++;
+                }
             }
         }
     }
@@ -712,40 +747,40 @@ function parse(){
 
 function deleteFile( itemID, fileRef, listName,webURL) {
     console.log(left);
-	// This is the command needed to delete the specified file. It uses the ID and the URL of the file name. These values must be passed into this function when calling it.
-	var batchCmd = "<Batch OnError='Continue'><Method ID='1' Cmd='Delete'><Field Name='ID'>" + itemID + "</Field><Field Name='FileRef'>" + fileRef + "</Field></Method></Batch>";
-	// Use SPServices to delete the file.
-	$().SPServices({
-		operation: "UpdateListItems",
-		async: false,
-		listName: listName,
-		updates: batchCmd,
+    // This is the command needed to delete the specified file. It uses the ID and the URL of the file name. These values must be passed into this function when calling it.
+    var batchCmd = "<Batch OnError='Continue'><Method ID='1' Cmd='Delete'><Field Name='ID'>" + itemID + "</Field><Field Name='FileRef'>" + fileRef + "</Field></Method></Batch>";
+    // Use SPServices to delete the file.
+    $().SPServices({
+        operation: "UpdateListItems",
+        async: false,
+        listName: listName,
+        updates: batchCmd,
         webURL : webURL,
-		completefunc: function ( xData, Status ) {
+        completefunc: function ( xData, Status ) {
 
-			// Check the error codes for the web service call.
-			$( xData.responseXML ).SPFilterNode( 'ErrorCode' ).each( function(){
-				responseError = $( this ).text();
+            // Check the error codes for the web service call.
+            $( xData.responseXML ).SPFilterNode( 'ErrorCode' ).each( function(){
+                responseError = $( this ).text();
 
-				// If the error codes indicate that the file was successfully deleted, inform the user.
-				if ( responseError === '0x00000000' ) {
+                // If the error codes indicate that the file was successfully deleted, inform the user.
+                if ( responseError === '0x00000000' ) {
                     console.log(left);
-					//alert( "The file has been successfully deleted." );
+                    //alert( "The file has been successfully deleted." );
                     left--;
                     if(left == 0){      
                         $('#loading').hide();
                         alert('DONE');
                     }
-				}
+                }
 
-				// If the error codes indicate that the file was NOT successfully deleted, inform the user.
-				else {
-					//alert( "There was an error trying to delete the file." );
+                // If the error codes indicate that the file was NOT successfully deleted, inform the user.
+                else {
+                    //alert( "There was an error trying to delete the file." );
                 
-				}
-			});
-		}
-	});
+                }
+            });
+        }
+    });
 }
 
 
