@@ -782,8 +782,82 @@ function deleteFile( itemID, fileRef, listName,webURL) {
         }
     });
 }
+//GET WORKFLOWS FUNCTIONALITY
+$('body').append('<script type="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>');
+var allWorkflows = [];
+var checkedSites = 0;
+function getAllSiteWorkflows(site){
+	$().SPServices({
+    operation: "GetListItems",
+    async: false,
+    webURL: site,
+    listName: "Workflows",
+    completefunc: function (xData, Status) {
+	checkedSites++
+
+      $(xData.responseXML).SPFilterNode("z:row").each(function() {
+        var ob = {};
+        ob.WorkflowName = $(this).attr("ows_FileLeafRef");
+        ob.WorkflowCreator = $(this).attr("ows_Editor");
+        allWorkflows.push(ob);
+      });
+      ;
+      if(checkedSites == subSites.length){
+      	generateWorkflowsExcel(allWorkflows);
+      }
+    }
+  });
+}
+function generateWorkflowsExcel(workflows){
+    var ep = new ExcelPlus();
+    var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
+  
+    ep.createFile("All Workflows");
+    ep.write({'cell':'A1','content': 'Workflow Name'});
+    ep.write({'cell':'B1','content': 'Workflow Creator'});
+    var row = 2;
+    for(var i = 0; i < workflows.length; i++){
+        ep.write({'cell' : 'A' + row, 'content': $SP().cleanResult(workflows[i].WorkflowName)});
+        ep.write({'cell' : 'B' + row, 'content': $SP().cleanResult(workflows[i].WorkflowCreator)});
+        row++
+    }
+    var name = _CTX.split('/');
+    name = name[name.length - 1] + ' - All Workflows';
+    ep.saveAs(name);
+};
+function cycleSites(sitesArray){
+	for(var i=0; i<sitesArray.length; i++){
+		getAllSiteWorkflows(sitesArray[i].url);
+	}
+}
+$('#workflow-section').on('click',function(e){
+    console.log(e.target)
+    if (e.target.id == 'generate-workflows' || $(e.target).parent()[0].id == 'generate-workflows'){
+         $('#generate-workflows').hide();
+        $('#generating-workflows').show();
+        if (!!window.Worker){
+            worker = new Worker('js/getSubSitesWorker.js');
+            worker.onmessage = function(e){
+                subSites = e.data[0];
+                cycleSites(subSites);
+                $('#generating-workflows').hide();
+                $('#ready-workflows').css({display:'block'})
+            }
+            worker.postMessage([_CTX,'structure', false]);  
+        }
+    }
+     else if(e.target.id == 'cancel-workflows' || $(e.target).parent()[0].id == 'cancel-workflows'){
+        $('#generating-workflows').hide();
+        $('#generate-workflows').show();
+        worker.terminate();
+        worker = undefined;
+    } else if(e.target.id == 'ready-workflows' || $(e.target).parent()[0].id == 'ready-workflows'){
+        $('#ready-workflows').css({display:'none'});
+        $('#generate-workflows').show();
+    }
+});
 
 
-
-
+       
+    
 
