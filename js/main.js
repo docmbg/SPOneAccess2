@@ -799,6 +799,7 @@ function getAllSiteWorkflows(site){
         var ob = {};
         ob.WorkflowName = $(this).attr("ows_FileLeafRef");
         ob.WorkflowCreator = $(this).attr("ows_Editor");
+        ob.WorkflowLocation = $(this).attr("ows_FileRef");
         allWorkflows.push(ob);
       });
       ;
@@ -811,14 +812,16 @@ function getAllSiteWorkflows(site){
 function generateWorkflowsExcel(workflows){
     var ep = new ExcelPlus();
     var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
-  
+    var mainSite = subSites[0].url.split('/teams')[0];
     ep.createFile("All Workflows");
     ep.write({'cell':'A1','content': 'Workflow Name'});
     ep.write({'cell':'B1','content': 'Workflow Creator'});
+    ep.write({'cell':'C1','content': 'Location'})
     var row = 2;
     for(var i = 0; i < workflows.length; i++){
         ep.write({'cell' : 'A' + row, 'content': $SP().cleanResult(workflows[i].WorkflowName)});
         ep.write({'cell' : 'B' + row, 'content': $SP().cleanResult(workflows[i].WorkflowCreator)});
+        ep.write({'cell' : 'C' + row, 'content': mainSite+'/'+$SP().cleanResult(workflows[i].WorkflowLocation).split('/teams/')[0].split('/Workflows')[0]});
         row++
     }
     var name = _CTX.split('/');
