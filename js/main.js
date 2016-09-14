@@ -316,7 +316,7 @@ function generateMatrixExcel(sites, groups, lists){
         cell.value(lists[i].url);
     };
     var name = _CTX.split('/');
-    name = name[name.length - 1] + ' - Permission Matrix';
+    name = name[name.length - 1] + ' - Permission Matrix' + ".xlsx";
     saveWorkbook(workbook,name)
 
 };
