@@ -2,30 +2,6 @@ var _CTX = $().SPServices.SPGetCurrentSite(),
     _SPGrind = new SPGrind(),
     tempGroups;
 
-var subSites;
-$('#getSubSites').click(function(){
-     $('#getSubSites').hide();
-     $('#loadingSites').show();
-    if (!!window.Worker){
-        worker = new Worker('js/getSubSitesWorker.js');
-        worker.onmessage = function(e){
-            subSites = e.data[0];
-            for (var i = 0 ; i < subSites.length; i++){
-                 $('#emptyFoldersSites').append($('<option>',{
-                    value: subSites[i].url,
-                    text: subSites[i].name + ' (' + subSites[i].url.split('/')[subSites[i].url.split('/').length-1]+')' 
-                    }));
-            }
-            $('#loadingSites').hide();
-            $('#emptyFoldersSites').css({'display':'block'})
-        }
-        worker.postMessage([_CTX,'structure', false]);
-        
-    }
-     
-});
-
-
 var siteTemplate,
     fabTemplate,
     spData,
@@ -316,7 +292,7 @@ function generateMatrixExcel(sites, groups, lists){
         cell.value(lists[i].url);
     };
     var name = _CTX.split('/');
-    name = name[name.length - 1] + ' - Permission Matrix' + ".xlsx";
+    name = name[name.length - 1] + ' - Permission Matrix';
     saveWorkbook(workbook,name)
 
 };
@@ -332,6 +308,7 @@ var allUsers = [];
 var pdls = [];
 var emptyFolders = [];
 var libraryName = location.pathname.split('/');
+var versioning = [];
 libraryName = libraryName[libraryName.length - 2];
 
 
@@ -392,12 +369,7 @@ $('#structure-section').on('click', function(e){
 });
 
 //empty-folders
- 
 $('#empty-folders-section').on('click',function(e){
-   
-    
-
-    
     if(e.target.id == 'generate-empty-folders' || $(e.target).parent()[0].id == 'generate-empty-folders'){
         $('#generate-empty-folders').hide();
         $('#generating-empty-folders').show();
@@ -409,7 +381,7 @@ $('#empty-folders-section').on('click',function(e){
                 $('#generating-empty-folders').hide();
                 $('#ready-empty-folders').show();
             }
-            worker.postMessage([_CTX,'structure',$('#emptyFoldersSites').find(":selected").val()]);
+            worker.postMessage([_CTX,'structure']);
         } 
     }else if(e.target.id == 'cancel-empty-folders'){
         $('#generating-empty-folders').hide();
@@ -436,6 +408,18 @@ $('#all-users-section').on('click', function(e){
     }
 });
 
+$('#generate-versioning').on('click', function(e){
+    SPGetCurrentSite().done(function(webAddress) {
+         doTheJob(webAddress);
+    });
+    $('#generate-versioning').hide();
+    $('#generating-versioning').show();
+});
+
+$('#cancel-versioning').on('click', function(e){
+    $('#generating-versioning').hide();
+    $('#generate-versioning').show();
+});
 
 //MASS DELETE
 //var epDel = new ExcelPlus();
@@ -564,8 +548,6 @@ $('#delete-users').click(function(){
 
 $(document).ready(function(){
      $('.modal-trigger').leanModal();
-     
-
  });
 
 $('#instr-nav').on('click', function(e){
@@ -675,12 +657,11 @@ $('#central-nav').on('click', function(e){
     }
 });
 
-
 // get empty folders
 function generateEmptyFoldersExcel(sites){
     var ep = new ExcelPlus();
     var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
-  
+
     ep.createFile("Empty Folders");
     ep.write({'cell':'A1','content': 'Folder Name'});
     ep.write({'cell':'B1','content': 'URL'});
@@ -694,18 +675,15 @@ function generateEmptyFoldersExcel(sites){
     var row = 2;
     for(var i = 0; i < sites.length; i++){
         for(var j = 0; j < sites[i].lists.length; j++){
-            if(sites[i].lists[j].hasOwnProperty('emptyFolders')){
-                
-                for(var f = 0; f < sites[i].lists[j].emptyFolders.length; f++){
-                    var count = 0;
-                    for(var key in sites[i].lists[j].emptyFolders[f]) {
-                        var value = sites[i].lists[j].emptyFolders[f][key].toString();
-                        var cellName = (cellsLetters[count] + row).toString();
-                        ep.write({'cell': cellName, 'content': value});
-                        count++;
-                    };
-                     row++;
-                }
+            for(var f = 0; f < sites[i].lists[j].emptyFolders.length; f++){
+                var count = 0;
+                for(var key in sites[i].lists[j].emptyFolders[f]) {
+                    var value = sites[i].lists[j].emptyFolders[f][key].toString();
+                    var cellName = (cellsLetters[count] + row).toString();
+                    ep.write({'cell': cellName, 'content': value});
+                    count++;
+                };
+                 row++;
             }
         }
     }
@@ -747,120 +725,43 @@ function parse(){
 
 function deleteFile( itemID, fileRef, listName,webURL) {
     console.log(left);
-    // This is the command needed to delete the specified file. It uses the ID and the URL of the file name. These values must be passed into this function when calling it.
-    var batchCmd = "<Batch OnError='Continue'><Method ID='1' Cmd='Delete'><Field Name='ID'>" + itemID + "</Field><Field Name='FileRef'>" + fileRef + "</Field></Method></Batch>";
-    // Use SPServices to delete the file.
-    $().SPServices({
-        operation: "UpdateListItems",
-        async: false,
-        listName: listName,
-        updates: batchCmd,
+	// This is the command needed to delete the specified file. It uses the ID and the URL of the file name. These values must be passed into this function when calling it.
+	var batchCmd = "<Batch OnError='Continue'><Method ID='1' Cmd='Delete'><Field Name='ID'>" + itemID + "</Field><Field Name='FileRef'>" + fileRef + "</Field></Method></Batch>";
+	// Use SPServices to delete the file.
+	$().SPServices({
+		operation: "UpdateListItems",
+		async: false,
+		listName: listName,
+		updates: batchCmd,
         webURL : webURL,
-        completefunc: function ( xData, Status ) {
+		completefunc: function ( xData, Status ) {
 
-            // Check the error codes for the web service call.
-            $( xData.responseXML ).SPFilterNode( 'ErrorCode' ).each( function(){
-                responseError = $( this ).text();
+			// Check the error codes for the web service call.
+			$( xData.responseXML ).SPFilterNode( 'ErrorCode' ).each( function(){
+				responseError = $( this ).text();
 
-                // If the error codes indicate that the file was successfully deleted, inform the user.
-                if ( responseError === '0x00000000' ) {
+				// If the error codes indicate that the file was successfully deleted, inform the user.
+				if ( responseError === '0x00000000' ) {
                     console.log(left);
-                    //alert( "The file has been successfully deleted." );
+					//alert( "The file has been successfully deleted." );
                     left--;
                     if(left == 0){      
                         $('#loading').hide();
                         alert('DONE');
                     }
-                }
+				}
 
-                // If the error codes indicate that the file was NOT successfully deleted, inform the user.
-                else {
-                    //alert( "There was an error trying to delete the file." );
+				// If the error codes indicate that the file was NOT successfully deleted, inform the user.
+				else {
+					//alert( "There was an error trying to delete the file." );
                 
-                }
-            });
-        }
-    });
+				}
+			});
+		}
+	});
 }
-//GET WORKFLOWS FUNCTIONALITY
-$('body').append('<script type="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>');
-var allWorkflows = [];
-var checkedSites = 0;
-function getAllSiteWorkflows(site){
-	$().SPServices({
-    operation: "GetListItems",
-    async: false,
-    webURL: site,
-    listName: "Workflows",
-    completefunc: function (xData, Status) {
-	checkedSites++
-
-      $(xData.responseXML).SPFilterNode("z:row").each(function() {
-        var ob = {};
-        ob.WorkflowName = $(this).attr("ows_FileLeafRef");
-        ob.WorkflowCreator = $(this).attr("ows_Editor");
-        ob.WorkflowLocation = $(this).attr("ows_FileRef");
-        allWorkflows.push(ob);
-      });
-      ;
-      if(checkedSites == subSites.length){
-      	generateWorkflowsExcel(allWorkflows);
-      }
-    }
-  });
-}
-function generateWorkflowsExcel(workflows){
-    var ep = new ExcelPlus();
-    var cellsLetters = ['A','B','C','D','E','F','G','H','I'];
-    var mainSite = subSites[0].url.split('/teams')[0];
-    ep.createFile("All Workflows");
-    ep.write({'cell':'A1','content': 'Workflow Name'});
-    ep.write({'cell':'B1','content': 'Workflow Creator'});
-    ep.write({'cell':'C1','content': 'Location'})
-    var row = 2;
-    for(var i = 0; i < workflows.length; i++){
-        ep.write({'cell' : 'A' + row, 'content': $SP().cleanResult(workflows[i].WorkflowName)});
-        ep.write({'cell' : 'B' + row, 'content': $SP().cleanResult(workflows[i].WorkflowCreator)});
-        ep.write({'cell' : 'C' + row, 'content': mainSite+'/'+$SP().cleanResult(workflows[i].WorkflowLocation).split('/teams/')[0].split('/Workflows')[0]});
-        row++
-    }
-    var name = _CTX.split('/');
-    name = name[name.length - 1] + ' - All Workflows';
-    ep.saveAs(name);
-};
-function cycleSites(sitesArray){
-	for(var i=0; i<sitesArray.length; i++){
-		getAllSiteWorkflows(sitesArray[i].url);
-	}
-}
-$('#workflow-section').on('click',function(e){
-    console.log(e.target)
-    if (e.target.id == 'generate-workflows' || $(e.target).parent()[0].id == 'generate-workflows'){
-         $('#generate-workflows').hide();
-        $('#generating-workflows').show();
-        if (!!window.Worker){
-            worker = new Worker('js/getSubSitesWorker.js');
-            worker.onmessage = function(e){
-                subSites = e.data[0];
-                cycleSites(subSites);
-                $('#generating-workflows').hide();
-                $('#ready-workflows').css({display:'block'})
-            }
-            worker.postMessage([_CTX,'structure', false]);  
-        }
-    }
-     else if(e.target.id == 'cancel-workflows' || $(e.target).parent()[0].id == 'cancel-workflows'){
-        $('#generating-workflows').hide();
-        $('#generate-workflows').show();
-        worker.terminate();
-        worker = undefined;
-    } else if(e.target.id == 'ready-workflows' || $(e.target).parent()[0].id == 'ready-workflows'){
-        $('#ready-workflows').css({display:'none'});
-        $('#generate-workflows').show();
-    }
-});
 
 
-       
-    
+
+
 
