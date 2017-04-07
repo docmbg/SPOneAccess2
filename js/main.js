@@ -734,6 +734,7 @@ function parse(){
           header: true,
           dynamicTyping: true,
           complete: function(results) {
+results.data.pop();
             data = results.data;
             for(var i = 0 ;i < data.length; i++){
               if(data[i]['Folder Name'] != ''){
