@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
 
 <head>
     <meta charset="UTF-8">
@@ -19,14 +21,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link href="https://rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" /> -->
     <link href="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/css/style.css" rel="stylesheet" type="text/css" />
-    <!--[if gte mso 9]><xml>
+    
+
+<!--[if gte mso 9]><SharePoint:CTFieldRefs runat=server Prefix="mso:" FieldList="FileLeafRef,FY,Document_x0020_Type,TRIM,Document_x0020_Description,ERMS,EmailSender,EmailTo,EmailCc,EmailFrom,EmailSubject,EmailHeaders"><xml>
 <mso:CustomDocumentProperties>
 <mso:TRIM msdt:dt="string"></mso:TRIM>
 <mso:Document_x0020_Description msdt:dt="string"></mso:Document_x0020_Description>
-<mso:FY msdt:dt="string">FY15</mso:FY>
-<mso:Document_x0020_Type msdt:dt="string">Unspecified</mso:Document_x0020_Type>
+<mso:FY msdt:dt="string">FY16</mso:FY>
+<mso:Document_x0020_Type msdt:dt="string">Non-Record</mso:Document_x0020_Type>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Nanova, Liliya</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Russeva, Sohair</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:Order msdt:dt="string">2500.00000000000</mso:Order>
+<mso:ERMS msdt:dt="string">No</mso:ERMS>
 </mso:CustomDocumentProperties>
-</xml><![endif]-->
+</xml></SharePoint:CTFieldRefs><![endif]-->
 </head>
 
 <body>
@@ -49,13 +57,15 @@
                         <a href="#" class="structure-instr"> Structure </a></li>
                     <li class="z-depth-2 waves-effect hpe-turquoise">
                         <a href="#" class="empty-folders-instr"> Empty Folders </a></li>
+                    <li class="z-depth-2 waves-effect hpe-turquoise">
+                        <a href="#" class="versioning-instr"> Versioning </a></li>                      
                 </ul>
             </div>
             <div id="instr-container" class="row">
 
                 <div class="row center access-instr">
                     <div class="row hpe-turquoise">
-                        <h5>Access Management</h5>
+                        <h5>Access Management</h5> 
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
@@ -67,7 +77,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col s12 m12 l6 center">
+                          <div class="col s12 m12 l6 center">
                             2. Current user's groups will appear in the right box. Beware that by default you are the current user.
                         </div>
                         <div class="col s12 m12 l6 center">
@@ -75,28 +85,24 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col s12 m12 l6 center">
-                            3. Add and remove user's permission from the Sites & Groups menu.
+                     <div class="row">
+                          <div class="col s12 m12 l6 center">
+                            3. Add and remove user's permission from the Sites & Groups menu. 
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/access3.png" />
                         </div>
                     </div>
 
-                    <div class="row">
+                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            4. <span class="hpe-turquoise">How to copy permissions</span>: first enter the user whose permissions
-                            need to be copied. Click on the <i>Copy/Paste</i> button. Then enter the user you need to grand
-                            the permissions and click the
-                            <i>Copy/Paste</i> button again. Note that the permissions will stay copied in the background
-                            and you can paste multiple times. To clear them just hold your mouse on the <i>Copy/Paste</i>                            button and click the 'X' that will appear.
+                            4. <span class="hpe-turquoise">How to copy permissions</span>: first enter the user whose permissions need to be copied. Click on the <i>Copy/Paste</i> button. Then enter the user you need to grand the permissions and click the 
+                            <i>Copy/Paste</i> button again. Note that the permissions will stay copied in the background and you can paste multiple times. To clear them just hold your mouse on the <i>Copy/Paste</i> button and click the 'X' that will appear.      
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/access4.png" />
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row center mass-delete-instr" hidden>
@@ -105,9 +111,7 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            1. Create an excel file containing the emails of the users that need to be removed from the SharePoint. Rename the sheet
-                            to 'MassDelete' and upload the file. Please note that ONLY ONE upload is allowed per session,
-                            so if you need to upload new file just refresh the page.
+                            1. Create an excel file containing the emails of the users that need to be removed from the SharePoint. Rename the sheet to 'MassDelete' and upload the file. Please note that ONLY ONE upload is allowed per session, so if you need to upload new file just refresh the page. 
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/del1.png" />
@@ -115,20 +119,15 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            2. Emails that are recognized as valid will appear on the left, the rest in the right box. Use 'remove from list' to remove
-                            users that you do NOT wish to delete. For invalid emails will be considered inactive, wrong or
-                            missing(empty line) emails.
+                            2. Emails that are recognized as valid will appear on the left, the rest in the right box. Use 'remove from list' to remove users that you do NOT wish to delete. For invalid emails will be considered inactive, wrong or missing(empty line) emails. 
                         </div>
-                        <div class="col s12 m12 l6 center">
+                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/del2.png" />
                         </div>
                     </div>
-                    <div class="row">
+                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            3. Click <i>Delete Users</i> to start the deleting process. Successfully deleted users will disappear
-                            from the box. If a user cannot be deleted for some reason, he/she will be <span style='background: rgb(255, 141, 109)'> marked </span>.
-                            In these cases double check the email and verify that the user does not have permissions on the
-                            SP. Contact the technical team if there is a big number of users that cannot be deleted.
+                            3. Click <i>Delete Users</i> to start the deleting process. Successfully deleted users will disappear from the box. If a user cannot be deleted for some reason, he/she will be <span style='background: rgb(255, 141, 109)'> marked </span>. In these cases double check the email and verify that the user does not have permissions on the SP. Contact the technical team if there is a big number of users that cannot be deleted. 
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.8/pics/del3.png" />
@@ -141,56 +140,44 @@
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l12 center">
-                            Should take around 10 min for the biggest sites and will automatically download an excel file on your PC. If it goes for
-                            more than 20 min, contact the technical team. Note that permissions and users WILL NOT be taken
-                            from groups containing 'spacial' symbols, for example 'GSD San Jos
-                            <span style="background:rgb(255, 141, 109)">é</span> Owners'. Rename the group to escape this
-                            issue.
+                            Should take around 10 min for the biggest sites and will automatically download an excel file on your PC. If it goes for more than 20 min, contact the technical team. Note that permissions and users WILL NOT be taken from groups containing 'spacial' symbols, for example 'GSD San Jos<span style="background:rgb(255, 141, 109)">é</span> Owners'. Rename the group to escape this issue.
                         </div>
                     </div>
                 </div>
-                <div class="row center all-users-instr hidden" hidden>
+                 <div class="row center all-users-instr hidden" hidden>
                     <div class="row">
                         <h5 class="hpe-turquoise">All Users</h5>
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l12 center">
-                            1. This will generate & download an excel file with two sheets - 'Users' & 'PDLs'. 'Users' will NOT contain the users that
-                            are in the PDLs on the SharePoint. Please double check the 'Users' list for PDLs! It should not
-                            take more than 10 seconds.
+                            1. This shouldn't take more than 10 sec to generate & download an excel file with two sheets - 'Users' & 'PDLs' for Internal SP or 'Users', 'PDLs' & 'External' for External SP. 'Users' will NOT contain the users that are in the PDLs on the SharePoint. Please double check the 'Users' list for PDLs!
                         </div>
                     </div>
                 </div>
-                <div class="row center structure-instr hidden" hidden>
+                 <div class="row center structure-instr hidden" hidden>
                     <div class="row">
                         <h5 class="hpe-turquoise">Structure</h5>
                     </div>
                     <div class="row">
                         <div class="col s12 m12 l6 center">
-                            1. USE Chrome!!! Click 'Draw Structure' and a new window should open within 10-20 seconds. If the window does not appear,
-                            check the upper right corner of your browser for a popup blocker. If there is, click it, select
-                            'Allow...' and click the url.
+                            1. USE Chrome!!! Click 'Draw Structure' and a new window should open within 10-20 seconds. If the window does not appear, check the upper right corner of your browser for a popup blocker. If there is, click it, select 'Allow...' and click the url.
                         </div>
                         <div class="col s12 m12 l6 center">
                             <img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.2.3/pics/structure1.png" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col s12 m12 l12 center">
-                            2. Click the 'Draw' button to get the structure with the default properties. Hold 'Ctrl' and sctoll with the mouse to zoom
-                            in/out. Click on the text inside a box and it will become dragable. Double click on the text
-                            and you will be able to make changes. Click on the border of a box and you will have the option
-                            to create new connections between the boxes. Use 'Ctrl' + 'Z' for undo.
+                     <div class="row">
+                         <div class="col s12 m12 l12 center">
+                            2. Click the 'Draw' button to get the structure with the default properties. Hold 'Ctrl' and sctoll with the mouse to zoom in/out. Click on the text inside a box and it will become dragable. Double click on the text and you will be able to make changes. Click on the border of a box and you will have the option to create new connections between the boxes. Use 'Ctrl' + 'Z' for undo.
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m12 l12 center">
-                            3. To donwload the structure simply click 'Get PNG'. In the new tab click on the image with the right button and select 'Save
-                            image as...'
+                         <div class="col s12 m12 l12 center">
+                            3. To donwload the structure simply click 'Get PNG'. In the new tab click on the image with the right button and select 'Save image as...'
                         </div>
                     </div>
                 </div>
-                <div class="row center empty-folders-instr hidden" hidden>
+                 <div class="row center empty-folders-instr hidden" hidden>
                     <div class="row">
                         <h5 class="hpe-turquoise">Empty Folders</h5>
                     </div>
@@ -199,19 +186,31 @@
                             1. This will generate and download you an excel file containing all the empty folders on the SharePoint.
                         </div>
                     </div>
+                </div>            
+                 <div class="row center versioning-instr hidden" hidden>
+                    <div class="row">
+                        <h5 class="hpe-turquoise">Versioning</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 center">
+                            This will generate and download you an excel file containing if files on the SharePoint have versioning enabled, or disabled.
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="modal-footer center">
                 <a href="#!" class="modal-action modal-close waves-effect">OK</a>
             </div>
-        </div>
+         </div>
 
+        
 
         <div class="valign-wrapper stage z-depth-1">
             <div id="logo-nav" class="container">
                 <div class="row">
                     <div class="col s12">
-                        <h1 class="center logo">ONE ACCESS 2.1
+                        <h1 class="center logo">ONE ACCESS 2.2
                             <div id="instructions" class="center hide-on med-and-down">
                                 <a class="modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Instructions" href="#instructionsModal">
                                     <!-- <i class="mdi-social-school fa-3x"></i> -->
@@ -258,6 +257,13 @@
                             <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
                                 <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Empty Folders"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/1.2.0/pics/empty_folders.png"
                                         class="material-icons image" id="show-empty-folders" /></a>
+                            </li>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Workflows"><img src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/pics/workflowIconGrey1.png"
+                                        class="material-icons image" id="show-workflows" /></a>
+                            <li class="z-depth-1 waves-effect waves-hpe-purple hide-on med-and-down">
+                                <a href="#" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Versioning"><img src="https://hpe.sharepoint.com/teams/DOCM222/Treasury/Enhance/Pictures/v.png"
+                                        class="material-icons image" id="show-versioning" /></a>                                        
                             </li>
                         </ul>
                     </div>
@@ -381,10 +387,33 @@
             </div>
             <!-- get empty folders -->
             <div class="show-empty-folders center" id="empty-folders-section" hidden>
+                 <div class="col s6">
+                            <select id="emptyFoldersSites" style="width:30% ; margin-left:35%">
+                                <option value="all">All Sites</option>
+                                 
+                            </select>
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only" id="loadingSites" style="display:none">
+                                  <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                  </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                  </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            <a class="waves-effect waves-light btn" id="getSubSites" style="margin-left:-8%; width: 15% ;position: absolute">Get Subsites</a>
+                 </div>
                 <div class="row center hpe-turquoise">
-                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-empty-folders"><br/>
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-empty-folders" style="margin-top: 1%"><br/>
                         <span class="text-style">GET EMPTY FOLDERS</span>
+                        
+                        
                     </i></a>
+                   
+                                
+                    
                     <div id="generating-empty-folders" class="" hidden>
                         <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
                         <h4 class="text-style">Please wait!</h4>
@@ -401,7 +430,7 @@
                     <!--<object id='file-object'></object>-->
                     <form action="#">
                         <div class="file-field input-field">
-                            <div class="btn" style="margin-left:45%">
+                            <div class="btn" style="margin-left:46%">
                                 <span>File</span>
                                 <input type="file" id="delete-empty-folders" value="Open an Excel file" style="">
                             </div>
@@ -409,7 +438,7 @@
                                 <input class="file-path validate" type="text" style="width:0%">
                             </div>
                         </div>
-                    </form>
+                    </form> 
                 
                 <div class="preloader-wrapper big active" id='loading' style='display:none;margin-top:20px;position:absolute;margin-left:-3%'>
                     <div class="spinner-layer spinner-red">
@@ -451,20 +480,62 @@
 
             </div>
         </div>
+        <div class="show-workflows" id="workflow-section" hidden>
+            <div class="center row hpe-turquoise">
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-workflows"><br/>
+                    <span class="text-style">GET WORKFLOWS</span>
+                    </i></a>
+                    <div id="generating-workflows" class="" hidden>
+                        <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                        <h4 class="text-style">Please wait!</h4>
+                        <a><i class="waves-effect hpe-turquoise" id="cancel-workflows">Cancel request</i></a>
+                    </div>
+                     <a><i class="fa fa-check-square fa-3x waves-effect hpe-turquoise" id="ready-workflows" style="display: none"><br/>
+                        <span class="text-style">Workflows generated!</span>
+                    </i></a>
+            </div>
+        </div>
+        <div class="show-versioning" id="versioning-section" hidden>
+            <div class="center row hpe-turquoise">
+                    <a><i class="fa fa-download waves-effect fa-3x hpe-turquoise" id="generate-versioning"><br/>
+                    <span class="text-style">GET VERSIONING</span>
+                    </i></a>
+                    <div id="generating-versioning" class="" hidden>
+                        <i class="fa fa-spinner fa-pulse fa-4x hpe-turquoise"></i>
+                        <h4 class="text-style">Please wait!</h4>
+                        <a><i class="waves-effect hpe-turquoise" id="cancel-versioning">Cancel request</i></a>
+                    </div>
+                     <a><i class="fa fa-check-square fa-3x waves-effect hpe-turquoise" id="ready-versioning" style="display: none"><br/>
+                        <span class="text-style">Versioning generated!</span>
+                    </i></a>
+            </div>
+        </div>        
 </div>
+        
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
+        <script type="text/javascript" src="js/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="js/excelplus-2.4.1.min.js"></script>
+        <!--<script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/excelplus-2.2.min.js"></script>-->
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.9/js/infragistics.js"></script>
+
+
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/sheetjs.all.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/excelplus-2.2.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.2/js/models.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/spgrind.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/ractive.js"></script>
+      
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.1/js/models.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.3/js/spgrind.js"></script>
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/ractive.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+        <script type="text/javascript" src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/main.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/js/versioningToMain.js"></script>        
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/js/versioning.js"></script>  <!--This is the main js file that is uploaded to github-->
+        <script type="text/javascript" src="js/main.js"></script> <!--This is just the versioning js file with the function that triggers the functionallity of the demotest.js file-->
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/materialize.min.js"></script>
         
 
-        <script type="text/javascript" src="js/main.js"></script>
-        <!--  
+
+                <!--  
          <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.3/js/main.js"></script> 
         <script type="text/javascript" src="models.js"></script> 
         <script type="text/javascript" src="js/spgrind.js"></script> 
