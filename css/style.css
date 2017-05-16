@@ -27,7 +27,7 @@ nav .input-field label i {
 }
 
 .hpe-turquoise {
-    color: rgb(42, 210, 201);
+    color: black;
 }
 
 .hpe-slate {
@@ -35,7 +35,7 @@ nav .input-field label i {
 }
 
 .hpe-orange-bg {
-    background-color: rgb(255, 141, 109);
+    background-color: rgb(000, 201,255);
 }
 
 .hpe-slate-bg {
@@ -43,7 +43,7 @@ nav .input-field label i {
 }
 
 .hpe-orange {
-    color: rgb(255, 141, 109);
+    color: rgb(000, 201,255);
 }
 
 .logo-subtext {
@@ -60,7 +60,7 @@ nav .input-field label i {
 .stage {
     height: 300px;
     transition: .3s background-color;
-    background-color: rgb(42, 210, 201);
+    background-color: black;
 }
 
 .main-content {
@@ -111,7 +111,7 @@ nav .input-field label i {
 }
 
 #instr-nav a{
-    color: rgb(42, 210, 201);
+    color: black;
 }
 
 #delete-users{
@@ -138,13 +138,13 @@ nav .input-field label i {
 .waves-effect.waves-hpe-turquoise .waves-ripple {
     /* The alpha value allows the text and background color
      of the button to still show through. */
-    background-color: rgba(42, 210, 201, .65);
+    background-color: rgba(0, 0, 0, .65);
 }
 
 .waves-effect.waves-hpe-orange .waves-ripple {
     /* The alpha value allows the text and background color
      of the button to still show through. */
-    background-color: rgba(255, 141, 109, .65);
+    background-color: rgba(0, 0, 0, .65);
 }
 
 .waves-effect.waves-hpe-purple .waves-ripple {
@@ -192,7 +192,7 @@ nav .input-field label i {
 
 /* Visio styles*/
 #controls{
-    background-color: rgb(42, 210, 201);
+    background-color: black;
     padding: 1em;
     text-align: center;
     font-weight: bold;
