@@ -1,7 +1,16 @@
 * {
     font-family: Arial;
 }
+.btn {
+    color: white!importantl
+    background: black!important;
+}
 
+
+.btn-large {
+    color: white!importantl
+    background: black!important;
+}
 nav {
     background-color: rgb(66, 85, 99);
 }
