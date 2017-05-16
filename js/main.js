@@ -250,7 +250,7 @@ function generateMatrixExcel(sites, groups, lists){
         cell = matrix.getCell(cellNumber);
         cell.value(sites[i].name);
         format = matrix.getCell(cellNumber).cellFormat();
-        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#01a982', '#01a982'));
+        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#ffed00', '#ffed00'));
 
     }
     for (var i = 0; i < groups.length; i++){
@@ -276,19 +276,19 @@ function generateMatrixExcel(sites, groups, lists){
                     
                     if(groupPermissions.indexOf('Read') > -1){
                         format = matrix.getCell(cellNumber).cellFormat();
-                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#FF8D6D', '#FF8D6D'));
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#64ff00', '#64ff00'));
                     }
                     if(groupPermissions.indexOf('Limited Access') > -1){
                         format = matrix.getCell(cellNumber).cellFormat();
-                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#C6C9CA', '#C6C9CA'));
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#d9d9d9', '#d9d9d9'));
                     }
                     if(groupPermissions.indexOf('Full Control') > -1){
                         format = matrix.getCell(cellNumber).cellFormat();
-                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#C2AEC8', '#C2AEC8'));
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#666666', '#666666'));
                     }
                     if(groupPermissions.indexOf('Contribute') > -1){
                         format = matrix.getCell(cellNumber).cellFormat();
-                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#7DE6E0', '#7DE6E0'));
+                        format.fill($.ig.excel.CellFill.createLinearGradientFill(45, '#00c9ff', '#00c9ff'));
                     }
                 }
             }
@@ -864,4 +864,3 @@ $('#workflow-section').on('click',function(e){
 
        
     
-
