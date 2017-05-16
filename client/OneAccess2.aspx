@@ -514,8 +514,8 @@
         
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
-        <script type="text/javascript" src="js/sheetjs.all.min.js"></script>
-        <script type="text/javascript" src="js/excelplus-2.4.1.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/libraries/2.2/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/libraries/2.2/excelplus-2.2.min.js"></script>
         <!--<script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/sheetjs.all.min.js"></script>
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/excelplus-2.2.min.js"></script>-->
         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.9/js/infragistics.js"></script>
