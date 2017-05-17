@@ -60,6 +60,6 @@
   <script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
   <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/libraries/gojs.js"></script>
-  <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/js/structure.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5.5/js/structure.js"></script>
 </body>
 </html>
