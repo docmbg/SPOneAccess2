@@ -30,7 +30,9 @@ function openWindow(url) {
 
 function fillSubSites(sites) {
   //sites.shift();
-  var excluded = ["Master Page Gallery", "Calendar", "Links", "Tasks", "Workflow History", "Site Assets", "Announcements", "Site Library"];
+  var excluded = ["Master Page Gallery", "Calendar", "Content and Structure Reports", "Form Templates",
+ "Links", "MicroFeed", "Tasks", "Reusable Content", "Workflow History", "Site Collection Documents", "Site Assets", 
+ "Site Collection Images", "Announcements", "Site Pages", "Style Library", "Workflow Tasks", "Site Library"];
   var nodeData = [];
   var mainList
   var parent;
