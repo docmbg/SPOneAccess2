@@ -593,7 +593,7 @@ function getAllUsers(){
         operation: 'GetListItems',
         listName: 'User Information List',
         completefunc: function(xData, Status){
-            $(xData.responseXML).find('row').each(function(){
+            $(xData.responseXML).SPFilterNode("z:row").each(function(){
                 var user = new User();
                 user.setEmail($(this).attr('ows_EMail'));
                 user.setName($(this).attr('ows_Title'));
