@@ -304,8 +304,9 @@ $('#buttonPNG').click(function(){
       maxSize: new go.Size(10000,10000)
       });
     newDocument.body.appendChild(svg);
-  }, false);
 })
+
+
 $('#redraw').on('click', function () {
   drawCount++;
   var div = '#' + diagramDiv;
