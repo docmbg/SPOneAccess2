@@ -293,18 +293,19 @@ function OpenInNewTab(url) {
   win.focus();
 }
 
-$('#buttonPNG').on('click', function () {
-  var imgBlob = myDiagram.makeImageData({
-    background: 'white',
-    scale: 1,
-    type: "image/png",
-    maxSize: new go.Size(10000, 10000)
-  });
-  //console.log(imgBlob);
-  OpenInNewTab(imgBlob);
-  //var blob = new Blob([imgBlob], {type: "data:image/png;base64"});
-  //saveAs(blob,'test.png',false);
-});
+$('#buttonPNG').click(function(){
+    var newWindow = window.open("","newWindow");
+    if (!newWindow) return;
+    var newDocument = newWindow.document;
+    var svg = myDiagram.makeImage({
+        scale: 1,
+        type: "image/jpeg",
+      background: "rgb(255,255,255)",
+      maxSize: new go.Size(10000,10000)
+      });
+    newDocument.body.appendChild(svg);
+  }, false);
+})
 $('#redraw').on('click', function () {
   drawCount++;
   var div = '#' + diagramDiv;
