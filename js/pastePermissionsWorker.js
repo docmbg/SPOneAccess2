@@ -1,4 +1,4 @@
-importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.2/js/models.js");
+importScripts("https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.2/js/models.js");
 
 self.onmessage = function(e) {
     console.log('copy permissions worker is runnig');

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
   <title>HPE OneAccess 2</title>
-  <link href="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.0/css/style.css" rel="stylesheet" type="text/css" />
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
@@ -59,7 +59,7 @@
   <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
   <script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
-  <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/libraries/gojs.js"></script>
-  <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5.5/js/structure.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.0/libraries/gojs.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.5.5/js/structure.js"></script>
 </body>
 </html>

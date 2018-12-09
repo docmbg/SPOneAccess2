@@ -12,15 +12,15 @@
     <!-- Compiled and minified CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" rel="stylesheet" type="text/css"
     />
-    <link href="https://cdn.rawgit.com/docmbg/SPOneAccess2/production/css/materialdesignicons.css" media="all" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@production/css/materialdesignicons.css" media="all" rel="stylesheet"
         type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"
     />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link href="https://rawgit.com/docmbg/SPOneAccess2/production/css/style.css" rel="stylesheet" type="text/css" /> -->
-    <link href="https://rawgit.com/docmbg/SPOneAccess2/1.2.0/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@production/css/style.css" rel="stylesheet" type="text/css" /> -->
+    <link href="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.0/css/style.css" rel="stylesheet" type="text/css" />
     
 
 <!--[if gte mso 9]><SharePoint:CTFieldRefs runat=server Prefix="mso:" FieldList="FileLeafRef,FY,Document_x0020_Type,TRIM,Document_x0020_Description,ERMS,EmailSender,EmailTo,EmailCc,EmailFrom,EmailSubject,EmailHeaders"><xml>
@@ -514,29 +514,29 @@
         
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/sharepointplus/3.0.10/sharepointplus.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/libraries/2.2/sheetjs.all.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/libraries/2.2/excelplus-2.2.min.js"></script>
-        <!--<script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/sheetjs.all.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/2.2/excelplus-2.2.min.js"></script>-->
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.9/js/infragistics.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.5/libraries/2.2/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.5/libraries/2.2/excelplus-2.2.min.js"></script>
+        <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.0/libraries/2.2/sheetjs.all.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.0/libraries/2.2/excelplus-2.2.min.js"></script>-->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.9/js/infragistics.js"></script>
 
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js"></script>
       
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.1/js/models.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.3/js/spgrind.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/ractive.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.1/js/models.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.3/js/spgrind.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.0/libraries/ractive.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
         <script type="text/javascript" src="https://raw.githubusercontent.com/docmbg/SPOneAccess2/production/js/main.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/js/versioningToMain.js"></script>        
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/2.5/js/versioning.js"></script>  <!--This is the main js file that is uploaded to github-->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.5/js/versioningToMain.js"></script>        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@2.5/js/versioning.js"></script>  <!--This is the main js file that is uploaded to github-->
         <script type="text/javascript" src="js/main.js"></script> <!--This is just the versioning js file with the function that triggers the functionallity of the demotest.js file-->
-        <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.0/libraries/materialize.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.0/libraries/materialize.min.js"></script>
         
 
 
                 <!--  
-         <script type="text/javascript" src="https://rawgit.com/docmbg/SPOneAccess2/1.2.3/js/main.js"></script> 
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.3/js/main.js"></script> 
         <script type="text/javascript" src="models.js"></script> 
         <script type="text/javascript" src="js/spgrind.js"></script> 
          -->
