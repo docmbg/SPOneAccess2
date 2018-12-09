@@ -1,5 +1,5 @@
 importScripts("models.js");
-importScripts("https://rawgit.com/docmbg/SPOneAccess2/1.2.0/js/spgrind.js");
+importScripts("https://cdn.jsdelivr.net/gh/docmbg/SPOneAccess2@1.2.0/js/spgrind.js");
 
 
     // because its type is javascript/worker.
